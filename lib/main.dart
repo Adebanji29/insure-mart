@@ -45,6 +45,7 @@ import './screen/profile/utility_bills.dart';
 import './utils/app_theme.dart';
 import '../screen/home/request_hardcopy.dart';
 import 'Backend models/insurance_model.dart';
+import 'firebase_options.dart';
 import 'global/global.dart';
 import 'screen/home/home.dart';
 import 'screen/onboarding/onboard.dart';
@@ -53,21 +54,13 @@ import 'service/auth_service.dart';
 import 'service/user_service.dart';
 
 Future<void> main() async {
+
+
   WidgetsFlutterBinding.ensureInitialized();
-  if(kIsWeb){
-    await Firebase.initializeApp(
-        options: FirebaseOptions(apiKey: "AIzaSyD8wpvI8NbQQveZ-bsb5FNllwdanAIzlJQ",
-            appId:"1:544321412080:web:3fe8c58af6a7de5ee45b35",
-            messagingSenderId:"544321412080",
-            projectId: "insuremart-ca423",
-            storageBucket:"insuremart-ca423.appspot.com",
-            measurementId:"G-V9QF3LP1XJ",
-            authDomain: "insuremart-ca423.firebaseapp.com")
-    );
-  }
-  else{
-    await Firebase.initializeApp();
-  }
+  await Firebase.initializeApp(
+    name: 'insuremart',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   sharedPreferences = await SharedPreferences.getInstance();
 
   SystemChrome.setPreferredOrientations([
@@ -173,7 +166,8 @@ class AuthGate extends StatelessWidget {
       // initialData:  null,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return const Main();
+          // return const Main();
+          return Login();
         } else {
           return const Login();
         }

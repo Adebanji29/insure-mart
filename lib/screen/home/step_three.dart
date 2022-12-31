@@ -1,30 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/global/global.dart';
+import 'package:insuremart_app/utils/utils.dart';
 import 'package:provider/provider.dart';
-
 import '../../Backend models/insurance_model.dart';
 import '../../provider/new_insurance_provider.dart';
 import '../../utils/app_theme.dart';
-import '../../utils/utils.dart';
 import '../../widget/boxes.dart';
 import '../../widget/buttons.dart';
 import '../../widget/info_screen.dart';
+import '../../widget/text_fields.dart';
 import 'new_insurance.dart';
 
 class StepThree extends StatefulWidget {
-  final InsuranceModel model;
-  const StepThree({super.key, required this.model});
+  InsuranceModel model;
+  StepThree({required this.model});
+
 
   @override
   State<StepThree> createState() => _StepThreeState();
 }
 
 class _StepThreeState extends State<StepThree> {
+  TextEditingController _licenseController = TextEditingController();
+
+
+
+  Widget RadioGroup(){
+    String radioItemHolder="";
+    int? id;
+
+
+
+    List<ATPModel>atpList=[
+      ATPModel(
+          index: 1,
+          amount: 'Additional ₦1,000,000',
+          premium: '₦2,000.00'
+
+      ),
+      ATPModel(
+          index: 2,
+          amount: 'Additional ₦2,000,000',
+          premium: '₦4,000.00'
+
+      ),
+      ATPModel(
+          index: 3,
+          amount: 'Additional ₦1,000,000',
+          premium: '₦6,000.00'
+
+      ),
+    ];
+    return  SizedBox(
+      height: 180,
+      child: Column(
+        children: [
+          Container(
+            height: 180,
+            child: Column(
+              children: atpList.map((e) {
+                return RadioListTile(
+                    title: Row(
+                      children: [
+                        Expanded(
+                          child: Text(e.amount.toString(),
+                              style: InsuremartTheme.lightTextTheme.bodyText1!
+                                  .copyWith(fontWeight: FontWeight.w200)),),
+                        Expanded(
+                          child: Text(e.premium.toString(),
+                              style: TextStyle(color: InsuremartTheme.blue1,fontWeight: FontWeight.bold )),)
+                      ],
+                    ),
+                    value: e.index,
+                    groupValue: id,
+                    onChanged: (val){
+                      setState(() {
+                        radioItemHolder = e.premium.toString();
+                        print(radioItemHolder);
+                        id= e.index!;
+                      });
+                    });
+              }).toList(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    NewInsuranceManager provider = Provider.of<NewInsuranceManager>(context);
-    List<String> selectedSnapshot = provider.selectedExtension;
+
+    NewInsuranceManager provider=Provider.of<NewInsuranceManager>(context);
+    List<String>selectedSnapshot=provider.selectedExtension;
     final insure = context.read<NewInsuranceManager>();
     final insurance = context.watch<NewInsuranceManager>();
+
 
     return ListView(
       padding: const EdgeInsets.only(
@@ -36,17 +107,14 @@ class _StepThreeState extends State<StepThree> {
       children: [
         CustomListTile(
           title: 'Excess Buy Back (EBB)',
-          tapSelect: () async {
+          tapSelect: ()async {
             insure.step3Switch('ebb');
+
           },
           toastTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => InfoPage(
-                          title: Utils.extension_descript[0]["name"],
-                          message: Utils.extension_descript[0]["descript"],
-                        )));
+            Navigator.push(context, MaterialPageRoute(builder:(context) =>
+                InfoPage(title: Utils.extension_descript[0]["name"],
+                  message:  Utils.extension_descript[0]["descript"],) ));
           },
           selected: insurance.ebb,
         ),
@@ -57,13 +125,9 @@ class _StepThreeState extends State<StepThree> {
             insure.step3Switch('flood');
           },
           toastTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => InfoPage(
-                          title: Utils.extension_descript[2]["name"],
-                          message: Utils.extension_descript[2]["descript"],
-                        )));
+            Navigator.push(context, MaterialPageRoute(builder:(context) =>
+                InfoPage(title: Utils.extension_descript[2]["name"],
+                  message:  Utils.extension_descript[2]["descript"],) ));
           },
           selected: insurance.flood,
         ),
@@ -74,58 +138,68 @@ class _StepThreeState extends State<StepThree> {
             insure.step3Switch('srcc');
           },
           toastTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => InfoPage(
-                          title: Utils.extension_descript[1]["name"],
-                          message: Utils.extension_descript[1]["descript"],
-                        )));
+            Navigator.push(context, MaterialPageRoute(builder:(context) =>
+                InfoPage(title: Utils.extension_descript[1]["name"],
+                  message:  Utils.extension_descript[1]["descript"],) ));
           },
           selected: insurance.srcc,
         ),
         const SizedBox(height: 25),
-        CustomListTile(
+        CustomExpansion(
           title: 'Additional Third Party Property Damage',
-          tapSelect: () {
+          selected: insurance.atp,
+          onClick: () {
             insure.step3Switch('atp');
+
+          },
+          childern: [
+            RadioGroupWidget(model: widget.model,
+            )
+          ],
+        ),
+
+        const SizedBox(height: 25),
+        CustomListTile(
+          title: 'Vehicle tracking device',
+          tapSelect: () {
+            insure.step3Switch('vtd');
+
           },
           toastTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => InfoPage(
-                          title: Utils.extension_descript[4]["name"],
-                          message: Utils.extension_descript[5]["descript"],
-                        )));
           },
-          selected: insurance.atp,
+          selected: insurance.vtd,
         ),
         const SizedBox(height: 25),
-        CustomExpansion(
-          title: 'Vehicle tracking device',
-          selected: insurance.atp,
-          childern: const [],
-        ),
-        const SizedBox(height: 25),
-        CustomExpansion(
+        CustomListTile(
           title: 'Renew tracking device',
-          selected: insurance.atp,
-          childern: const [],
+          tapSelect: () {
+            insure.step3Switch('rtd');
+
+          },
+          toastTap: () {
+          },
+          selected: insurance.rtd,
         ),
         const SizedBox(height: 25),
         CustomExpansion(
           title: 'Renew vehicle license',
-          selected: insurance.atp,
-          childern: const [],
+          selected: insurance.rvl,
+          childern: [
+            CustomTextField(
+              controller: _licenseController,
+              label: 'MM/YY',
+            ),
+          ],
         ),
         const SizedBox(height: 25),
         CustomListTile(
           title: 'Renew road worthiness',
           tapSelect: () async {
+
             insure.step3Switch('rrw');
           },
-          toastTap: () {},
+          toastTap: () {
+          },
           selected: insurance.rrw,
         ),
         const SizedBox(height: 25),
@@ -137,32 +211,21 @@ class _StepThreeState extends State<StepThree> {
           toastTap: () {},
           selected: insurance.rhp,
         ),
-        const SizedBox(height: 25),
-        CustomListTile(
-          title: 'Delete personal effects',
-          tapSelect: () {
-            insure.step3Switch('dpe');
-          },
-          toastTap: () {},
-          selected: insurance.dpe,
-        ),
-        const CustomSizedBox(height: 10),
-        LongButton(
-            title: 'CONTINUE',
-            onPressed: () async {
-              setState(() {
-                widget.model.step3Extensions = selectedSnapshot;
-              });
-              print(widget.model.step3Extensions);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => NewInsurance(
-                            myModel: widget.model,
-                            summary: 0,
-                          )));
-              insure.nextStep();
-            }),
+
+        const CustomSizedBox(height: 25),
+        LongButton(title: 'CONTINUE', onPressed: ()async{
+          setState(() {
+            widget.model.step3Extensions= selectedSnapshot;
+            widget.model.vehicletrackinglicence=_licenseController.text.trim();
+
+          });
+          print(widget.model.step3Extensions);
+          print(widget.model.atp);
+          print(widget.model.vehicletrackinglicence);
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, summary: 0,)));
+          insure.nextStep();
+
+        }),
       ],
     );
   }
@@ -175,10 +238,12 @@ class CustomExpansion extends StatelessWidget {
     this.selected = false,
     required this.title,
     required this.childern,
+    this.onClick
   }) : super(key: key);
   final bool isExpanded;
   final bool selected;
   final String title;
+  final VoidCallback? onClick;
   final List<Widget> childern;
 
   @override
@@ -186,7 +251,7 @@ class CustomExpansion extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        color: selected ? InsuremartTheme.green3 : InsuremartTheme.white2,
+        color: selected? InsuremartTheme.green3 : InsuremartTheme.white2,
         border: Border.all(
           width: selected ? 2 : 1,
           color: selected ? InsuremartTheme.green2 : InsuremartTheme.white3,
@@ -197,7 +262,7 @@ class CustomExpansion extends StatelessWidget {
         data: ThemeData().copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           childrenPadding:
-              const EdgeInsets.only(left: 20, right: 20, bottom: 24),
+          const EdgeInsets.only(left: 20, right: 20, bottom: 24),
           title: Text(
             title,
             style: InsuremartTheme.lightTextTheme.bodyText1!
@@ -227,6 +292,8 @@ class CustomListTile extends StatelessWidget {
     required this.toastTap,
     required this.tapSelect,
     required this.title,
+
+
   }) : super(key: key);
   final String title;
   final bool selected;
@@ -237,16 +304,17 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     // print('object');
     return GestureDetector(
-      onTap: tapSelect,
+      onTap:
+      tapSelect,
       child: Container(
         padding: const EdgeInsets.all(20),
         height: 78,
         decoration: BoxDecoration(
-          color: selected == true
-              ? InsuremartTheme.green3
-              : InsuremartTheme.white2,
+          color: selected == true ? InsuremartTheme.green3 : InsuremartTheme.white2,
           border: Border.all(
             width: selected ? 2 : 1,
             color: selected ? InsuremartTheme.green2 : InsuremartTheme.white3,
@@ -271,13 +339,13 @@ class CustomListTile extends StatelessWidget {
                 selected
                     ? const Icon(Icons.check, color: InsuremartTheme.blue1)
                     : Container(
-                        height: 34,
-                        width: 34,
-                        decoration: BoxDecoration(
-                          color: InsuremartTheme.black4.withOpacity(.1),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
+                  height: 34,
+                  width: 34,
+                  decoration: BoxDecoration(
+                    color: InsuremartTheme.black4.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
                 const SizedBox(width: 22),
                 InkWell(
                   onTap: toastTap,
@@ -292,5 +360,90 @@ class CustomListTile extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
+
+class ATPModel{
+  String? amount;
+  String? premium;
+  int? index;
+
+  ATPModel({this.amount, this.premium, this.index,});
+}
+class RadioGroupWidget extends StatefulWidget {
+  InsuranceModel model;
+  RadioGroupWidget({required this.model});
+
+
+  @override
+  State<RadioGroupWidget> createState() => _RadioGroupWidgetState();
+}
+
+class _RadioGroupWidgetState extends State<RadioGroupWidget> {
+  String radioItemHolder="";
+  int? id;
+
+
+
+  List<ATPModel>atpList=[
+    ATPModel(
+        index: 1,
+        amount: 'Additional ₦1,000,000',
+        premium: '₦2,000.00'
+
+    ),
+    ATPModel(
+        index: 2,
+        amount: 'Additional ₦2,000,000',
+        premium: '₦4,000.00'
+
+    ),
+    ATPModel(
+        index: 3,
+        amount: 'Additional ₦1,000,000',
+        premium: '₦6,000.00'
+
+    ),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 180,
+      child: Column(
+        children: [
+          Container(
+            height: 180,
+            child: Column(
+              children: atpList.map((e) {
+                return RadioListTile(
+                    title: Row(
+                      children: [
+                        Expanded(
+                          child: Text(e.amount.toString(),
+                              style: InsuremartTheme.lightTextTheme.bodyText1!
+                                  .copyWith(fontWeight: FontWeight.w200)),),
+                        Expanded(
+                          child: Text(e.premium.toString(),
+                              style: TextStyle(color: InsuremartTheme.blue1,fontWeight: FontWeight.bold )),)
+                      ],
+                    ),
+                    value: e.index,
+                    groupValue: id,
+                    onChanged: (val){
+                      setState(() {
+                        widget.model.atp= e.premium.toString();
+                        id= e.index!;
+                      });
+                    });
+              }).toList(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+
+

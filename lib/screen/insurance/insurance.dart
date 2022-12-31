@@ -26,7 +26,7 @@ class _MyInsuranceState extends State<MyInsurance> {
   Widget build(BuildContext context) {
     InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context);
     insuranceProvider.getNewInsuranceData();
-    List<dynamic>insuranceList= insuranceProvider.myInsuranceList;
+    List<InsuranceModel>insuranceList= insuranceProvider.getNewInsuranceList;
 
     var items = ['Car Insurance', 'Insurance'];
     String? value = items[0];
@@ -75,7 +75,7 @@ class _MyInsuranceState extends State<MyInsurance> {
               ListView.separated(
                 primary: false,
                 shrinkWrap: true,
-                itemCount: insuranceProvider.myInsuranceList.length,
+                itemCount: insuranceProvider.getNewInsuranceListLength,
                 itemBuilder: (context, index) => InsuranceItem(
                   insuranceModel: insuranceList[index],
                 ),

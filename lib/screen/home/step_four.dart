@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:provider/provider.dart';
-
 import '../../Backend models/insurance_model.dart';
 import '../../provider/new_insurance_provider.dart';
 import '../../utils/app_theme.dart';
@@ -42,38 +41,38 @@ class _StepFourState extends State<StepFour> {
         bottom: 40,
       ),
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton.icon(
-                onPressed: () => sortByBottomSheet(context),
-                icon: Icon(
-                  Icons.sort,
-                  color: InsuremartTheme.black1.withOpacity(.8),
-                ),
-                label: Text(
-                  'Sort',
-                  style: InsuremartTheme.lightTextTheme.bodyText1!
-                      .copyWith(fontSize: 14),
-                ),
-              ),
-              TextButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.filter_alt_outlined,
-                  color: InsuremartTheme.black1.withOpacity(.8),
-                ),
-                label: Text(
-                  'Filter',
-                  style: InsuremartTheme.lightTextTheme.bodyText1!
-                      .copyWith(fontSize: 14),
-                ),
-              ),
-            ],
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.end,
+        //     children: [
+        //       TextButton.icon(
+        //         onPressed: () => sortByBottomSheet(context),
+        //         icon: Icon(
+        //           Icons.sort,
+        //           color: InsuremartTheme.black1.withOpacity(.8),
+        //         ),
+        //         label: Text(
+        //           'Sort',
+        //           style: InsuremartTheme.lightTextTheme.bodyText1!
+        //               .copyWith(fontSize: 14),
+        //         ),
+        //       ),
+        //       TextButton.icon(
+        //         onPressed: () {},
+        //         icon: Icon(
+        //           Icons.filter_alt_outlined,
+        //           color: InsuremartTheme.black1.withOpacity(.8),
+        //         ),
+        //         label: Text(
+        //           'Filter',
+        //           style: InsuremartTheme.lightTextTheme.bodyText1!
+        //               .copyWith(fontSize: 14),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         ListView.separated(
             primary: false,
             shrinkWrap: true,
@@ -93,6 +92,8 @@ class _StepFourState extends State<StepFour> {
               logoUrl: company[index].logo,
             ),
             separatorBuilder: (_, __) => const SizedBox(height: 15)),
+
+        const SizedBox(height: 350),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: LongButton(title: 'CONTINUE', onPressed: ()async{
@@ -102,23 +103,23 @@ class _StepFourState extends State<StepFour> {
             });
             print(widget.model.providerName);
             Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, summary: 0,)));
-           widget.model.providerImage==null? Fluttertoast.showToast(msg: "Kindly select a provider"): ref.nextStep();
+            widget.model.providerImage==null? Fluttertoast.showToast(msg: "Kindly select a provider"): ref.nextStep();
 
           }),
         ),
         const SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: LongButton(
-            title: 'SAVE AND CONTINUE LATER',
-            onPressed: () {
-              buildBottomSheet(context);
-            },
-            color: InsuremartTheme.white1,
-            textColor: InsuremartTheme.blue2,
-            isBorder: true,
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+        //   child: LongButton(
+        //     title: 'SAVE AND CONTINUE LATER',
+        //     onPressed: () {
+        //       buildBottomSheet(context);
+        //     },
+        //     color: InsuremartTheme.white1,
+        //     textColor: InsuremartTheme.blue2,
+        //     isBorder: true,
+        //   ),
+        // ),
       ],
     );
   }
@@ -127,16 +128,16 @@ class _StepFourState extends State<StepFour> {
     List<Widget> buildRadio() => sortBy
         .map(
           (value) => RadioListTile<String>(
-            contentPadding: const EdgeInsets.only(left: 5),
-            value: value,
-            groupValue: selectedValue,
-            onChanged: (val) {
-              setState(() {
-                selectedValue = val;
-              });
-            },
-            title: Text(
-              value,
+        contentPadding: const EdgeInsets.only(left: 5),
+        value: value,
+        groupValue: selectedValue,
+        onChanged: (val) {
+          setState(() {
+            selectedValue = val;
+          });
+        },
+        title: Text(
+          value,
           style: InsuremartTheme.lightTextTheme.bodyText1!
               .copyWith(fontWeight: FontWeight.w400),
         ),
@@ -287,14 +288,8 @@ class InsuranceCompany {
 
 const List<InsuranceCompany> company = [
   InsuranceCompany(
-      name: 'Custodian & Allied Insurance', logo: 'assets/images/camel.png'),
+      name: 'Cornerstone Insurance', logo: 'assets/images/corner.png'),
   InsuranceCompany(
-      name: 'Leadway Assurance Plc', logo: 'assets/images/camel.png'),
-  InsuranceCompany(
-      name: 'Allianz Nigeria Insurance Plc', logo: 'assets/images/camel.png'),
-  InsuranceCompany(
-      name: 'Mansard Insurance Plc', logo: 'assets/images/camel.png'),
-  InsuranceCompany(
-      name: 'Mutual Benefits Assurance Plc', logo: 'assets/images/camel.png'),
+      name: 'Allianz Nigeria Insurance Plc', logo: 'assets/images/allianz.jpg'),
 
 ];

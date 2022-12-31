@@ -14,7 +14,7 @@ class InsuranceModel{
   String? premiumPaid;
   String? expDate;
   String? carMakeImage;
-   String? carYear;
+  String? carYear;
   String? username;
   String? carmake;
   String? carmodel;
@@ -25,6 +25,8 @@ class InsuranceModel{
   String? chasisNumber;
   String? engineNumber;
   String? insurancePeriod;
+  String? atp;
+  String? vehicletrackinglicence;
   List<String>?step3Extensions;
 
 
@@ -37,22 +39,24 @@ class InsuranceModel{
     this.providerImage,
     this.purchaceDate,
     this.renewalDate,
-     this.premiumPaid,
+    this.premiumPaid,
     this.expDate,
     this.carMakeImage,
     this.carYear,
     this.username,
     this.carmake,
     this.carmodel,
-     this.coverType,
-     this.vehicleColor,
-   required this.sumInsured,
+    this.coverType,
+    this.vehicleColor,
+    required this.sumInsured,
     this.registrationNumber,
     this.chasisNumber,
     this.engineNumber,
     this.insurancePeriod,
     this.step3Extensions,
+    this.atp,
+    this.vehicletrackinglicence
 
-});
+  });
 }
 

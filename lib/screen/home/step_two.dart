@@ -14,8 +14,8 @@ import '../../utils/app_theme.dart';
 import '../../widget/buttons.dart';
 
 class StepTwo extends StatefulWidget {
-final InsuranceModel model;
-const StepTwo({super.key, required this.model});
+  final InsuranceModel model;
+  const StepTwo({super.key, required this.model});
 
   @override
   State<StepTwo> createState() => _StepTwoState();
@@ -53,7 +53,7 @@ class _StepTwoState extends State<StepTwo> {
         const SizedBox(height: 25),
         label('Car Interior 1 (optional)'),
         ImageContainer(imageFile: _carFront, imageUrl: '',
-       ),
+        ),
         const SizedBox(height: 25),
         label('Car Interior 2 (optional)'),
         ImageContainer(imageFile: _carFront, imageUrl: '',
@@ -61,26 +61,26 @@ class _StepTwoState extends State<StepTwo> {
         const SizedBox(height: 25),
         label('Car Interior 3 (optional)s'),
         ImageContainer(imageFile: _carFront, imageUrl: '',
-       ),
+        ),
         const SizedBox(height: 25),
         LongButton(title: 'CONTINUE', onPressed:
-          ref.nextStep
+        ref.nextStep
 
-          ),
+        ),
 
 
         const SizedBox(height: 10),
-        LongButton(
-          title: 'SAVE AND CONTINUE LATER',
-          onPressed: () {
-            buildBottomSheet(context);
-          },
-          color: InsuremartTheme.white1,
-          textColor: InsuremartTheme.blue2,
-          isBorder: true,
-        ),
+        // LongButton(
+        //   title: 'SAVE AND CONTINUE LATER',
+        //   onPressed: () {
+        //     buildBottomSheet(context);
+        //   },
+        //   color: InsuremartTheme.white1,
+        //   textColor: InsuremartTheme.blue2,
+        //   isBorder: true,
+        // ),
       ],
     );
   }
 
- }
+}

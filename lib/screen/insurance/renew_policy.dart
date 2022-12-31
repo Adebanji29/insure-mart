@@ -21,40 +21,40 @@ class RenewPolicy extends StatelessWidget {
         centerTitle: false,
         leadingWidth: 64,
       ),
-      body: insurance.myInsuranceList.isNotEmpty
+      body: insurance.item.isNotEmpty
           ? ListView(
-              primary: true,
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 49),
-              children: [
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  primary: false,
-                  itemCount: insurance.myInsuranceList.length,
-                  itemBuilder: (context, index) {
-                    var insure = insurance.myInsuranceList[index];
-                    return ChangeNotifierProvider.value(
-                      value: insure,
-                      child: const RenewPolicyItem(),
-                    );
-                  },
-                  separatorBuilder: (_, __) => const CustomSizedBox(height: 20),
-                ),
-                const CustomSizedBox(height: 29),
-                Consumer<InsuranceProvider>(builder: (context, insurance, _) {
-                  return LongButton(
-                    onPressed: insurance.isSelected
-                        ? () => showModalBottomSheet(
-                              context: context,
-                              builder: (context) =>
-                                  buildButtomSheet(context, insurance),
-                            )
-                        : null,
-                    title: 'Renew',
-                  );
-                }),
-              ],
-            )
+        primary: true,
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 49),
+        children: [
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            primary: false,
+            itemCount: insurance.item.length,
+            itemBuilder: (context, index) {
+              var insure = insurance.item[index];
+              return ChangeNotifierProvider.value(
+                value: insure,
+                child: const RenewPolicyItem(),
+              );
+            },
+            separatorBuilder: (_, __) => const CustomSizedBox(height: 20),
+          ),
+          const CustomSizedBox(height: 29),
+          Consumer<InsuranceProvider>(builder: (context, insurance, _) {
+            return LongButton(
+              onPressed: insurance.isSelected
+                  ? () => showModalBottomSheet(
+                context: context,
+                builder: (context) =>
+                    buildButtomSheet(context, insurance),
+              )
+                  : null,
+              title: 'Renew',
+            );
+          }),
+        ],
+      )
           : const EmptyPolicy(),
     );
   }
@@ -62,7 +62,7 @@ class RenewPolicy extends StatelessWidget {
   Widget buildButtomSheet(BuildContext context, InsuranceProvider insure) =>
       Padding(
         padding:
-            const EdgeInsets.only(left: 20, right: 20, top: 25, bottom: 44),
+        const EdgeInsets.only(left: 20, right: 20, top: 25, bottom: 44),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -157,15 +157,15 @@ class RenewPolicyItem extends StatelessWidget {
       child: Container(
         alignment: AlignmentDirectional.topStart,
         padding:
-            const EdgeInsets.only(left: 15, bottom: 15, top: 15.75, right: 15),
+        const EdgeInsets.only(left: 15, bottom: 15, top: 15.75, right: 15),
         decoration: BoxDecoration(
           color: InsuremartTheme.white4,
           borderRadius: BorderRadius.circular(10),
           border: insurancew.selected
               ? Border.all(
-                  color: InsuremartTheme.green1,
-                  width: 3,
-                )
+            color: InsuremartTheme.green1,
+            width: 3,
+          )
               : null,
         ),
         child: Column(
@@ -239,65 +239,65 @@ class RenewPolicyItem extends StatelessWidget {
   }
 
   Column carDetail(String title, String subtitle) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: InsuremartTheme.lightTextTheme.headline5,
-          ),
-          const CustomSizedBox(height: 5),
-          Text(
-            subtitle,
-            style: InsuremartTheme.lightTextTheme.headline3!.copyWith(
-              fontSize: 12,
-              color: InsuremartTheme.green1,
-            ),
-          )
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        title,
+        style: InsuremartTheme.lightTextTheme.headline5,
+      ),
+      const CustomSizedBox(height: 5),
+      Text(
+        subtitle,
+        style: InsuremartTheme.lightTextTheme.headline3!.copyWith(
+          fontSize: 12,
+          color: InsuremartTheme.green1,
+        ),
+      )
+    ],
+  );
 
   Column buildPolicy(String policy) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Text(
+        'Policy',
+        style: InsuremartTheme.lightTextTheme.headline5,
+      ),
+      const CustomSizedBox(height: 5),
+      Text(
+        policy,
+        style: InsuremartTheme.lightTextTheme.headline3!
+            .copyWith(fontSize: 12),
+      ),
+    ],
+  );
+
+  Column buildProvider(String logo, String provider) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Provider',
+        style: InsuremartTheme.lightTextTheme.headline5,
+      ),
+      const CustomSizedBox(height: 5),
+      Row(
         children: [
-          Text(
-            'Policy',
-            style: InsuremartTheme.lightTextTheme.headline5,
+          SizedBox(
+            height: 20,
+            width: 20,
+            child: Image.asset(logo),
           ),
-          const CustomSizedBox(height: 5),
+          const SizedBox(width: 5),
           Text(
-            policy,
-            style: InsuremartTheme.lightTextTheme.headline3!
+            provider,
+            style: InsuremartTheme.lightTextTheme.bodyText2!
                 .copyWith(fontSize: 12),
           ),
         ],
-      );
-
-  Column buildProvider(String logo, String provider) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Provider',
-            style: InsuremartTheme.lightTextTheme.headline5,
-          ),
-          const CustomSizedBox(height: 5),
-          Row(
-            children: [
-              SizedBox(
-                height: 20,
-                width: 20,
-                child: Image.asset(logo),
-              ),
-              const SizedBox(width: 5),
-              Text(
-                provider,
-                style: InsuremartTheme.lightTextTheme.bodyText2!
-                    .copyWith(fontSize: 12),
-              ),
-            ],
-          )
-        ],
-      );
+      )
+    ],
+  );
 
   Column textSubtext(String title, String subtitle, {bool money = false}) {
     return Column(
@@ -313,9 +313,9 @@ class RenewPolicyItem extends StatelessWidget {
           subtitle,
           style: money
               ? InsuremartTheme.lightTextTheme.subtitle1!.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xff4F4F4F),
-                )
+            fontWeight: FontWeight.w700,
+            color: const Color(0xff4F4F4F),
+          )
               : InsuremartTheme.lightTextTheme.subtitle1,
         ),
       ],

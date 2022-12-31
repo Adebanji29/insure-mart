@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../main.dart';
 import '../../widget/boxes.dart';
+import '../Auth/login.dart';
 import '../main_screen.dart';
 
 class MySplashScreen extends StatefulWidget {
@@ -20,18 +21,20 @@ class _MySplashScreenState extends State<MySplashScreen> {
       //user is already logged-in
       if (FirebaseAuth.instance.currentUser != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Main()));
-      } else //user is NOT already logged-in
-      {
+            context, MaterialPageRoute(builder: (context) =>Login()));
+        //   context, MaterialPageRoute(builder: (context) => Main()));
+      }
+      else //user is NOT already logged-in
+          {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => AuthGate()));
+            context, MaterialPageRoute(builder: (context) => Login()));
       }
     });
   }
 
   @override
   void
-      initState() //called automatically when user comes here to this splash screen
+  initState() //called automatically when user comes here to this splash screen
   {
     super.initState();
 
