@@ -1,37 +1,40 @@
+import 'dart:collection';
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart' show BuildContext,ChangeNotifier;
-// import 'package:intl/intl.dart';
-// import 'package:provider/provider.dart';
-// import 'package:http/http.dart' as http;
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 import '../Backend models/insurance_model.dart';
-// import '../global/global.dart';
+import '../global/global.dart';
 import '../models/insurance.dart';
 
 
 
 class InsuranceProvider with ChangeNotifier {
 
-   List<Insurance> _myInsuranceList = list;
+  final List<Insurance> _myInsurance = list;
   bool _isSelected = false;
 
   bool get isSelected => _isSelected;
 
 
-  List<Insurance> get myInsuranceList =>
-      [..._myInsuranceList];
+  UnmodifiableListView<Insurance> get item =>
+      UnmodifiableListView([..._myInsurance]);
 
-  
+
 
   // Insurance findById(int id) =>
   //     _myInsurance.firstWhere((insurance) => insurance.id == id);
 
   Iterable<Insurance> showSelected() =>
-      _myInsuranceList.where((insurance) => insurance.selected).toList();
+      _myInsurance.where((insurance) => insurance.selected).toList();
 
   void isSelect() {
-    _isSelected = _myInsuranceList.any((insurance) => insurance.selected);
+    _isSelected = _myInsurance.any((insurance) => insurance.selected);
     notifyListeners();
   }
 
@@ -41,7 +44,7 @@ class InsuranceProvider with ChangeNotifier {
         .now()
         .millisecondsSinceEpoch
         .toString();
-    model.purchaceDate = DateTime.now().toLocal().toString();
+    // model.purchaceDate = DateTime.now().toLocal().toString();
 
 
     User? currentUser = FirebaseAuth.instance.currentUser;
@@ -75,6 +78,7 @@ class InsuranceProvider with ChangeNotifier {
           "expDate": "",
           "car year": "",
           "carMakeImage": model.carMakeImage,
+          "selected extension":model.step3Extensions
 
         }).whenComplete(() async {
       await FirebaseFirestore.instance
@@ -103,10 +107,11 @@ class InsuranceProvider with ChangeNotifier {
             "expDate": "",
             "car year": "",
             "carMakeImage": model.carMakeImage,
+            "selected extension":model.step3Extensions
 
           });
 
-      });
+    });
 
     notifyListeners();
 
@@ -127,38 +132,45 @@ class InsuranceProvider with ChangeNotifier {
             (element) {
           InsuranceModel insuranceData = InsuranceModel(
 
-              userUID: element["userId"],
-              purchaseId: element["purchaseID"],
-              insuranceClass: element["class"],
-              coverType: element["type"],
-              username: element["username"],
-              carmake: element["car make"],
-              carmodel: element["car model"],
-              providerName: element["provider name"],
-              providerImage: element["provider image"],
-              vehicleColor: element["vehicle color"],
-              sumInsured: double.parse((element["sum insured"]).toString()),
-              registrationNumber: element["reg no"],
-              chasisNumber: element["chasis number"],
-              engineNumber: element["engine number"],
-              policy:"Joshua Hawkins Car Insurance",
-              insurancePeriod: element["policy period"],
-              purchaceDate: element["purchase Date"],
-              renewalDate: element["renewalDate"],
-              premiumPaid: element["premiumPaid"],
-              expDate: element["expDate"],
-              carYear: element["car year"],
-              carMakeImage: element["carMakeImage"],
-              step3Extensions: [],
+            userUID: element["userId"],
+            purchaseId: element["purchaseID"],
+            insuranceClass: element["class"],
+            coverType: element["type"],
+            username: element["username"],
+            carmake: element["car make"],
+            carmodel: element["car model"],
+            providerName: element["provider name"],
+            providerImage: element["provider image"],
+            vehicleColor: element["vehicle color"],
+            sumInsured: element["sum insured"],
+            registrationNumber: element["reg no"],
+            chasisNumber: element["chasis number"],
+            engineNumber: element["engine number"],
+            policy:"${element["username"]}'s Car Insurance",
+            insurancePeriod: element["policy period"],
+            purchaceDate: element["purchase Date"],
+            renewalDate: element["renewalDate"],
+            premiumPaid: element["premiumPaid"],
+            expDate: element["expDate"],
+            carYear: element["car year"],
+            carMakeImage: element["carMakeImage"],
+            // step3Extensions: element["selected extension"]
 
 
           );
           newList.add(insuranceData);
         });
-    // _myInsuranceList=newList;
+    newInsuranceList=newList;
     notifyListeners();
   }
-  
+  List<InsuranceModel> get getNewInsuranceList{
+    return newInsuranceList;
+
+  }
+
+  int get getNewInsuranceListLength{
+    return newInsuranceList.length;
+  }
 
   List<InsuranceModel> selectedRenewList= [];
 

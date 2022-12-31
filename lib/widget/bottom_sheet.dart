@@ -45,12 +45,12 @@ Future<dynamic> carBottomSheet(BuildContext context) {
                 Navigator.of(context).pop();
                 context.read<AppStateManager>().goToTab(1);
               }),
-          const CustomSizedBox(height: 10),
-          LongButton(
-              title: 'GET A PREMIUM QUOTATION',
-              onPressed: () {
-                Navigator.of(context).pop();
-              }),
+          // const CustomSizedBox(height: 10),
+          // LongButton(
+          //     title: 'GET A PREMIUM QUOTATION',
+          //     onPressed: () {
+          //       Navigator.of(context).pop();
+          //     }),
         ],
       ),
     ),

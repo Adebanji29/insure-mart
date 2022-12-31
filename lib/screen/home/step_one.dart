@@ -266,6 +266,7 @@ class _StepOneState extends State<StepOne> {
             },
             controller: _chassisNumber,
             label: 'Chassis Number',
+            textCapitalization: TextCapitalization.characters,
           ),
           const CustomSizedBox(height: 25),
           label('Engine Number'),
@@ -281,6 +282,7 @@ class _StepOneState extends State<StepOne> {
             },
             controller: _engineNumber,
             label: 'Engine Number',
+            textCapitalization: TextCapitalization.characters,
           ),
           const CustomSizedBox(height: 25),
           label('Period of Insurance'),
@@ -302,15 +304,15 @@ class _StepOneState extends State<StepOne> {
                 validateUploadForm();
               }),
           const CustomSizedBox(height: 10),
-          LongButton(
-            title: 'SAVE AND CONTINUE LATER',
-            onPressed: () {
-              buildBottomSheet(context);
-            },
-            color: InsuremartTheme.white1,
-            textColor: InsuremartTheme.blue2,
-            isBorder: true,
-          ),
+          // LongButton(
+          //   title: 'SAVE AND CONTINUE LATER',
+          //   onPressed: () {
+          //     buildBottomSheet(context);
+          //   },
+          //   color: InsuremartTheme.white1,
+          //   textColor: InsuremartTheme.blue2,
+          //   isBorder: true,
+          // ),
         ],
       ),
     );
@@ -324,7 +326,7 @@ class _StepOneState extends State<StepOne> {
       widget.model.carmodel = _selectedCarModel;
       widget.model.coverType = _covertype.text;
       widget.model.vehicleColor = _vehicleColor.text;
-      widget.model.sumInsured = double.parse(_vehicleValue.text);
+      widget.model.sumInsured = double.parse(_vehicleValue.text.replaceAll(RegExp('[^0-9.]'), ''));
       widget.model.registrationNumber = _regNumber.text;
       widget.model.chasisNumber = _chassisNumber.text;
       widget.model.engineNumber = _engineNumber.text;
@@ -335,9 +337,9 @@ class _StepOneState extends State<StepOne> {
         context,
         MaterialPageRoute(
             builder: (context) => NewInsurance(
-                  myModel: widget.model,
-                  summary: 0,
-                )));
+              myModel: widget.model,
+              summary: 0,
+            )));
     ref.nextStep();
   }
 
