@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "544321412080",
+    "project_id": "insuremart-ca423",
+    "storage_bucket": "insuremart-ca423.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544321412080:android:f6c725c7abcee5fce45b35",
+        "android_client_info": {
+          "package_name": "com.example.insuremart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544321412080-2dm57tp3uruua1tt0kk1ege5ealauts9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc5Hp2MhXiU1vNLKjfynM8gcIK0NxXdZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544321412080-2dm57tp3uruua1tt0kk1ege5ealauts9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "544321412080-a4nbend9ikdje5d0j5h2ferfbjin6qke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.insuremart"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544321412080:android:37c619da5509f441e45b35",
+        "android_client_info": {
+          "package_name": "com.example.insuremart_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544321412080-2dm57tp3uruua1tt0kk1ege5ealauts9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc5Hp2MhXiU1vNLKjfynM8gcIK0NxXdZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544321412080-2dm57tp3uruua1tt0kk1ege5ealauts9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "544321412080-a4nbend9ikdje5d0j5h2ferfbjin6qke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.insuremart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
