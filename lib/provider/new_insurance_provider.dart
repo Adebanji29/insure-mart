@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../Backend models/insurance_model.dart';
 
 class NewInsuranceTab {
   static const stepOne = 0;
@@ -21,12 +20,12 @@ class NewInsuranceManager extends ChangeNotifier {
   bool _srcc = false;
   bool _atp = false;
   bool _vtd = false;
-  final bool _rtd = false;
-  final bool _rvl = false;
+  bool _rtd = false;
+  bool _rvl = false;
   bool _rrw = false;
   bool _rhp = false;
   bool _dpe = false;
-   List<String> _selectedExtension= [];
+  List<String> _selectedExtension= [];
 
   bool get ebb => _ebb;
   bool get flood => _flood;
@@ -39,7 +38,9 @@ class NewInsuranceManager extends ChangeNotifier {
   bool get rhp => _rhp;
   bool get dpe => _dpe;
 
-  List<String> get selectedExtension =>[..._selectedExtension];
+  List<String> get selectedExtension {
+    return _selectedExtension;
+  }
 
   int get currentStep => _currentStep;
 
@@ -117,6 +118,16 @@ class NewInsuranceManager extends ChangeNotifier {
         }
         if (!_vtd & _selectedExtension.contains('vtd')) {
           _selectedExtension.remove('vtd');
+        }
+        notifyListeners();
+        break;
+      case 'rtd':
+        _rtd = !_rtd;
+        if (_vtd & !_selectedExtension.contains('rtd')) {
+          _selectedExtension.add('rtd');
+        }
+        if (!_vtd & _selectedExtension.contains('rtd')) {
+          _selectedExtension.remove('rtd');
         }
         notifyListeners();
         break;
