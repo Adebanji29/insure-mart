@@ -51,7 +51,7 @@ class _BvnState extends State<Bvn> {
                 maxLength: 11,
               ),
               const SizedBox(height: 25),
-              LongButton(title: 'VERIFY & SAVE', onPressed: () {}),
+              LongButton(title: 'SAVE', onPressed: () {}),
             ],
           ),
         ),

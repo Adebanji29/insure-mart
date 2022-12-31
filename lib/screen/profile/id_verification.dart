@@ -75,7 +75,7 @@ class _IdVerificationState extends State<IdVerification> {
                   label: 'ID Number',
                 ),
                 const SizedBox(height: 25),
-                LongButton(title: 'VERIFY & SAVE', onPressed: () {}),
+                LongButton(title: 'SAVE', onPressed: () {}),
                 const SizedBox(height: 40),
               ],
             ),

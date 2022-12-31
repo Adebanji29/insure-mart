@@ -13,7 +13,7 @@ class NextofKin extends StatefulWidget {
 }
 
 class _NextofKinState extends State<NextofKin> {
-  final List<String> _relTypeList = ['Mother', 'Father'];
+  final List<String> _relTypeList = ['Mother', 'Father', 'Husband', 'Wife', 'Son', 'Daughter', 'Brother', 'Sister', 'Aunty', 'Uncle'];
   late TextEditingController _fName;
   late TextEditingController _lName;
   late TextEditingController _relType;
@@ -70,10 +70,10 @@ class _NextofKinState extends State<NextofKin> {
                 },
               ),
               const CustomSizedBox(height: 25),
-              label('Last Name'),
+              label('Email Address'),
               CustomTextField(label: 'Email Address', controller: _email),
               const CustomSizedBox(height: 25),
-              label('Last Name'),
+              label('Phone Number'),
               CustomTextField(label: 'Phone Number', controller: _pNumber),
               const CustomSizedBox(height: 25),
               LongButton(title: 'SAVE', onPressed: () {})

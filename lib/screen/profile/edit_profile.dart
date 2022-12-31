@@ -341,7 +341,7 @@ class _EditProfileState extends State<EditProfile> {
                                   }),
                               const SizedBox(height: 25),
                               LongButton(
-                                  title: 'APPlY',
+                                  title: 'Save',
                                   onPressed: () {
                                     userDetailUpdate();
                                   }),

@@ -74,14 +74,14 @@ class Profile extends StatelessWidget {
                           },
                           badge: true,
                         ),
-                        ProfileListTile(
+                       /* ProfileListTile(
                           leading: FontAwesomeIcons.facebook,
                           title: 'Connect Socials',
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(ConnectSocials.route);
                           },
-                        ),
+                        ), */
                         ProfileListTile(
                           leading: FontAwesomeIcons.creditCard,
                           title: 'My Cards',
