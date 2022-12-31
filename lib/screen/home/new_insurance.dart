@@ -3,7 +3,9 @@ import 'package:insuremart_app/screen/home/step_one.dart';
 // import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 import 'package:provider/provider.dart';
-// import 'package:insuremart/widget/text_fields.dart';
+// import 'package:insuremart/widget/text_fields.dartimport '../../Backend models/insurance_model.dart';
+
+
 
 import '../../Backend models/insurance_model.dart';
 import '../../provider/new_insurance_provider.dart';
@@ -139,7 +141,7 @@ class _NewInsuranceState extends State<NewInsurance> {
                     StepTwo(model: widget.myModel,),
                     StepThree(model: widget.myModel,),
                     StepFour(model: widget.myModel),
-                    StepFive(model:widget.myModel),
+                    StepFive(model:widget.myModel,),
                     StepSix(model:widget.myModel, summary: widget.summary,),
                   ],
                 ),

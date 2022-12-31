@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e323a948-7b36-4ea8-adc6-ae648cac56b7" name="Changes" comment="profile update ongoing">
+    <list default="true" id="e323a948-7b36-4ea8-adc6-ae648cac56b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_24_2022_10_15_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_24_2022_10_15_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_24_2022_10_15_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_24_2022_10_15_PM__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
@@ -18,24 +14,8 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/google-services.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Backend models/insurance_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Backend models/insurance_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/provider/insurance_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/insurance_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/claims/new_claim.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/claims/new_claim.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_five.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_five.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_four.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_four.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_one.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_one.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_three.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_three.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_two.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_two.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/insurance/renew_policy.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/insurance/renew_policy.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/splashScreen/my_splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/splashScreen/my_splash_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widget/bottom_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget/bottom_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/provider/new_insurance_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/new_insurance_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/new_insurance.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/new_insurance.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +80,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../insure-mart before" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -150,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671531351959</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="recent update">
+      <created>1672499917225</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672499917225</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -173,7 +160,8 @@
     <MESSAGE value="paystack payment function added,cards added, edit profile page, step 1 to 6 pages and insurance screen modified" />
     <MESSAGE value="claims function and user's device token update added" />
     <MESSAGE value="profile update ongoing" />
-    <option name="LAST_COMMIT_MESSAGE" value="profile update ongoing" />
+    <MESSAGE value="recent update" />
+    <option name="LAST_COMMIT_MESSAGE" value="recent update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
