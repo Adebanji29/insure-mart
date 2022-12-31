@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -208,13 +209,13 @@ class _NewClaimState extends State<NewClaim> {
                 //
               ),
             ),
-            const CustomSizedBox(height: 25),
-            label('Mechanic or Engineer Contact Number'),
-            CustomTextField(
-              controller: _mechanicContactNumber,
-              // readOnly: true,
-              label: 'Phone Number',
-            ),
+            // const CustomSizedBox(height: 25),
+            // label('Mechanic or Engineer Contact Number'),
+            // CustomTextField(
+            //   controller: _mechanicContactNumber,
+            //   // readOnly: true,
+            //   label: 'Phone Number',
+            // ),
             if (_typeOfLoss!.toLowerCase().contains('personal')) ...[
               const CustomSizedBox(height: 25),
               label(_typeOfLoss!.toLowerCase().contains('only')
@@ -245,17 +246,20 @@ class _NewClaimState extends State<NewClaim> {
               ),
               child: TextFormField(
                 controller: _descriptionOfAccident,
-                maxLength: null,
+                minLines: 1,
+                maxLines: 7,
+                maxLength: 1000,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 decoration: const InputDecoration(
                   hintText: 'Description of loss/accident',
                   border: InputBorder.none,
                 ),
               ),
             ),
-            const CustomSizedBox(height: 25),
-            label('Record yourself narrating incident (optional)'),
-            ImageContainer(imageFile: _narrateFile,
-                imageUrl: ""),
+            // const CustomSizedBox(height: 25),
+            // label('Record yourself narrating incident (optional)'),
+            // ImageContainer(imageFile: _narrateFile,
+            //     imageUrl: ""),
             const CustomSizedBox(height: 25),
             label('Upload Sworn Avidivit or Police Report'),
             ImageContainer(imageFile: _narrateFile,
