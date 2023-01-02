@@ -53,10 +53,10 @@ class _MainState extends State<Main> {
     final readTab = context.read<AppStateManager>();
     final watchTab = context.watch<AppStateManager>();
     return Scaffold(
-      body: IndexedStack(
-        index: watchTab.getSelectedTab,
-        children: screens,
-      ),
+      body: screens[watchTab.getSelectedTab], //IndexedStack(
+      //   index: watchTab.getSelectedTab,
+      //   children: screens,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: watchTab.getSelectedTab,
         onTap: (index) => readTab.goToTab(index),
