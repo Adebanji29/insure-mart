@@ -47,6 +47,7 @@ import '../screen/home/request_hardcopy.dart';
 import 'Backend models/insurance_model.dart';
 import 'firebase_options.dart';
 import 'global/global.dart';
+import 'provider/new_claim_provider.dart';
 import 'screen/home/home.dart';
 import 'screen/onboarding/onboard.dart';
 import 'screen/splashScreen/my_splash_screen.dart';
@@ -92,6 +93,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CardProvider()),
         ChangeNotifierProvider(create: (_) => InsuranceProvider()),
         ChangeNotifierProvider(create: (_) => NewInsuranceManager()),
+        ChangeNotifierProvider(create: (_)=> NewClaimProvider()),
         Provider<AuthService>(create: (_) => AuthService()),
         Provider<UserService>(create: (_) => UserService()),
         FutureProvider(

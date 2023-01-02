@@ -42,7 +42,6 @@ dependencies:
   flutter_credit_card:
   flutter_pw_validator:
   image_picker:
-  shelf:
   shelf_router:
   shelf_hotreload:
   shelf_web_socket:
@@ -73,6 +72,7 @@ dependencies:
   pattern_formatter: ^2.0.0
   currency_text_input_formatter: ^2.1.8
   flutter_svg: ^1.1.6
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:
