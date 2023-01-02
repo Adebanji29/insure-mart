@@ -20,6 +20,14 @@ class MyClaims extends StatefulWidget {
 }
 
 class _MyClaimsState extends State<MyClaims> {
+  late Future<void> futureData;
+
+  @override
+  void initState() {
+    futureData = context.read<ClaimProvider>().getClaimsData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final claims = Provider.of<ClaimProvider>(context);
@@ -36,25 +44,34 @@ class _MyClaimsState extends State<MyClaims> {
             icon: const Icon(Icons.add),
           ),
           IconButton(
-            onPressed: () => claims.getClaimsData(),
+            onPressed: () => context.read<ClaimProvider>().getClaimsData(),
             icon: const Icon(Icons.add),
           ),
         ],
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        itemCount: claims.claimList.length,
-        itemBuilder: (_, index) {
-          final claim = claimlist[index];
-          return Provider.value(
-            value: claim,
-            child: ClaimItemCard(
-              myIndex: index,
-            ),
-          );
-        },
-        separatorBuilder: (_, __) => const CustomSizedBox(height: 20),
-      ),
+      body: FutureBuilder<void>(
+          future: futureData,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              itemCount: claims.claimList.length,
+              itemBuilder: (_, index) {
+                final claim = claimlist[index];
+                return Provider.value(
+                  value: claim,
+                  child: ClaimItemCard(
+                    myIndex: index,
+                  ),
+                );
+              },
+              separatorBuilder: (_, __) => const CustomSizedBox(height: 20),
+            );
+          }),
     );
   }
 }

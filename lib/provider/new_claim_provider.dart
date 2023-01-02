@@ -131,6 +131,8 @@ class NewClaimProvider extends ChangeNotifier {
         .set({
       'id': id,
       'Claim Status': 'more info needed',
+      'Claim Amount' : '0',
+      'Offer Detail' :'',
       'Type of Loss': typeOfLoss,
       'Reg Num': regNum,
       'Date of Accident': dateOfAccident,

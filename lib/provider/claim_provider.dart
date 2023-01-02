@@ -68,7 +68,7 @@ class ClaimProvider extends ChangeNotifier {
 
   List<Claim> get claimList => [..._claims];
 
-  Future<void> getClaimsData() async {
+  Future<List<Claim>> getClaimsData() async {
     // List<Claim> newList = [];
     final claimSnapshot = await firebaseFirestore
         .collection("Users")
@@ -79,28 +79,35 @@ class ClaimProvider extends ChangeNotifier {
     // final tt = claimSnapshot.docs.first['']
     // log(claimSnapshot.docs.first.get('Type of Loss'));
     for (var element in claimSnapshot.docs) {
-      final repairAmount =
-          element.get("Estimate of Repair(own)").toString().split('₦')[0];
-      log(repairAmount);
+      final pr = element.get("Estimate of Repair(own)").toString().split('₦');
+      final rp =
+          element.get("Estimate of Repair(3rd party)").toString().split('₦');
+      final rr = (pr.length > 1) ? pr[1] : '0';
+      final pp = (rp.length > 1) ? rp[1] : '0';
+
+      final rrr = double.parse(rr.replaceAll(',', ''));
+      final ppp = double.parse(pp.replaceAll(',', ''));
+      final double repairAmount = rrr + ppp;
       log('element');
-      // // repairAmount.split()
-      // // double.parse(element["Estimate of Repair(3rd party)"]);
-      // log(repairAmount.toString());
-      // Claim claimData = Claim(
-      //     // userid: element["userUID"],
-      //     id: element["id"],
-      //     status: element["Claim Status"],
-      //     assets: "",
-      //     dateOfIncident: element["Date of Accident"],
-      //     repairAmount: element["Estimate of Repair(3rd party)"],
-      //     claimedAmount: '₦${element["repair Amount"]}',
-      //     description: element["description of accident"],
-      //     offerDetail: element["offerDetail"]);
-      // _claims.add(claimData);
-      // notifyListeners();
+      log(repairAmount.toString());
+      Claim claimData = Claim(
+        id: element.get("id").toString().split('-').first,
+        status: element.get("Claim Status"),
+        assets: "",
+        dateOfIncident: element.get("Date of Accident"),
+        repairAmount: '₦$repairAmount',
+        claimedAmount: '', //'₦${element.get("Claim Amount")}',
+        description: element.get('Description of Accident'),
+        offerDetail: '', //element.get('Offer Detail'),
+        policy: '',
+      );
+
+      _claims.add(claimData);
+      notifyListeners();
     }
     // _claims = newList;
     notifyListeners();
+    return _claims;
   }
 
   void deleteCard(int index) async {
