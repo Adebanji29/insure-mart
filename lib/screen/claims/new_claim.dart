@@ -69,56 +69,7 @@ class _NewClaimState extends State<NewClaim> {
     super.dispose();
   }
 
-  saveClaimInfo() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(child: CircularProgressIndicator());
-        });
-    await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(currentUser!.uid)
-        .collection("claims")
-        .doc(ClaimID)
-        .set({
-      // "userUID":currentUser!.uid,
-      // "claimID": ClaimID,
-      // "type of loss":_typeOfLoss.toString(),
-      // "registration Number":_regNum.toString(),
-      // "date Of Incident":_dateOfAccident.text.trim(),
-      // "engineer contact" :_mechanicContactNumber.text.trim(),
-      // "repair Amount": _estimateOfrepairs.text.trim(),
-      // "thirdparty repair Amount": _rdestimateOfrepairs.text.trim(),
-      // "description of accident": _descriptionOfAccident.text.trim(),
-      // "description of damaged property":_descriptionOfDangedProperty.text.trim(),
-      // "police report Image":policereportImg,
-      // "reg number1 image":regnum1img,
-      // "reg number2 image": regnum2Img,
-      // "police report 1": policereport1,
-      // "police report 2": policereport2,
-      // "3rd party reg number 1":partyregnum1img,
-      // "3rd party reg number 2":partyregnum2Img,
-      // "more images 1":moreimages1,
-      // "more images 2":moreimages2,
-      // "more images 3":moreimages3,
-      // "3rd party more images 1":partymoreimages1,
-      // "3rd party more images 2":partymoreimages2,
-      // "3rd party more images 3":partymoreimages3,
-      // "status":'under review and adjustment',
-      // "assets": 'Car make',
-      // "policy":'policy',
-      // "claimedAmount":"",
-      // "offerDetail":'',
-      // "publishedDate": DateTime.now().millisecondsSinceEpoch,
-    });
 
-    // setState(() {
-    //   // uploading = false;
-    //   ClaimID = DateTime.now().millisecondsSinceEpoch.toString();
-    // });
-
-    // Navigator.push(context, MaterialPageRoute(builder: (c)=> Main()));
-  }
 
   @override
   Widget build(BuildContext context) {

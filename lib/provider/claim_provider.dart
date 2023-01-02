@@ -81,7 +81,7 @@ class ClaimProvider extends ChangeNotifier {
     for (var element in claimSnapshot.docs) {
       final pr = element.get("Estimate of Repair(own)").toString().split('₦');
       final rp =
-          element.get("Estimate of Repair(3rd party)").toString().split('₦');
+      element.get("Estimate of Repair(3rd party)").toString().split('₦');
       final rr = (pr.length > 1) ? pr[1] : '0';
       final pp = (rp.length > 1) ? rp[1] : '0';
 
@@ -91,14 +91,20 @@ class ClaimProvider extends ChangeNotifier {
       log('element');
       log(repairAmount.toString());
       Claim claimData = Claim(
-        id: element.get("id").toString().split('-').first,
+        id: element
+            .get("id")
+            .toString()
+            .split('-')
+            .first,
         status: element.get("Claim Status"),
         assets: "",
         dateOfIncident: element.get("Date of Accident"),
         repairAmount: '₦$repairAmount',
-        claimedAmount: '', //'₦${element.get("Claim Amount")}',
+        claimedAmount: '',
+        //'₦${element.get("Claim Amount")}',
         description: element.get('Description of Accident'),
-        offerDetail: '', //element.get('Offer Detail'),
+        offerDetail: '',
+        //element.get('Offer Detail'),
         policy: '',
       );
 
@@ -115,11 +121,11 @@ class ClaimProvider extends ChangeNotifier {
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(currentUser!.uid)
-        .collection("claims")
+        .collection("New Claim")
         .doc(_claims[index].id)
         .delete();
 
-    Fluttertoast.showToast(msg: "Card deleted");
+    Fluttertoast.showToast(msg: "Claims deleted");
     notifyListeners();
   }
 
@@ -171,55 +177,4 @@ class ClaimProvider extends ChangeNotifier {
     }
   }
 
-  saveClaimInfo() async {
-    //   showDialog(
-    //       context: context,
-    //       builder: (context) {
-    //         return const Center(child: CircularProgressIndicator());
-    //       });
-    //   await FirebaseFirestore.instance
-    //       .collection("Users")
-    //       .doc(currentUser!.uid)
-    //       .collection("claims")
-    //       .doc(ClaimID)
-    //       .set({
-    //     // "userUID":currentUser!.uid,
-    //     "claimID": ClaimID,
-    //     "type of loss": _typeOfLoss.toString(),
-    //     "registration Number": _regNum.toString(),
-    //     "date Of Incident": _dateOfAccident.text.trim(),
-    //     "engineer contact": _mechanicContactNumber.text.trim(),
-    //     "repair Amount": _estimateOfrepairs.text.trim(),
-    //     "thirdparty repair Amount": _rdestimateOfrepairs.text.trim(),
-    //     "description of accident": _descriptionOfAccident.text.trim(),
-    //     "description of damaged property":
-    //         _descriptionOfDangedProperty.text.trim(),
-    //     "police report Image": policereportImg,
-    //     "reg number1 image": regnum1img,
-    //     "reg number2 image": regnum2Img,
-    //     "police report 1": policereport1,
-    //     "police report 2": policereport2,
-    //     "3rd party reg number 1": partyregnum1img,
-    //     "3rd party reg number 2": partyregnum2Img,
-    //     "more images 1": moreimages1,
-    //     "more images 2": moreimages2,
-    //     "more images 3": moreimages3,
-    //     "3rd party more images 1": partymoreimages1,
-    //     "3rd party more images 2": partymoreimages2,
-    //     "3rd party more images 3": partymoreimages3,
-    //     "status": 'under review and adjustment',
-    //     "assets": 'Car make',
-    //     "policy": 'policy',
-    //     "claimedAmount": "",
-    //     "offerDetail": '',
-    //     "publishedDate": DateTime.now().millisecondsSinceEpoch,
-    //   });
-
-    //   setState(() {
-    //     uploading = false;
-    //     ClaimID = DateTime.now().millisecondsSinceEpoch.toString();
-    //   });
-
-    //   Navigator.push(context, MaterialPageRoute(builder: (c) => const Main()));
-  }
 }

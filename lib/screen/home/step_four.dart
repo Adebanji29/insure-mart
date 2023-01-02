@@ -102,7 +102,7 @@ class _StepFourState extends State<StepFour> {
               widget.model.providerImage=selectedProviderImage;
             });
             print(widget.model.providerName);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, summary: 0,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model,)));
             widget.model.providerImage==null? Fluttertoast.showToast(msg: "Kindly select a provider"): ref.nextStep();
 
           }),

@@ -1008,7 +1008,7 @@ class Computation {
         vlicence= 3300;
       }
     }
-    else{
+    else if(model.vehicletrackinglicence.toString() == null){
       vlicence=0;
     }
 

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/Backend%20models/insurance_model.dart';
 
 import 'package:provider/provider.dart';
 
@@ -23,11 +24,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  InsuranceModel model=InsuranceModel(sumInsured: 0, step3Extensions: []);
+
 
   @override
   void initState() {
     PushNotificationsSystem pushNotificationsSystem=  PushNotificationsSystem();
     pushNotificationsSystem.generateDeviceRecognitionToken();
+    model.premiumPaid='';
     super.initState();
   }
   @override

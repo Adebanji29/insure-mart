@@ -4,6 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 
 // import 'package:insuremart/screen/home/step_two.dart';
 import 'package:provider/provider.dart';
@@ -61,6 +62,7 @@ class _StepOneState extends State<StepOne> {
   late TextEditingController _vehicleValue;
   late TextEditingController _covertype;
   late TextEditingController _insuranceperiod;
+  late TextEditingController _policydate;
 
   @override
   void initState() {
@@ -73,6 +75,7 @@ class _StepOneState extends State<StepOne> {
     _vehicleValue = TextEditingController();
     _covertype = TextEditingController();
     _insuranceperiod = TextEditingController();
+    _policydate=TextEditingController();
     super.initState();
   }
 
@@ -285,6 +288,43 @@ class _StepOneState extends State<StepOne> {
             textCapitalization: TextCapitalization.characters,
           ),
           const CustomSizedBox(height: 25),
+          label('Policy Start Date'),
+          GestureDetector(
+            onTap: () => showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1960),
+              lastDate: DateTime.now(),
+            ),
+            child: CustomTextField(
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1960),
+                  lastDate: DateTime.now(),
+                );
+                if (pickedDate != null) {
+                  String formattedDate =
+                  DateFormat('dd-MM-yyyy')
+                      .format(pickedDate);
+                  _policydate.text = formattedDate;
+                  print(_policydate.text);
+                }
+              },
+              focusColor: InsuremartTheme.blue2,
+              label:
+            ('Policy Start Date') ,
+              controller: _policydate,
+              readOnly: true,
+              suffix: const Icon(
+                Icons.calendar_month,
+                color: InsuremartTheme.white3,
+              ),
+              //
+            ),
+          ),
+          const CustomSizedBox(height: 25),
           label('Period of Insurance'),
           CustomDropDownButton(
             onChanged: (String? val) {
@@ -331,6 +371,7 @@ class _StepOneState extends State<StepOne> {
       widget.model.chasisNumber = _chassisNumber.text;
       widget.model.engineNumber = _engineNumber.text;
       widget.model.insurancePeriod = _insuranceperiod.text;
+      widget.model.purchaceDate= _policydate.text;
     });
 
     Navigator.push(
@@ -338,9 +379,9 @@ class _StepOneState extends State<StepOne> {
         MaterialPageRoute(
             builder: (context) => NewInsurance(
               myModel: widget.model,
-              summary: 0,
             )));
     ref.nextStep();
+    print(widget.model.purchaceDate);
   }
 
   // savestep1CarInsuranceInfo()async
@@ -388,6 +429,7 @@ class _StepOneState extends State<StepOne> {
         });
 
         getModels();
+
         // savestep1CarInsuranceInfo();
 
         setState(() {
