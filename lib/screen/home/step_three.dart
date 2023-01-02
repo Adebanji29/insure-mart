@@ -21,7 +21,21 @@ class StepThree extends StatefulWidget {
 }
 
 class _StepThreeState extends State<StepThree> {
-  TextEditingController _licenseController = TextEditingController();
+ late TextEditingController _licenseController;
+
+  @override
+  void initState() {
+    _licenseController=TextEditingController();
+    print(widget.model.atp);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _licenseController.dispose();
+    super.dispose();
+  }
+
 
 
 
@@ -171,7 +185,7 @@ class _StepThreeState extends State<StepThree> {
         ),
         const SizedBox(height: 25),
         CustomListTile(
-          title: 'Renew tracking device',
+          title: 'Install/Renew tracking device',
           tapSelect: () {
             insure.step3Switch('rtd');
 
@@ -217,12 +231,14 @@ class _StepThreeState extends State<StepThree> {
           setState(() {
             widget.model.step3Extensions= selectedSnapshot;
             widget.model.vehicletrackinglicence=_licenseController.text.trim();
+            _licenseController.text.trim().isNotEmpty? widget.model.step3Extensions.add("Renew Vehicle License"):widget.model.step3Extensions.remove("Renew Vehicle License");
+
 
           });
           print(widget.model.step3Extensions);
           print(widget.model.atp);
           print(widget.model.vehicletrackinglicence);
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, summary: 0,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, )));
           insure.nextStep();
 
         }),
@@ -401,7 +417,7 @@ class _RadioGroupWidgetState extends State<RadioGroupWidget> {
     ),
     ATPModel(
         index: 3,
-        amount: 'Additional ₦1,000,000',
+        amount: 'Additional ₦3,000,000',
         premium: '₦6,000.00'
 
     ),
@@ -434,6 +450,7 @@ class _RadioGroupWidgetState extends State<RadioGroupWidget> {
                       setState(() {
                         widget.model.atp= e.premium.toString();
                         id= e.index!;
+
                       });
                     });
               }).toList(),

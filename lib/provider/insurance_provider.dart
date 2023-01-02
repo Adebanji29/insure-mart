@@ -78,7 +78,9 @@ class InsuranceProvider with ChangeNotifier {
           "expDate": "",
           "car year": "",
           "carMakeImage": model.carMakeImage,
-          "selected extension":model.step3Extensions
+          "selected extension":model.step3Extensions,
+          "additional third party":model.atp,
+          "renew vehicle license data": model.vehicletrackinglicence
 
         }).whenComplete(() async {
       await FirebaseFirestore.instance
@@ -107,7 +109,9 @@ class InsuranceProvider with ChangeNotifier {
             "expDate": "",
             "car year": "",
             "carMakeImage": model.carMakeImage,
-            "selected extension":model.step3Extensions
+            "selected extension":model.step3Extensions,
+            "additional third party":model.atp,
+            "renew vehicle license data": model.vehicletrackinglicence
 
           });
 
@@ -154,7 +158,7 @@ class InsuranceProvider with ChangeNotifier {
             expDate: element["expDate"],
             carYear: element["car year"],
             carMakeImage: element["carMakeImage"],
-            // step3Extensions: element["selected extension"]
+           step3Extensions: []
 
 
           );

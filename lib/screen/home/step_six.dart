@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../Backend models/insurance_model.dart';
 import '../../Backend models/cardModel.dart';
 import '../../Payment/payment_page.dart';
+import '../../computation/computation.dart';
 import '../../provider/insurance_provider.dart';
 // import './request_hardcopy.dart';
 import '../../utils/app_theme.dart';
@@ -19,17 +20,24 @@ import '../../widget/text_fields.dart';
 
 class StepSix extends StatefulWidget {
   final InsuranceModel model;
-  final double summary;
-  const StepSix({super.key, required this.model, required this.summary});
+  const StepSix({super.key, required this.model,});
 
   @override
   State<StepSix> createState() => _StepSixState();
 }
 
 class _StepSixState extends State<StepSix> {
+
   var selectedIndex;
 
   CardModel mycardModel = CardModel();
+
+  @override
+  void initState() {
+   print(widget.model.step3Extensions);
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +118,7 @@ class _StepSixState extends State<StepSix> {
         textRow('Amount Insured', widget.model.sumInsured.toString()),
         const SizedBox(height: 10),
         textRow('Extensions + Addons',
-            widget.model.step3Extensions.toString().length.toString()),
+            widget.model.step3Extensions.toString() != null? widget.model.step3Extensions.length.toString():"0",),
         const SizedBox(height: 10),
         const Divider(),
         const SizedBox(height: 10),
@@ -124,7 +132,7 @@ class _StepSixState extends State<StepSix> {
                   .copyWith(color: InsuremartTheme.green1),
             ),
             Text(
-              '₦${widget.summary}',
+              '₦${widget.model.premiumPaid.toString()}',
               style: InsuremartTheme.lightTextTheme.headline3!
                   .copyWith(fontSize: 18, color: InsuremartTheme.green1),
             ),
@@ -146,18 +154,18 @@ class _StepSixState extends State<StepSix> {
                         insurancemodel: widget.model,
                         context: context,
                         email: "emogbolu@theinsuremart.com",
-                        price: widget.summary.toInt())
+                        price: double.parse(widget.model.premiumPaid.toString()).toInt())
                     .chargeCardAndMakePayment();
               }
             }),
         const SizedBox(height: 10),
-        LongButton(
-          title: 'SAVE & CONTINUE LATER',
-          onPressed: () {},
-          color: InsuremartTheme.white1,
-          textColor: InsuremartTheme.blue4,
-          isBorder: true,
-        ),
+        // LongButton(
+        //   title: 'SAVE & CONTINUE LATER',
+        //   onPressed: () {},
+        //   color: InsuremartTheme.white1,
+        //   textColor: InsuremartTheme.blue4,
+        //   isBorder: true,
+        // ),
       ],
     );
   }

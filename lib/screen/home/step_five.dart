@@ -11,13 +11,9 @@ import 'new_insurance.dart';
 
 class StepFive extends StatefulWidget {
   InsuranceModel model;
-  double? ebb;
-  double? flood;
-  double? srcc;
-  double? tpd;
 
 
-  StepFive({required this.model, this.ebb, this.flood, this.srcc, this.tpd, });
+  StepFive({required this.model });
 
   @override
   State<StepFive> createState() => _StepFiveState();
@@ -26,6 +22,11 @@ class StepFive extends StatefulWidget {
 class _StepFiveState extends State<StepFive> {
   Computation? computation;
   double sumInsured=0;
+  double basicPremium= 0;
+  double ebb =0;
+  double flood=0;
+  double srcc=0;
+  double tpd=0;
 
 
 
@@ -36,33 +37,28 @@ class _StepFiveState extends State<StepFive> {
     computation!.getVehicleLicence();
     computation!.getRoadWorthinessLicence();
     computation!.getHackneyPermit();
+
+
     super.initState();
   }
 
 
-  sendTotalPremium(BuildContext context){
-    final ref = context.read<NewInsuranceManager>();
-    Navigator.push(context,MaterialPageRoute(builder: (context)=> NewInsurance(
-      myModel: widget.model,
-      summary: double.parse(widget.model.premiumPaid!),
-    ) ));
-    ref.nextStep();
-  }
-
   @override
   Widget build(BuildContext context) {
     widget.model.sumInsured== 0? sumInsured=0: sumInsured= widget.model.sumInsured;
-    double basicpremium= (0.02 * sumInsured);
+     basicPremium= (0.02 * sumInsured);
 
 
-    widget.model.step3Extensions.toString().contains("ebb")?   widget.ebb= (0.005* sumInsured):widget.ebb= 0;
-    widget.model.step3Extensions.toString().contains("flood")? widget.flood= (0.005* sumInsured):widget.flood= 0;
-    widget.model.step3Extensions.toString().contains("srcc")?   widget.srcc= (0.005* sumInsured):widget.srcc= 0;
+    widget.model.step3Extensions.toString().contains("ebb")?   ebb= (0.005* sumInsured):ebb= 0;
+    widget.model.step3Extensions.toString().contains("flood")? flood= (0.005* sumInsured):flood= 0;
+    widget.model.step3Extensions.toString().contains("srcc")?   srcc= (0.005* sumInsured):srcc= 0;
     // model.step3Extensions.toString().contains("atp")?   tpd= 5000:tpd= 0;
-    widget.model.atp==null? widget.tpd=0: widget.tpd= double.parse(widget.model.atp.toString().replaceAll(RegExp('[^0-9.]'), ''));
+    widget.model.atp==null? tpd=0: tpd= double.parse(widget.model.atp.toString().replaceAll(RegExp('[^0-9.]'), ''));
 
 
-    widget.model.premiumPaid= (basicpremium+widget.ebb!+widget.flood!+widget.srcc!+widget.tpd!+computation!.getVlc+ computation!.getRRW+ computation!.getHP).toString();
+      widget.model.premiumPaid= (basicPremium+ebb+flood+srcc+tpd+computation!.getVlc+ computation!.getRRW+ computation!.getHP).toString();
+
+
 
     final ref = context.read<NewInsuranceManager>();
     return ListView(
@@ -82,7 +78,7 @@ class _StepFiveState extends State<StepFive> {
               const SizedBox(height: 20),
               buildRow('Period of Insurance', widget.model.insurancePeriod.toString()),
               const SizedBox(height: 20),
-              buildRow('Basic Premuim', '₦${basicpremium.toString()}'),
+              buildRow('Basic Premuim', '₦${basicPremium.toString()}'),
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
@@ -93,20 +89,23 @@ class _StepFiveState extends State<StepFive> {
                 textAlign: TextAlign.left,
               ),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("ebb")?   addOnsRow('Excess buy back', '₦${widget.ebb.toString()}') : Container(),
+              widget.model.step3Extensions.toString().contains("ebb")?   addOnsRow('Excess buy back', '₦${ebb.toString()}') : Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("flood")?  addOnsRow('Flood Extension',  '₦${widget.flood.toString()}' ):Container(),
+              widget.model.step3Extensions.toString().contains("flood")?  addOnsRow('Flood Extension',  '₦${flood.toString()}' ):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("srcc")? addOnsRow('SRCC',  '₦${widget.srcc.toString()}'):Container(),
+              widget.model.step3Extensions.toString().contains("srcc")? addOnsRow('SRCC',  '₦${srcc.toString()}'):Container(),
               const SizedBox(height: 10),
-              widget.model.atp != null? addOnsRow('Third Party Property Damage',  '₦${widget.tpd.toString()}'):Container(),
+              widget.model.atp != null? addOnsRow('Third Party Property Damage',  '₦${tpd.toString()}'):Container(),
               const SizedBox(height: 10),
               computation!.getVlc != 0? addOnsRow('Vehicle Licence',  '₦${computation!.getVlc}'):Container(),
               const SizedBox(height: 10),
               widget.model.step3Extensions.toString().contains("rrw")? addOnsRow('Road Worthiness',  '₦${computation!.getRRW}'):Container(),
-
               const SizedBox(height: 10),
               widget.model.step3Extensions.toString().contains("rhp")? addOnsRow('Hackney Permit',  '₦${computation!.getHP}'):Container(),
+              const SizedBox(height: 10),
+              widget.model.step3Extensions.toString().contains("vtd")? addOnsRow('Vehicle Tracking Device',  '₦0'):Container(),
+              const SizedBox(height: 10),
+              widget.model.step3Extensions.toString().contains("rtd")? addOnsRow('Install/Renew Tracking Device',  '₦0'):Container(),
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
@@ -239,8 +238,12 @@ class _StepFiveState extends State<StepFive> {
               const SizedBox(height: 17),
               LongButton(
                 title: 'CONTINUE',
-                onPressed: (){
-                  sendTotalPremium(context);
+                onPressed: ()async{
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=> NewInsurance(
+                    myModel: widget.model,
+                  ) ));
+                  final ref = context.read<NewInsuranceManager>();
+                  ref.nextStep();
                 },
 
                 color: InsuremartTheme.pink2,

@@ -11,7 +11,7 @@ class InsuranceModel{
   String? providerImage;
   String? purchaceDate;
   String? renewalDate;
-  String? premiumPaid;
+ String? premiumPaid;
   String? expDate;
   String? carMakeImage;
   String? carYear;
@@ -27,7 +27,7 @@ class InsuranceModel{
   String? insurancePeriod;
   String? atp;
   String? vehicletrackinglicence;
-  List<String>?step3Extensions;
+  List<String>step3Extensions;
 
 
   InsuranceModel({
@@ -53,7 +53,7 @@ class InsuranceModel{
     this.chasisNumber,
     this.engineNumber,
     this.insurancePeriod,
-    this.step3Extensions,
+    required this.step3Extensions,
     this.atp,
     this.vehicletrackinglicence
 

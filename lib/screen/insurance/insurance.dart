@@ -48,8 +48,8 @@ class _MyInsuranceState extends State<MyInsurance> {
                 itemBuilder: (_) => menuItem
                     .map(
                       (item) => PopupMenuItem(
-                    value: item,
-                    child: Text(
+                       value: item,
+                        child: Text(
                       item,
                       style: InsuremartTheme.lightTextTheme.headline3,
                     ),

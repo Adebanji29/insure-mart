@@ -115,7 +115,7 @@ class MaterialApplication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    InsuranceModel model= InsuranceModel(sumInsured: 0);
+    InsuranceModel model= InsuranceModel(sumInsured: 0, step3Extensions: []);
     return MaterialApp(
       title: 'Insuremart',
       debugShowCheckedModeBanner: false,
@@ -131,7 +131,7 @@ class MaterialApplication extends StatelessWidget {
         SignUp.route: (_) => const SignUp(),
         Main.route: (_) => const Main(),
         Notifications.route: (_) => const Notifications(),
-        NewInsurance.route: (_) =>  NewInsurance(myModel: model,summary: 0,),
+        NewInsurance.route: (_) =>  NewInsurance(myModel: model),
         RequestHardcopy.route: (_) => const RequestHardcopy(),
         ClaimDischarge.route: (_) => const ClaimDischarge(),
         NewClaim.route: (_) => const NewClaim(),
