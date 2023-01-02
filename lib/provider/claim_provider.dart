@@ -1,4 +1,6 @@
 // import 'package:flutter/foundation.dart';
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +11,10 @@ import '../models/claim_model.dart';
 import '../utils/app_theme.dart';
 
 class ClaimProvider extends ChangeNotifier {
-  String? _regNum;
-  final List<String> _regList = ['qew2e2esw', 'ewdwdwdd'];
+  User? user = FirebaseAuth.instance.currentUser;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  List<Claim> _claims = [
+  final List<Claim> _claims = [
     // Claim(
     //   id: 2452665,
     //   status: 'under review and adjustment',
@@ -64,39 +66,40 @@ class ClaimProvider extends ChangeNotifier {
     // ),
   ];
 
-
-  void rregNum(String val) {
-    _regNum = val;
-    notifyListeners();
-  }
-
   List<Claim> get claimList => [..._claims];
-  List<String> get reglist => _regList;
-  String? get regNum => _regNum;
 
   Future<void> getClaimsData() async {
-    List<Claim> newList = [];
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    QuerySnapshot claimSnapshot = await FirebaseFirestore.instance
+    // List<Claim> newList = [];
+    final claimSnapshot = await firebaseFirestore
         .collection("Users")
-        .doc(currentUser!.uid)
-        .collection("claims")
-        .orderBy("publishedDate", descending: true)
+        .doc(user!.uid)
+        .collection("New Claim")
         .get();
+
+    // final tt = claimSnapshot.docs.first['']
+    // log(claimSnapshot.docs.first.get('Type of Loss'));
     for (var element in claimSnapshot.docs) {
-      Claim claimData = Claim(
-          // userid: element["userUID"],
-          id: element["claimID"],
-          status: element["status"],
-          assets: "",
-          dateOfIncident: element["date Of Incident"],
-          repairAmount: "₦${element["repair Amount"]}",
-          claimedAmount: '₦${element["repair Amount"]}',
-          description: element["description of accident"],
-          offerDetail: element["offerDetail"]);
-      newList.add(claimData);
+      final repairAmount =
+          element.get("Estimate of Repair(own)").toString().split('₦')[0];
+      log(repairAmount);
+      log('element');
+      // // repairAmount.split()
+      // // double.parse(element["Estimate of Repair(3rd party)"]);
+      // log(repairAmount.toString());
+      // Claim claimData = Claim(
+      //     // userid: element["userUID"],
+      //     id: element["id"],
+      //     status: element["Claim Status"],
+      //     assets: "",
+      //     dateOfIncident: element["Date of Accident"],
+      //     repairAmount: element["Estimate of Repair(3rd party)"],
+      //     claimedAmount: '₦${element["repair Amount"]}',
+      //     description: element["description of accident"],
+      //     offerDetail: element["offerDetail"]);
+      // _claims.add(claimData);
+      // notifyListeners();
     }
-    _claims = newList;
+    // _claims = newList;
     notifyListeners();
   }
 

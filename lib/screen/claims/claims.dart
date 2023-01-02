@@ -20,14 +20,11 @@ class MyClaims extends StatefulWidget {
 }
 
 class _MyClaimsState extends State<MyClaims> {
-
-
   @override
   Widget build(BuildContext context) {
-
     final claims = Provider.of<ClaimProvider>(context);
-    claims.getClaimsData();
-    List<Claim>claimlist=claims.claimList;
+    // claims.getClaimsData();
+    List<Claim> claimlist = claims.claimList;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Claims'),
@@ -35,8 +32,13 @@ class _MyClaimsState extends State<MyClaims> {
         titleSpacing: 20,
         actions: [
           IconButton(
-              onPressed: () => Navigator.of(context).pushNamed(NewClaim.route),
-              icon: const Icon(Icons.add))
+            onPressed: () => Navigator.of(context).pushNamed(NewClaim.route),
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () => claims.getClaimsData(),
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
       body: ListView.separated(
@@ -69,8 +71,6 @@ class ClaimItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     final claim = context.read<Claim>();
     final claiman = context.read<ClaimProvider>();
     return buildItemCard(context, claim, claiman);
@@ -134,7 +134,8 @@ class ClaimItemCard extends StatelessWidget {
                   children: [
                     labelText('Asset'),
                     const CustomSizedBox(height: 5),
-                    Text(claim.assets,
+                    Text(
+                      claim.assets,
                       // claim.assets.toTitle,
                       style: InsuremartTheme.lightTextTheme.headline3!
                           .copyWith(fontSize: 12),
@@ -277,7 +278,8 @@ class ClaimItemCard extends StatelessWidget {
               ? 'Asset'
               : 'Vehicle Make And Model'),
           const CustomSizedBox(height: 5),
-          Text(claim.assets,
+          Text(
+            claim.assets,
             // claim.assets.toTitle,
             style: InsuremartTheme.lightTextTheme.headline3!
                 .copyWith(fontSize: 12),
@@ -285,7 +287,8 @@ class ClaimItemCard extends StatelessWidget {
           if (claim.status.toLowerCase() == 'rejected') ...[
             const CustomSizedBox(height: 25),
             labelText('Policy / Policy Number'),
-            Text(claim.assets,
+            Text(
+              claim.assets,
               // claim.assets.toTitle,
               style: InsuremartTheme.lightTextTheme.headline3!
                   .copyWith(fontSize: 12),
@@ -322,36 +325,37 @@ class ClaimItemCard extends StatelessWidget {
               // const CustomSizedBox(width: 12),
               IconButton(
                 onPressed: () {
-                  showDialog(context: context, builder: (context) {
-                    return AlertDialog(
-                      content: Text(
-                        "Are you sure you want to delete this claim?",
-                        style: TextStyle(
-                            color: Colors.black, fontSize: 15
-                        ),
-                      ),
-                      actions: [
-
-                        TextButton(onPressed: () {
-                          Navigator.pop(context);
-                        },
-                            child: Text("cancel",
-                              style: TextStyle(
-                                  color: InsuremartTheme.blue1
-                              ),)),
-                        TextButton(onPressed: () async {
-                          Navigator.pop(context);
-                          claiman.deleteCard(myIndex);
-                        },
-                            child: Text("Ok",
-                              style: TextStyle(
-                                  color: InsuremartTheme.blue1
-                              ),)),
-                      ],
-
-                    );
-                  });
-
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          content: const Text(
+                            "Are you sure you want to delete this claim?",
+                            style: TextStyle(color: Colors.black, fontSize: 15),
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  "cancel",
+                                  style:
+                                      TextStyle(color: InsuremartTheme.blue1),
+                                )),
+                            TextButton(
+                                onPressed: () async {
+                                  Navigator.pop(context);
+                                  claiman.deleteCard(myIndex);
+                                },
+                                child: const Text(
+                                  "Ok",
+                                  style:
+                                      TextStyle(color: InsuremartTheme.blue1),
+                                )),
+                          ],
+                        );
+                      });
                 },
                 color: const Color(0xff4f4f4f),
                 icon: const Icon(Icons.delete),
