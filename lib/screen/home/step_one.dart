@@ -14,7 +14,6 @@ import '../../utils/app_theme.dart';
 import '../../utils/utils.dart';
 import '../../widget/boxes.dart';
 import '../../widget/buttons.dart';
-import '../../widget/save_bottom_sheet.dart';
 import '../../widget/text_fields.dart';
 import 'new_insurance.dart';
 
@@ -60,7 +59,6 @@ class _StepOneState extends State<StepOne> {
   late TextEditingController _chassisNumber;
   late TextEditingController _engineNumber;
   late TextEditingController _vehicleValue;
-  late TextEditingController _covertype;
   late TextEditingController _insuranceperiod;
   late TextEditingController _policydate;
 
@@ -73,9 +71,8 @@ class _StepOneState extends State<StepOne> {
     _chassisNumber = TextEditingController();
     _engineNumber = TextEditingController();
     _vehicleValue = TextEditingController();
-    _covertype = TextEditingController();
     _insuranceperiod = TextEditingController();
-    _policydate=TextEditingController();
+    _policydate = TextEditingController();
     super.initState();
   }
 
@@ -92,7 +89,7 @@ class _StepOneState extends State<StepOne> {
 
   @override
   Widget build(BuildContext context) {
-    final ref = context.read<NewInsuranceManager>();
+    final readProvider = context.read<NewInsuranceManager>();
     return Form(
       key: _formkey,
       child: ListView(
@@ -195,98 +192,103 @@ class _StepOneState extends State<StepOne> {
           label('Type of Cover'),
           CustomDropDownButton(
             label: 'Type of cover',
+            items: readProvider.coverList,
+            value: readProvider.typeOfCover,
             onChanged: (String? val) {
-              _covertype.text = val!;
-            },
-            items: Utils.coverList,
-          ),
-          const CustomSizedBox(height: 25),
-          label('Colour of vehicle'),
-          CustomTextField(
-            controller: _vehicleColor,
-            label: 'Colour',
-            validator: (value) {
-              if (value.toString().isNotEmpty && value.length > 2) {
-                return null;
-              } else if (value.toString().isNotEmpty && value.length < 3) {
-                return "Fill in correct details";
-              } else {
-                return " Enter  the color";
-              }
+              readProvider.setTypeOfCover(val!);
             },
           ),
-          const CustomSizedBox(height: 25),
-          label('Value of Car'),
-          CustomTextField(
-            validator: (value) {
-              if (value.toString().isNotEmpty && value.length > 2) {
-                return null;
-              } else if (value.toString().isNotEmpty && value.length < 5) {
-                return "the value cannot be too short";
-              } else {
-                return " Enter  the vehicle value";
-              }
-            },
-            controller: _vehicleValue,
-            label: '100000 and above',
-            keyBoardType: TextInputType.phone,
-            inputFormatters: [
-              CurrencyTextInputFormatter(
-                locale: 'en_NG',
-                symbol: '₦',
-                decimalDigits: 2,
-                enableNegative: false,
-              ),
-            ],
-          ),
-          const CustomSizedBox(height: 25),
-          label('Registration Number'),
-          CustomTextField(
-            validator: (value) {
-              if (value.toString().isNotEmpty && value.length > 2) {
-                return null;
-              } else if (value.toString().isNotEmpty && value.length < 5) {
-                return "Registration number cannot be too short";
-              } else {
-                return " Enter the registration number";
-              }
-            },
-            controller: _regNumber,
-            label: 'eg. 345AD7H3',
-            textCapitalization: TextCapitalization.characters,
-          ),
-          const CustomSizedBox(height: 25),
-          label('Chassis Number'),
-          CustomTextField(
-            validator: (value) {
-              if (value.toString().isNotEmpty && value.length > 2) {
-                return null;
-              } else if (value.toString().isNotEmpty && value.length < 5) {
-                return "chasis number cannot be too short";
-              } else {
-                return "Enter chasis number";
-              }
-            },
-            controller: _chassisNumber,
-            label: 'Chassis Number',
-            textCapitalization: TextCapitalization.characters,
-          ),
-          const CustomSizedBox(height: 25),
-          label('Engine Number'),
-          CustomTextField(
-            validator: (value) {
-              if (value.toString().isNotEmpty && value.length > 2) {
-                return null;
-              } else if (value.toString().isNotEmpty && value.length < 5) {
-                return "Engine number cannot be too short";
-              } else {
-                return " Enter the engine number";
-              }
-            },
-            controller: _engineNumber,
-            label: 'Engine Number',
-            textCapitalization: TextCapitalization.characters,
-          ),
+
+          if (readProvider.typeOfCover != null &&
+              !readProvider.typeOfCover!.contains('party')) ...[
+            const CustomSizedBox(height: 25),
+            label('Colour of vehicle'),
+            CustomTextField(
+              controller: _vehicleColor,
+              label: 'Colour',
+              validator: (value) {
+                if (value.toString().isNotEmpty && value.length > 2) {
+                  return null;
+                } else if (value.toString().isNotEmpty && value.length < 3) {
+                  return "Fill in correct details";
+                } else {
+                  return " Enter  the color";
+                }
+              },
+            ),
+            const CustomSizedBox(height: 25),
+            label('Value of Car'),
+            CustomTextField(
+              validator: (value) {
+                if (value.toString().isNotEmpty && value.length > 2) {
+                  return null;
+                } else if (value.toString().isNotEmpty && value.length < 5) {
+                  return "the value cannot be too short";
+                } else {
+                  return " Enter  the vehicle value";
+                }
+              },
+              controller: _vehicleValue,
+              label: '100000 and above',
+              keyBoardType: TextInputType.phone,
+              inputFormatters: [
+                CurrencyTextInputFormatter(
+                  locale: 'en_NG',
+                  symbol: '₦',
+                  decimalDigits: 2,
+                  enableNegative: false,
+                ),
+              ],
+            ),
+            const CustomSizedBox(height: 25),
+            label('Registration Number'),
+            CustomTextField(
+              validator: (value) {
+                if (value.toString().isNotEmpty && value.length > 2) {
+                  return null;
+                } else if (value.toString().isNotEmpty && value.length < 5) {
+                  return "Registration number cannot be too short";
+                } else {
+                  return " Enter the registration number";
+                }
+              },
+              controller: _regNumber,
+              label: 'eg. 345AD7H3',
+              textCapitalization: TextCapitalization.characters,
+            ),
+            const CustomSizedBox(height: 25),
+            label('Chassis Number'),
+            CustomTextField(
+              validator: (value) {
+                if (value.toString().isNotEmpty && value.length > 2) {
+                  return null;
+                } else if (value.toString().isNotEmpty && value.length < 5) {
+                  return "chasis number cannot be too short";
+                } else {
+                  return "Enter chasis number";
+                }
+              },
+              controller: _chassisNumber,
+              label: 'Chassis Number',
+              textCapitalization: TextCapitalization.characters,
+            ),
+            const CustomSizedBox(height: 25),
+            label('Engine Number'),
+            CustomTextField(
+              validator: (value) {
+                if (value.toString().isNotEmpty && value.length > 2) {
+                  return null;
+                } else if (value.toString().isNotEmpty && value.length < 5) {
+                  return "Engine number cannot be too short";
+                } else {
+                  return " Enter the engine number";
+                }
+              },
+              controller: _engineNumber,
+              label: 'Engine Number',
+              textCapitalization: TextCapitalization.characters,
+            ),
+          ],
           const CustomSizedBox(height: 25),
           label('Policy Start Date'),
           GestureDetector(
@@ -306,15 +308,13 @@ class _StepOneState extends State<StepOne> {
                 );
                 if (pickedDate != null) {
                   String formattedDate =
-                  DateFormat('dd-MM-yyyy')
-                      .format(pickedDate);
+                      DateFormat('dd-MM-yyyy').format(pickedDate);
                   _policydate.text = formattedDate;
                   print(_policydate.text);
                 }
               },
               focusColor: InsuremartTheme.blue2,
-              label:
-            ('Policy Start Date') ,
+              label: ('Policy Start Date'),
               controller: _policydate,
               readOnly: true,
               suffix: const Icon(
@@ -364,22 +364,22 @@ class _StepOneState extends State<StepOne> {
       widget.model.username = _name.text;
       widget.model.carmake = _selectedCarMake;
       widget.model.carmodel = _selectedCarModel;
-      widget.model.coverType = _covertype.text;
       widget.model.vehicleColor = _vehicleColor.text;
-      widget.model.sumInsured = double.parse(_vehicleValue.text.replaceAll(RegExp('[^0-9.]'), ''));
+      widget.model.sumInsured =
+          double.parse(_vehicleValue.text.replaceAll(RegExp('[^0-9.]'), ''));
       widget.model.registrationNumber = _regNumber.text;
       widget.model.chasisNumber = _chassisNumber.text;
       widget.model.engineNumber = _engineNumber.text;
       widget.model.insurancePeriod = _insuranceperiod.text;
-      widget.model.purchaceDate= _policydate.text;
+      widget.model.purchaceDate = _policydate.text;
     });
 
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => NewInsurance(
-              myModel: widget.model,
-            )));
+                  myModel: widget.model,
+                )));
     ref.nextStep();
     print(widget.model.purchaceDate);
   }
@@ -419,9 +419,7 @@ class _StepOneState extends State<StepOne> {
 
   validateUploadForm() async {
     if (_formkey.currentState!.validate()) {
-      if (_selectedCarModel.isEmpty &&
-          _selectedCarMake.isEmpty &&
-          _covertype.toString().isEmpty) {
+      if (_selectedCarModel.isEmpty && _selectedCarMake.isEmpty) {
         Fluttertoast.showToast(msg: "Please fill in all details correctly.");
       } else {
         setState(() {
