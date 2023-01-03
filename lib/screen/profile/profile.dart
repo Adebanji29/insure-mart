@@ -106,14 +106,14 @@ class Profile extends StatelessWidget {
                           },
                           badge: true,
                         ),
-                        ProfileListTile(
+                       /* ProfileListTile(
                           leading: Icons.share,
                           title: 'Share Insuremart',
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(ShareInsuremart.route);
                           },
-                        ),
+                        ), */
                         ProfileListTile(
                           leading: Icons.support_agent,
                           title: 'Help & Support',
