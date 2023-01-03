@@ -9,7 +9,7 @@ import '../../widget/text_fields.dart';
 class UtilityBills extends StatelessWidget {
     UtilityBills({Key? key}) : super(key: key);
    static const route = '/utilityBills';
-  final List<String> _billTypeList = const ['', ''];
+  final List<String> _billTypeList = const ['Electricity Bill', 'Water and Sewage Bill','Gas Cylinder Bill','Security Bill'];
 
    String? _utilityBillType;
   @override
