@@ -43,10 +43,6 @@ class _MyClaimsState extends State<MyClaims> {
             onPressed: () => Navigator.of(context).pushNamed(NewClaim.route),
             icon: const Icon(Icons.add),
           ),
-          IconButton(
-            onPressed: () => context.read<ClaimProvider>().getClaimsData(),
-            icon: const Icon(Icons.add),
-          ),
         ],
       ),
       body: FutureBuilder<void>(
@@ -84,7 +80,7 @@ class _MyClaimsState extends State<MyClaims> {
 
 class ClaimItemCard extends StatelessWidget {
   int myIndex;
-  ClaimItemCard({required this.myIndex});
+  ClaimItemCard({super.key, required this.myIndex});
 
   @override
   Widget build(BuildContext context) {

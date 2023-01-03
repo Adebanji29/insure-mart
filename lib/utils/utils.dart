@@ -32,10 +32,7 @@ class Utils{
   'v.Adm'
 ];
 
-  static const List<String> coverList = <String>[
-    'Third party only',
-    'Comprehensive',
-  ];
+  
 
 
 

@@ -1,8 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
+// import 'package:flutter/material.dart';
 
 class NewInsuranceTab {
   static const stepOne = 0;
@@ -15,18 +14,25 @@ class NewInsuranceTab {
 
 class NewInsuranceManager extends ChangeNotifier {
   int _currentStep = NewInsuranceTab.stepOne;
+  final List<String> _coverList = const <String>[
+    'Comprehensive',
+    'Third party only',
+  ];
+  String? _typeOfCover;
   bool _ebb = false;
   bool _flood = false;
   bool _srcc = false;
   bool _atp = false;
   bool _vtd = false;
   bool _rtd = false;
-  bool _rvl = false;
+  final bool _rvl = false;
   bool _rrw = false;
   bool _rhp = false;
   bool _dpe = false;
-  List<String> _selectedExtension= [];
+  final List<String> _selectedExtension = [];
 
+  List<String> get coverList => _coverList;
+  String? get typeOfCover => _typeOfCover;
   bool get ebb => _ebb;
   bool get flood => _flood;
   bool get srcc => _srcc;
@@ -44,29 +50,10 @@ class NewInsuranceManager extends ChangeNotifier {
 
   int get currentStep => _currentStep;
 
-  // void setEBB() {
-  //   _ebb = !ebb;
-  //   if (ebb) {
-  //     selectedExtension.add('ebb');
-  //   }
-  //   notifyListeners();
-  // }
-  // void addSelected(String selected){
-
-  // }
-
-  // void setEBB() {
-  //   _ebb = !ebb;
-  //   if (ebb) {
-  //     selectedExtension.add('ebb');
-  //   }
-  //   notifyListeners();
-  // }
-  // void addSelected(String selected){
-
-  // }
-
-
+  void setTypeOfCover(String val) {
+    _typeOfCover = val;
+    notifyListeners();
+  }
 
   void step3Switch(String sel) {
     switch (sel) {
