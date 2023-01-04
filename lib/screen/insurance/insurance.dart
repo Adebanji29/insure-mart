@@ -136,7 +136,7 @@ class InsuranceItem extends StatelessWidget {
           const CustomSizedBox(height: 25),
           Row(
             children: [
-              textSubtext('Sum Insured', '₦${insuranceModel.sumInsured.toString()}', money: true),
+              insuranceModel.coverType.toString().contains("party")?Container(): textSubtext('Sum Insured', '₦${insuranceModel.sumInsured.toString()}', money: true),
               const CustomSizedBox(width: 30),
               textSubtext('Expiry Date', insuranceModel.expDate.toString()),
             ],

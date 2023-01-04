@@ -37,71 +37,6 @@ class _StepThreeState extends State<StepThree> {
   }
 
 
-
-
-  Widget RadioGroup(){
-    String radioItemHolder="";
-    int? id;
-
-
-
-    List<ATPModel>atpList=[
-      ATPModel(
-          index: 1,
-          amount: 'Additional ₦1,000,000',
-          premium: '₦2,000.00'
-
-      ),
-      ATPModel(
-          index: 2,
-          amount: 'Additional ₦2,000,000',
-          premium: '₦4,000.00'
-
-      ),
-      ATPModel(
-          index: 3,
-          amount: 'Additional ₦1,000,000',
-          premium: '₦6,000.00'
-
-      ),
-    ];
-    return  SizedBox(
-      height: 180,
-      child: Column(
-        children: [
-          Container(
-            height: 180,
-            child: Column(
-              children: atpList.map((e) {
-                return RadioListTile(
-                    title: Row(
-                      children: [
-                        Expanded(
-                          child: Text(e.amount.toString(),
-                              style: InsuremartTheme.lightTextTheme.bodyText1!
-                                  .copyWith(fontWeight: FontWeight.w200)),),
-                        Expanded(
-                          child: Text(e.premium.toString(),
-                              style: TextStyle(color: InsuremartTheme.blue1,fontWeight: FontWeight.bold )),)
-                      ],
-                    ),
-                    value: e.index,
-                    groupValue: id,
-                    onChanged: (val){
-                      setState(() {
-                        radioItemHolder = e.premium.toString();
-                        print(radioItemHolder);
-                        id= e.index!;
-                      });
-                    });
-              }).toList(),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
 
@@ -119,81 +54,84 @@ class _StepThreeState extends State<StepThree> {
         bottom: 40,
       ),
       children: [
-        CustomListTile(
-          title: 'Excess Buy Back (EBB)',
-          tapSelect: ()async {
-            insure.step3Switch('ebb');
+        if(!insure.typeOfCover.toString().contains('party'))...[
+          CustomListTile(
+            title: 'Excess Buy Back (EBB)',
+            tapSelect: ()async {
+              insure.step3Switch('ebb');
 
-          },
-          toastTap: () {
-            Navigator.push(context, MaterialPageRoute(builder:(context) =>
-                InfoPage(title: Utils.extension_descript[0]["name"],
-                  message:  Utils.extension_descript[0]["descript"],) ));
-          },
-          selected: insurance.ebb,
-        ),
-        const SizedBox(height: 25),
-        CustomListTile(
-          title: 'Flood Extension',
-          tapSelect: () async {
-            insure.step3Switch('flood');
-          },
-          toastTap: () {
-            Navigator.push(context, MaterialPageRoute(builder:(context) =>
-                InfoPage(title: Utils.extension_descript[2]["name"],
-                  message:  Utils.extension_descript[2]["descript"],) ));
-          },
-          selected: insurance.flood,
-        ),
-        const SizedBox(height: 25),
-        CustomListTile(
-          title: 'SRCC Extension',
-          tapSelect: () async {
-            insure.step3Switch('srcc');
-          },
-          toastTap: () {
-            Navigator.push(context, MaterialPageRoute(builder:(context) =>
-                InfoPage(title: Utils.extension_descript[1]["name"],
-                  message:  Utils.extension_descript[1]["descript"],) ));
-          },
-          selected: insurance.srcc,
-        ),
-        const SizedBox(height: 25),
-        CustomExpansion(
-          title: 'Additional Third Party Property Damage',
-          selected: insurance.atp,
-          onClick: () {
-            insure.step3Switch('atp');
+            },
+            toastTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:(context) =>
+                  InfoPage(title: Utils.extension_descript[0]["name"],
+                    message:  Utils.extension_descript[0]["descript"],) ));
+            },
+            selected: insurance.ebb,
+          ),
+          const SizedBox(height: 25),
+          CustomListTile(
+            title: 'Flood Extension',
+            tapSelect: () async {
+              insure.step3Switch('flood');
+            },
+            toastTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:(context) =>
+                  InfoPage(title: Utils.extension_descript[2]["name"],
+                    message:  Utils.extension_descript[2]["descript"],) ));
+            },
+            selected: insurance.flood,
+          ),
+          const SizedBox(height: 25),
+          CustomListTile(
+            title: 'SRCC Extension',
+            tapSelect: () async {
+              insure.step3Switch('srcc');
+            },
+            toastTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:(context) =>
+                  InfoPage(title: Utils.extension_descript[1]["name"],
+                    message:  Utils.extension_descript[1]["descript"],) ));
+            },
+            selected: insurance.srcc,
+          ),
+          const SizedBox(height: 25),
+          CustomExpansion(
+            title: 'Additional Third Party Property Damage',
+            selected: insurance.atp,
+            onClick: () {
+              insure.step3Switch('atp');
 
-          },
-          childern: [
-            RadioGroupWidget(model: widget.model,
-            )
-          ],
-        ),
+            },
+            childern: [
+              RadioGroupWidget(model: widget.model,
+              )
+            ],
+          ),
 
-        const SizedBox(height: 25),
-        CustomListTile(
-          title: 'Vehicle tracking device',
-          tapSelect: () {
-            insure.step3Switch('vtd');
+          const SizedBox(height: 25),
+          CustomListTile(
+            title: 'Vehicle tracking device',
+            tapSelect: () {
+              insure.step3Switch('vtd');
 
-          },
-          toastTap: () {
-          },
-          selected: insurance.vtd,
-        ),
-        const SizedBox(height: 25),
-        CustomListTile(
-          title: 'Install/Renew tracking device',
-          tapSelect: () {
-            insure.step3Switch('rtd');
+            },
+            toastTap: () {
+            },
+            selected: insurance.vtd,
+          ),
+          const SizedBox(height: 25),
+          CustomListTile(
+            title: 'Install/Renew tracking device',
+            tapSelect: () {
+              insure.step3Switch('rtd');
 
-          },
-          toastTap: () {
-          },
-          selected: insurance.rtd,
-        ),
+            },
+            toastTap: () {
+            },
+            selected: insurance.rtd,
+          ),
+        ],
+
         const SizedBox(height: 25),
         CustomExpansion(
           title: 'Renew vehicle license',
@@ -226,7 +164,8 @@ class _StepThreeState extends State<StepThree> {
           selected: insurance.rhp,
         ),
 
-        const CustomSizedBox(height: 25),
+
+       insure.typeOfCover.toString().contains('party') ? const CustomSizedBox(height: 250):const CustomSizedBox(height: 25),
         LongButton(title: 'CONTINUE', onPressed: ()async{
           setState(() {
             widget.model.step3Extensions= selectedSnapshot;
@@ -235,9 +174,6 @@ class _StepThreeState extends State<StepThree> {
 
 
           });
-          print(widget.model.step3Extensions);
-          print(widget.model.atp);
-          print(widget.model.vehicletrackinglicence);
           Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, )));
           insure.nextStep();
 
@@ -397,10 +333,13 @@ class RadioGroupWidget extends StatefulWidget {
 }
 
 class _RadioGroupWidgetState extends State<RadioGroupWidget> {
-  String radioItemHolder="";
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
   int? id;
-
-
 
   List<ATPModel>atpList=[
     ATPModel(
@@ -446,13 +385,16 @@ class _RadioGroupWidgetState extends State<RadioGroupWidget> {
                     ),
                     value: e.index,
                     groupValue: id,
+                    toggleable: true,
                     onChanged: (val){
+
                       setState(() {
                         widget.model.atp= e.premium.toString();
-                        id= e.index!;
+                       id= e.index!;
 
                       });
-                    });
+                    }
+                    );
               }).toList(),
             ),
           )

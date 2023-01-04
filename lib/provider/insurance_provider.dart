@@ -59,7 +59,7 @@ class InsuranceProvider with ChangeNotifier {
         {
           "userId": model.userUID,
           "purchaseID": model.purchaseId,
-          "class": "Car Insurance",
+          "class": model.insuranceClass,
           "type": model.coverType,
           "username": model.username,
           "car make": model.carmake,
@@ -90,7 +90,7 @@ class InsuranceProvider with ChangeNotifier {
           {
             "userId": model.userUID,
             "purchaseID": model.purchaseId,
-            "class": "Car Insurance",
+            "class": model.insuranceClass,
             "type": model.coverType,
             "username": model.username,
             "car make": model.carmake,
@@ -116,6 +116,9 @@ class InsuranceProvider with ChangeNotifier {
           });
 
     });
+
+
+
 
     notifyListeners();
 

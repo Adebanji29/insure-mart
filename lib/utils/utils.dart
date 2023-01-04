@@ -191,7 +191,7 @@ class Utils{
     'Cruze':'Chev',
     'epica':'Chev',
     'Equinox':'Chev',
-    'Exprexx Cargo':'Chev',
+    'Express Cargo':'Chev',
     'GM HOLDEN':'Chev',
     'Malibu':'Chev',
     'N300':'Chev',
