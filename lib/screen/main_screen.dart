@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/Backend%20models/insurance_model.dart';
+import 'package:insuremart_app/screen/Auth/login.dart';
 
 import 'package:provider/provider.dart';
 
 import '../provider/app_state_manager.dart';
+import '../provider/new_insurance_provider.dart';
 import '../utils/app_theme.dart';
 import './insurance/insurance.dart';
 import './claims/claims.dart';
@@ -24,11 +29,16 @@ class _MainState extends State<Main> {
     MyClaims(),
     Profile(),
   ];
+
+
+
   @override
   void initState() {
     super.initState();
     checkInternetConnection();
+
   }
+
 
   void checkInternetConnection() async {
     // bool ActiveConnection = false;
@@ -52,6 +62,7 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     final readTab = context.read<AppStateManager>();
     final watchTab = context.watch<AppStateManager>();
+
     return Scaffold(
       body: screens[watchTab.getSelectedTab], //IndexedStack(
       //   index: watchTab.getSelectedTab,

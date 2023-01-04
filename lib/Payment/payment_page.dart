@@ -73,6 +73,7 @@ class MakePayment{
         InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
         insuranceProvider.saveNewInsuranceInfo(insurancemodel,context);
 
+
         final ref = context.read<NewInsuranceManager>();
         showModalBottomSheet(
             enableDrag: false,
@@ -147,6 +148,7 @@ class MakePayment{
 
       }
       else{
+        final ref = context.read<NewInsuranceManager>();
         print ("Transaction failed");
         showDialog(context: context, builder:(context) =>
             AlertDialog(
@@ -154,7 +156,13 @@ class MakePayment{
                   "Transaction failed"
               ),
             ));
+        // InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
+        // insuranceProvider.saveNewInsuranceInfo(insurancemodel,context);
+        ref.gotoStep(0);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Main()));
+        // Navigator.pop(context);
+
+
 
 
       }

@@ -20,7 +20,8 @@ class StepFive extends StatefulWidget {
 }
 
 class _StepFiveState extends State<StepFive> {
-  Computation? computation;
+  late Computation computation;
+
   double sumInsured=0;
   double basicPremium= 0;
   double ebb =0;
@@ -28,24 +29,41 @@ class _StepFiveState extends State<StepFive> {
   double srcc=0;
   double tpd=0;
 
+  getPremium(){
+    Navigator.push(context,MaterialPageRoute(builder: (context)=> NewInsurance(
+      myModel: widget.model,
+    ) )).then((value) {
+      setState(() {});
+    });
+    final ref = context.read<NewInsuranceManager>();
+    ref.nextStep();
+  }
 
 
 
-  @override
+@override
   void initState() {
-    computation=Computation(model: widget.model);
-    computation!.getVehicleLicence();
-    computation!.getRoadWorthinessLicence();
-    computation!.getHackneyPermit();
-
-
+  computation=Computation(model: widget.model);
+  computation.getVehicleLicence();
+    computation.getHackneyPermit();
+    computation.getRoadWorthiness();
+    computation.getClassOfInsurane();
+    computation.getThirdPartyInsuranceCost();
     super.initState();
   }
 
 
+
   @override
   Widget build(BuildContext context) {
-    widget.model.sumInsured== 0? sumInsured=0: sumInsured= widget.model.sumInsured;
+
+  var vlc= computation.getVlc;
+   var rrw= computation.getRRW;
+   var hp=computation.getHP;
+
+   var rdPartyCost= computation.get3rdParty;
+
+   widget.model.sumInsured== 0? sumInsured=0: sumInsured= widget.model.sumInsured;
      basicPremium= (0.02 * sumInsured);
 
 
@@ -56,15 +74,15 @@ class _StepFiveState extends State<StepFive> {
     widget.model.atp==null? tpd=0: tpd= double.parse(widget.model.atp.toString().replaceAll(RegExp('[^0-9.]'), ''));
 
 
-      widget.model.premiumPaid= (basicPremium+ebb+flood+srcc+tpd+computation!.getVlc+ computation!.getRRW+ computation!.getHP).toString();
+     widget.model.coverType.toString().contains('party')? widget.model.premiumPaid= (rdPartyCost+vlc+ rrw+ hp).toString():widget.model.premiumPaid= (basicPremium+ebb+flood+srcc+tpd+vlc+ rrw+ hp).toString();
 
 
-
-    final ref = context.read<NewInsuranceManager>();
     return ListView(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 64),
       children: [
         Container(
+          child: widget.model.providerName.toString().contains("Cornerstone")?
+          Image.asset("assets/images/cnimg.png"):Image.asset("assets/images/alimg.jpg"),
           height: 72,
           color: InsuremartTheme.pink1,
         ),
@@ -74,11 +92,11 @@ class _StepFiveState extends State<StepFive> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              buildRow('Sum Insured', '₦${widget.model.sumInsured.toString()}'),
+              widget.model.coverType.toString().contains('party')?Container():buildRow('Sum Insured', '₦${widget.model.sumInsured.toString()}'),
               const SizedBox(height: 20),
               buildRow('Period of Insurance', widget.model.insurancePeriod.toString()),
               const SizedBox(height: 20),
-              buildRow('Basic Premuim', '₦${basicPremium.toString()}'),
+               buildRow('Basic Premuim',  widget.model.coverType.toString().contains('party')? '₦${rdPartyCost}':'₦${basicPremium.toString()}'),
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
@@ -97,11 +115,11 @@ class _StepFiveState extends State<StepFive> {
               const SizedBox(height: 10),
               widget.model.atp != null? addOnsRow('Third Party Property Damage',  '₦${tpd.toString()}'):Container(),
               const SizedBox(height: 10),
-              computation!.getVlc != 0? addOnsRow('Vehicle Licence',  '₦${computation!.getVlc}'):Container(),
+              vlc != 0? addOnsRow('Vehicle Licence',  '₦${vlc}'):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("rrw")? addOnsRow('Road Worthiness',  '₦${computation!.getRRW}'):Container(),
+              widget.model.step3Extensions.toString().contains("rrw")? addOnsRow('Road Worthiness',  '₦${rrw}'):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("rhp")? addOnsRow('Hackney Permit',  '₦${computation!.getHP}'):Container(),
+              widget.model.step3Extensions.toString().contains("rhp")? addOnsRow('Hackney Permit',  '₦${hp}'):Container(),
               const SizedBox(height: 10),
               widget.model.step3Extensions.toString().contains("vtd")? addOnsRow('Vehicle Tracking Device',  '₦0'):Container(),
               const SizedBox(height: 10),
@@ -238,12 +256,8 @@ class _StepFiveState extends State<StepFive> {
               const SizedBox(height: 17),
               LongButton(
                 title: 'CONTINUE',
-                onPressed: ()async{
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=> NewInsurance(
-                    myModel: widget.model,
-                  ) ));
-                  final ref = context.read<NewInsuranceManager>();
-                  ref.nextStep();
+                onPressed: (){
+                  getPremium();
                 },
 
                 color: InsuremartTheme.pink2,

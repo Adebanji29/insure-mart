@@ -89,7 +89,7 @@ class InsuranceDetail extends StatelessWidget {
               const CustomSizedBox(height: 30),
               premiumPaid(model.premiumPaid.toString()),
               const CustomSizedBox(height: 20),
-              sumInsured('₦${model.sumInsured.toString()}'),
+             model.coverType.toString().contains("party")?Container():sumInsured('₦${model.sumInsured.toString()}'),
               const CustomSizedBox(height: 30),
               const Divider(),
               const CustomSizedBox(height: 30),

@@ -4,14 +4,199 @@ import '../Backend models/insurance_model.dart';
 
 class Computation {
   InsuranceModel model;
+
   Computation({required this.model});
+
   double vlicence=0;
   double roadworth= 0;
   double hpermit=0;
   double atp=0;
+  String? insuranceClass="";
+  double thirdparty=0;
 
-  getVehicleLicence(){
-    if(model.vehicletrackinglicence.toString().isNotEmpty){
+  void getClassOfInsurane(){
+    if(model.carmake=='Ashok' && model.carmodel== 'Leyland'){
+      insuranceClass= "Commercial";
+    }
+    else if(model.carmake=='Chevrolet' && model.carmodel== 'Express Cargo'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Chevrolet' && model.carmodel== 'N300'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Dodge' && model.carmodel== 'Ram'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Dodge' && model.carmodel== 'Ram Promaster'){
+      insuranceClass= "Commercial";
+    }
+    else if(model.carmake=='Dodge' && model.carmodel== 'Sprinter'){
+      insuranceClass= "Commercial";
+    }
+    else if(model.carmake=='Fiat' && model.carmodel== 'Ducato'){
+      insuranceClass= "Commercial";
+    }
+    else if(model.carmake=='Fiat' && model.carmodel=='FULLBACK' ){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Ford' && model.carmodel=='E-350' ){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Ford' && model.carmodel=='E-Series'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Ford' && model.carmodel=='Econoline' ){
+      insuranceClass= "Commercial";
+    }
+    else if(model.carmake=='Ford' && model.carmodel=='F-150'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Ford' && model.carmodel=='Ranger'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Ford' && model.carmodel=='Transit'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Foton'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='GMC' && model.carmodel=='SAVANA'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Honda' && model.carmodel=='Ridgeline'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Hyundai' && model.carmodel== 'County'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Hyundai' && model.carmodel=='HD 45'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Isuzu' && model.carmodel=='NQR'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='JMC'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Kia' && model.carmodel=='K3000'){
+      insuranceClass= "Commercial";
+    }
+
+
+    else if(model.carmake=='Mercedes Benz' && model.carmodel== 'Vito'){
+      insuranceClass= "Commercial";
+    }
+
+
+    else if(model.carmake=='Mercedes Benz' && model.carmodel=='Trucck'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Mitsubishi' && model.carmodel== 'BUS'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Mitsubishi' && model.carmodel== 'L200'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Mitsubishi' && model.carmodel== 'L300'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Mitsubishi' && model.carmodel== 'L400'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Nissan' && model.carmodel==  'Frontier'){
+      insuranceClass= "Commercial";
+    }
+    else if(model.carmake=='Nissan' && model.carmodel== 'Titan'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Nissan' && model.carmodel== 'Vanette' ){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Peugeot' && model.carmodel=='Boxer'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Peugeot' && model.carmodel=='Expert'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Stallion'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Toyota' && model.carmodel== 'Celica'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Toyota' && model.carmodel== 'HiAce'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Toyota' && model.carmodel=='Hilux'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Toyota' && model.carmodel=='Tacoma'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Toyota' && model.carmodel=='Tundra'){
+      insuranceClass= "Commercial";
+    }
+
+    else if(model.carmake=='Volkswagen' && model.carmodel=='Amarok'){
+      insuranceClass= "Commercial";
+    }
+    else{
+      insuranceClass= "Private";
+    }
+
+  }
+
+  String get getInsClass{
+    return insuranceClass.toString();
+  }
+
+
+  void getThirdPartyInsuranceCost(){
+    if(insuranceClass== "Commercial"){
+      thirdparty= 25000;
+    }
+    else{
+      thirdparty= 15000;
+    }
+  }
+
+  double get get3rdParty{
+    return thirdparty;
+  }
+
+  void getVehicleLicence(){
+    // if(model.vehicletrackinglicence.toString().isNotEmpty){
+      if(model.step3Extensions.contains("Renew Vehicle License")){
       if (model.carmake=='Acura' && model.carmodel== 'Mdx'){
         vlicence= 4000;
       }
@@ -1008,10 +1193,9 @@ class Computation {
         vlicence= 3300;
       }
     }
-    else if(model.vehicletrackinglicence.toString() == null){
+    else {
       vlicence=0;
     }
-
     print(vlicence);
   }
 
@@ -1020,7 +1204,7 @@ class Computation {
 }
 
 
-  getRoadWorthinessLicence(){
+  void getRoadWorthiness(){
     if(model.step3Extensions.toString().contains('rrw')){
       if (model.carmake=='Ashok' ){
         roadworth= 6400;
@@ -1321,7 +1505,6 @@ class Computation {
     else{
     roadworth=0;
     }
-
     print(roadworth);
   }
 
@@ -1331,7 +1514,7 @@ class Computation {
 
 
 
-  getHackneyPermit(){
+  void getHackneyPermit(){
     if(model.step3Extensions.toString().contains('rhp')){
       if (model.carmake=='Ashok' ){
         hpermit= 5500;
@@ -1352,6 +1535,45 @@ class Computation {
       else if(model.carmake=='Ford' && model.carmodel=='Econoline' ){
         hpermit= 5500;
       }
+      else if(model.carmake=='Foton' ){
+        hpermit= 5500;
+      }
+
+      else if(model.carmake=='GMC' && model.carmodel=='SAVANA' ){
+        hpermit= 5500;
+      }
+
+      else if(model.carmake=='Honda' && model.carmodel=='Shuttle' ){
+        hpermit= 5500;
+      }
+
+      else if(model.carmake=='Hyundai' && model.carmodel=='County' ){
+        hpermit= 6000;
+      }
+
+      else if(model.carmake=='Isuzu' && model.carmodel=='NQR' ){
+        hpermit= 5500;
+      }
+
+      else if(model.carmake=='JMC'){
+        hpermit= 5500;
+      }
+
+      else if(model.carmake=='Kia' && model.carmodel=='K3000' ){
+        hpermit= 5500;
+      }
+
+      else if(model.carmake=='Nissan' && model.carmodel== 'Civilian' ){
+        hpermit= 6000;
+      }
+
+      else if(model.carmake=='Toyota' && model.carmodel== 'Coaster' ){
+        hpermit= 6000;
+      }
+
+      else if(model.carmake=='Toyota' && model.carmodel== 'HiAce' ){
+        hpermit= 5500;
+      }
 
       else{
         hpermit= 5000;
@@ -1360,7 +1582,6 @@ class Computation {
     else{
      hpermit=0;
     }
-
     print(hpermit);
   }
 

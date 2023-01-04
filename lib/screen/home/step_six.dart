@@ -34,7 +34,7 @@ class _StepSixState extends State<StepSix> {
 
   @override
   void initState() {
-   print(widget.model.step3Extensions);
+
     super.initState();
   }
 
@@ -155,8 +155,7 @@ class _StepSixState extends State<StepSix> {
                         context: context,
                         email: "emogbolu@theinsuremart.com",
                         price: double.parse(widget.model.premiumPaid.toString()).toInt())
-                    .chargeCardAndMakePayment();
-              }
+                    .chargeCardAndMakePayment();}
             }),
         const SizedBox(height: 10),
         // LongButton(

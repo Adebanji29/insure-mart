@@ -4,10 +4,40 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e323a948-7b36-4ea8-adc6-ae648cac56b7" name="Changes" comment="still working on profile">
+    <list default="true" id="e323a948-7b36-4ea8-adc6-ae648cac56b7" name="Changes" comment="recent update new">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/profile/utility_bills.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/profile/utility_bills.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Payment/payment_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Payment/payment_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/computation/computation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/computation/computation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/provider/insurance_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/insurance_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/new_insurance.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/new_insurance.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_five.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_five.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_one.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_one.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_six.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_six.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_three.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_three.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/insurance/insurance_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/insurance/insurance_detail.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/main_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +80,9 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/README.md" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ios/Podfile" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/pubspec.yaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ios/Podfile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/README.md" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/pubspec.lock" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -72,7 +102,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/libraries" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -81,14 +111,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/.idea/libraries" />
+      <recent name="C:\Users\DELL\StudioProjects\insure-mart\assets\images" />
+      <recent name="C:\Users\DELL\StudioProjects\insure-mart\lib" />
       <recent name="C:\Users\DELL\StudioProjects\insure-mart\lib\screen\insurance" />
       <recent name="C:\Users\DELL\StudioProjects\insure-mart\lib\screen\claims" />
       <recent name="C:\Users\DELL\StudioProjects\insure-mart\ios\Runner" />
-      <recent name="C:\Users\DELL\StudioProjects\insure-mart\android\app" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$USER_HOME$/Desktop" />
     </key>
   </component>
   <component name="RunManager">
@@ -125,14 +152,21 @@
       <option name="project" value="LOCAL" />
       <updated>1671531351959</updated>
     </task>
-    <task id="LOCAL-00003" summary="still working on profile">
-      <created>1672724698014</created>
+    <task id="LOCAL-00003" summary="recent update">
+      <created>1672499917225</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1672724698014</updated>
+      <updated>1672499917225</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="recent update new">
+      <created>1672500973531</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672500973531</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -155,8 +189,9 @@
     <MESSAGE value="paystack payment function added,cards added, edit profile page, step 1 to 6 pages and insurance screen modified" />
     <MESSAGE value="claims function and user's device token update added" />
     <MESSAGE value="profile update ongoing" />
-    <MESSAGE value="still working on profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="still working on profile" />
+    <MESSAGE value="recent update" />
+    <MESSAGE value="recent update new" />
+    <option name="LAST_COMMIT_MESSAGE" value="recent update new" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

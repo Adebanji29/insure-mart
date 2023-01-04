@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +15,7 @@ import '../../utils/app_theme.dart';
 import '../../utils/constant.dart';
 import '../../widget/boxes.dart';
 import '../../widget/buttons.dart';
+import '../Auth/login.dart';
 import 'notifications.dart';
 
 class Home extends StatefulWidget {
@@ -31,9 +33,14 @@ class _HomeState extends State<Home> {
   void initState() {
     PushNotificationsSystem pushNotificationsSystem=  PushNotificationsSystem();
     pushNotificationsSystem.generateDeviceRecognitionToken();
-    model.premiumPaid='';
+    model.step3Extensions=[];
+
     super.initState();
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     UserProvider userprovider = Provider.of<UserProvider>(context);
