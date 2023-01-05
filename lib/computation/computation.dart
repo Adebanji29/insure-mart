@@ -181,18 +181,18 @@ class Computation {
   }
 
 
-  void getThirdPartyInsuranceCost(){
-    if(insuranceClass== "Commercial"){
-      thirdparty= 25000;
-    }
-    else{
-      thirdparty= 15000;
-    }
-  }
-
-  double get get3rdParty{
-    return thirdparty;
-  }
+  // void getThirdPartyInsuranceCost(){
+  //   if(insuranceClass== "Commercial"){
+  //     thirdparty= 25000;
+  //   }
+  //   else{
+  //     thirdparty= 15000;
+  //   }
+  // }
+  //
+  // double get get3rdParty{
+  //   return thirdparty;
+  // }
 
   void getVehicleLicence(){
     // if(model.vehicletrackinglicence.toString().isNotEmpty){

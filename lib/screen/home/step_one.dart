@@ -4,7 +4,9 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:insuremart_app/uppercaseFormatter/uppercase_formatter.dart';
 import 'package:intl/intl.dart';
 
 // import 'package:insuremart/screen/home/step_two.dart';
@@ -18,6 +20,7 @@ import '../../widget/boxes.dart';
 import '../../widget/buttons.dart';
 import '../../widget/text_fields.dart';
 import 'new_insurance.dart';
+
 
 class StepOne extends StatefulWidget {
   final InsuranceModel model;
@@ -253,7 +256,10 @@ class _StepOneState extends State<StepOne> {
               },
               controller: _regNumber,
               label: 'eg. 345AD7H3',
-              textCapitalization: TextCapitalization.characters,
+              inputFormatters: [
+                UpperCaseFormatter(),
+                FilteringTextInputFormatter.allow(RegExp('[0-9A-Z]'))
+              ],
             ),
             const CustomSizedBox(height: 25),
             label('Chassis Number'),
@@ -267,6 +273,10 @@ class _StepOneState extends State<StepOne> {
                   return "Enter chasis number";
                 }
               },
+              inputFormatters: [
+                UpperCaseFormatter(),
+                FilteringTextInputFormatter.allow(RegExp('[0-9A-Z]'))
+              ],
               controller: _chassisNumber,
               label: 'Chassis Number',
               textCapitalization: TextCapitalization.characters,
@@ -283,9 +293,13 @@ class _StepOneState extends State<StepOne> {
                   return " Enter the engine number";
                 }
               },
+              inputFormatters: [
+                UpperCaseFormatter(),
+                FilteringTextInputFormatter.allow(RegExp('[0-9A-Z]'))
+              ],
               controller: _engineNumber,
               label: 'Engine Number',
-              textCapitalization: TextCapitalization.characters,
+
             ),
 
             const CustomSizedBox(height: 25),
@@ -309,48 +323,39 @@ class _StepOneState extends State<StepOne> {
             ),
             const CustomSizedBox(height: 25),
             label('Policy Start Date'),
-            GestureDetector(
-              onTap: () =>
-                  showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1960),
-                    lastDate: DateTime.now(),
-                  ),
-              child: CustomTextField(
-                validator: (value) {
-                  if (value
-                      .toString()
-                      .isEmpty) {
-                    return " Enter  the policy start date";
-                  } else {
+            CustomTextField(
+              validator: (value) {
+                if (value
+                    .toString()
+                    .isEmpty) {
+                  return " Enter  the policy start date";
+                } else {
 
-                  }
-                },
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1960),
-                    lastDate: DateTime.now(),
-                  );
-                  if (pickedDate != null) {
-                    String formattedDate =
-                    DateFormat('dd-MM-yyyy').format(pickedDate);
-                    _policydate.text = formattedDate;
-                    print(_policydate.text);
-                  }
-                },
-                focusColor: InsuremartTheme.blue2,
-                label: ('Policy Start Date'),
-                controller: _policydate,
-                readOnly: true,
-                suffix: const Icon(
-                  Icons.calendar_month,
-                  color: InsuremartTheme.white3,
-                ),
-                //
+                }
+              },
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now().add(Duration(days: 30)),
+                );
+                if (pickedDate != null) {
+                  String formattedDate =
+                  DateFormat('dd-MM-yyyy').format(pickedDate);
+                  _policydate.text = formattedDate;
+                  print(_policydate.text);
+                }
+              },
+              focusColor: InsuremartTheme.blue2,
+              label: ('Policy Start Date'),
+              controller: _policydate,
+              readOnly: true,
+              suffix: const Icon(
+                Icons.calendar_month,
+                color: InsuremartTheme.white3,
               ),
+              //
             ),
             const CustomSizedBox(height: 25),
             label('Period of Insurance'),
@@ -486,6 +491,7 @@ class _StepOneState extends State<StepOne> {
 
 
   }
+
 
 
 
