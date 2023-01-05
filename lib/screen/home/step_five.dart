@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../Backend models/insurance_model.dart';
 import '../../computation/computation.dart';
@@ -48,7 +49,7 @@ class _StepFiveState extends State<StepFive> {
     computation.getHackneyPermit();
     computation.getRoadWorthiness();
     computation.getClassOfInsurane();
-    computation.getThirdPartyInsuranceCost();
+    // computation.getThirdPartyInsuranceCost();
     super.initState();
   }
 
@@ -56,12 +57,12 @@ class _StepFiveState extends State<StepFive> {
 
   @override
   Widget build(BuildContext context) {
-
+var formatter= NumberFormat('#,##,000');
   var vlc= computation.getVlc;
    var rrw= computation.getRRW;
    var hp=computation.getHP;
 
-   var rdPartyCost= computation.get3rdParty;
+  double rdPartyCost= 3000000.00;
 
    widget.model.sumInsured== 0? sumInsured=0: sumInsured= widget.model.sumInsured;
      basicPremium= (0.02 * sumInsured);
