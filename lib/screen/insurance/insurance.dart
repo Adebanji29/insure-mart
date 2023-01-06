@@ -111,7 +111,7 @@ class InsuranceItem extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.all(15),
-      height: size.height * (.00124 * 442),
+      height: size.height * (.00124 * 449),
       decoration: BoxDecoration(
         color: InsuremartTheme.white4,
         borderRadius: BorderRadius.circular(10),
@@ -149,16 +149,22 @@ class InsuranceItem extends StatelessWidget {
                 'Registration N0.',
                 insuranceModel.registrationNumber.toString()),
                 // '*****${insuranceModel.registrationNumber.toString().substring(insuranceModel.registrationNumber.toString().length - 4)}',),
+              ]
+                ),
 
+          const CustomSizedBox(height: 25),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               textSubtext(
-                'Chassis N0.',
+                  'Chassis N0.',
                   insuranceModel.chasisNumber.toString()),
-                // '*****${insuranceModel.chasisNumber.toString().substring(insuranceModel.chasisNumber.toString().length - 4)}',),
+              // '*****${insuranceModel.chasisNumber.toString().substring(insuranceModel.chasisNumber.toString().length - 4)}',),
 
               textSubtext(
-                'Engine N0.',
+                  'Engine N0.',
                   insuranceModel.engineNumber.toString()),
-                // '*****${insuranceModel.engineNumber.toString().substring(insuranceModel.engineNumber.toString().length - 4)}',),
+              // '*****${insuranceModel.engineNumber.toString().substring(insuranceModel.engineNumber.toString().length - 4)}',),
             ],
           ),
           const CustomSizedBox(height: 20),
