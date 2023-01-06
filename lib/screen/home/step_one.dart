@@ -342,7 +342,7 @@ class _StepOneState extends State<StepOne> {
                 );
                 if (pickedDate != null) {
                   String formattedDate =
-                  DateFormat('dd-MM-yyyy').format(pickedDate);
+                  DateFormat('yyyy-MM-dd').format(pickedDate);
                   _policydate.text = formattedDate;
                   print(_policydate.text);
                 }
@@ -410,7 +410,7 @@ class _StepOneState extends State<StepOne> {
       widget.model.chasisNumber = _chassisNumber.text;
       widget.model.engineNumber = _engineNumber.text;
       widget.model.insurancePeriod = _insuranceperiod.text;
-      widget.model.purchaceDate = _policydate.text;
+      widget.model.policyStartDate = _policydate.text;
       widget.model.coverType = ref.typeOfCover.toString();
       widget.model.insuranceClass = insureClass.toString();
     });
@@ -441,7 +441,7 @@ class _StepOneState extends State<StepOne> {
       widget.model.chasisNumber = _chassisNumber.text;
       widget.model.engineNumber = _engineNumber.text;
       widget.model.insurancePeriod = _insuranceperiod.text;
-      widget.model.purchaceDate = _policydate.text;
+      widget.model.policyStartDate = _policydate.text;
       widget.model.coverType = ref.typeOfCover.toString();
       widget.model.insuranceClass = insureClass.toString();
     });
@@ -454,7 +454,7 @@ class _StepOneState extends State<StepOne> {
                   myModel: widget.model,
                 )));
     ref.gotoStep(2);
-    print(widget.model.purchaceDate);
+    print(widget.model.policyStartDate);
   }
 
 

@@ -79,9 +79,12 @@ class InsuranceDetail extends StatelessWidget {
               const CustomSizedBox(height: 20),
               Row(
                 children: [
-                  textSubtext('Purchase date', model.purchaceDate.toString()),
+                  textSubtext('Purchase date', model.purchaceDate.toString().substring(0,11)),
+                  const CustomSizedBox(width: 34),
+                  textSubtext('Policy start date', model.policyStartDate.toString()),
                   const CustomSizedBox(width: 34),
                   textSubtext('Renewal date', model.renewalDate.toString()),
+
                 ],
               ),
               const CustomSizedBox(height: 30),

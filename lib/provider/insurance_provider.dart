@@ -44,7 +44,7 @@ class InsuranceProvider with ChangeNotifier {
         .now()
         .millisecondsSinceEpoch
         .toString();
-    // model.purchaceDate = DateTime.now().toLocal().toString();
+    model.purchaceDate = DateTime.now().toLocal().toString();
 
 
     User? currentUser = FirebaseAuth.instance.currentUser;
@@ -59,6 +59,7 @@ class InsuranceProvider with ChangeNotifier {
         {
           "userId": model.userUID,
           "purchaseID": model.purchaseId,
+          "policyStartDate": model.policyStartDate,
           "class": model.insuranceClass,
           "type": model.coverType,
           "username": model.username,
@@ -76,7 +77,6 @@ class InsuranceProvider with ChangeNotifier {
           "renewalDate": "",
           "premiumPaid": "₦${model.premiumPaid.toString()}",
           "expDate": "",
-          "car year": "",
           "carMakeImage": model.carMakeImage,
           "selected extension":model.step3Extensions,
           "additional third party":model.atp,
@@ -90,6 +90,7 @@ class InsuranceProvider with ChangeNotifier {
           {
             "userId": model.userUID,
             "purchaseID": model.purchaseId,
+            "policyStartDate": model.policyStartDate,
             "class": model.insuranceClass,
             "type": model.coverType,
             "username": model.username,
@@ -107,7 +108,6 @@ class InsuranceProvider with ChangeNotifier {
             "renewalDate": "",
             "premiumPaid": "₦${model.premiumPaid.toString()}",
             "expDate": "",
-            "car year": "",
             "carMakeImage": model.carMakeImage,
             "selected extension":model.step3Extensions,
             "additional third party":model.atp,
@@ -156,10 +156,10 @@ class InsuranceProvider with ChangeNotifier {
             policy:"${element["username"]}'s Car Insurance",
             insurancePeriod: element["policy period"],
             purchaceDate: element["purchase Date"],
+            policyStartDate: element["policyStartDate"],
             renewalDate: element["renewalDate"],
             premiumPaid: element["premiumPaid"],
             expDate: element["expDate"],
-            carYear: element["car year"],
             carMakeImage: element["carMakeImage"],
            step3Extensions: []
 

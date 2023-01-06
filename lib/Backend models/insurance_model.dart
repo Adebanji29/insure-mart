@@ -6,6 +6,7 @@ class InsuranceModel{
   String? userUID;
   String? purchaseId;
   String? policy;
+  String? policyStartDate;
   String? insuranceClass;
   String? providerName;
   String? providerImage;
@@ -35,6 +36,7 @@ class InsuranceModel{
     this.purchaseId,
     this.insuranceClass,
     this.policy,
+    this.policyStartDate,
     this.providerName,
     this.providerImage,
     this.purchaceDate,
