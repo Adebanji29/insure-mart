@@ -24,8 +24,10 @@ import 'step_two.dart';
 
 class NewInsurance extends StatefulWidget {
   InsuranceModel myModel;
+  String? summary;
 
-  NewInsurance({required this.myModel,});
+
+  NewInsurance({required this.myModel, this.summary});
 
   static const route = '/newInsurance';
 
@@ -187,7 +189,7 @@ class _NewInsuranceState extends State<NewInsurance> {
                       StepThree(model: widget.myModel,),
                       StepFour(model: widget.myModel),
                       StepFive(model:widget.myModel,),
-                      StepSix(model:widget.myModel,),
+                      StepSix(model:widget.myModel,summary: widget.summary.toString(),),
                     ],
                   ),
                 )

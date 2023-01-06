@@ -14,6 +14,8 @@ class StepFive extends StatefulWidget {
   InsuranceModel model;
 
 
+
+
   StepFive({required this.model });
 
   @override
@@ -29,14 +31,15 @@ class _StepFiveState extends State<StepFive> {
   double flood=0;
   double srcc=0;
   double tpd=0;
+  String summary="";
 
   getPremium(){
+    final ref = context.read<NewInsuranceManager>();
     Navigator.push(context,MaterialPageRoute(builder: (context)=> NewInsurance(
       myModel: widget.model,
-    ) )).then((value) {
-      setState(() {});
-    });
-    final ref = context.read<NewInsuranceManager>();
+      summary:summary,
+    ) ));
+
     ref.nextStep();
   }
 
@@ -75,7 +78,7 @@ var formatter= NumberFormat('#,##,000');
     widget.model.atp==null? tpd=0: tpd= double.parse(widget.model.atp.toString().replaceAll(RegExp('[^0-9.]'), ''));
 
 
-     widget.model.coverType.toString().contains('party')? widget.model.premiumPaid= (rdPartyCost+vlc+ rrw+ hp).toString():widget.model.premiumPaid= (basicPremium+ebb+flood+srcc+tpd+vlc+ rrw+ hp).toString();
+     widget.model.coverType.toString().contains('party')? summary= (rdPartyCost+vlc+ rrw+ hp).toString():summary= (basicPremium+ebb+flood+srcc+tpd+vlc+ rrw+ hp).toString();
 
 
     return ListView(
@@ -144,7 +147,7 @@ var formatter= NumberFormat('#,##,000');
                         .copyWith(color: InsuremartTheme.black4),
                   ),
                   Text(
-                    '₦${widget.model.premiumPaid}',
+                    '₦${summary}',
                     style: InsuremartTheme.lightTextTheme.headline2!
                         .copyWith(color: InsuremartTheme.blue1),
                   ),
@@ -227,30 +230,69 @@ var formatter= NumberFormat('#,##,000');
               // const SizedBox(height: 13),
               stepFiveExpansion(
                 'Benefits',
-                Column(
+               widget.model.coverType.toString().contains("party")?
+               Column(
+                 mainAxisAlignment: MainAxisAlignment.start,
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   benefitText(
+                     1,
+                     "Accidental damage to third party's properties up to a limit of ₦1,000,000.00",
+                   ),
+                   benefitText(
+                     2,
+                     'ECOWAS brown card coverage to other West African countries',
+                   ),
+                 ],
+               ):Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     benefitText(
                       1,
-                      'Accidental damage to own vehicle. ',
+                      'Accidental damage to own vehicle to the limit of the sum insured, i.e value of the vehicle',
                     ),
                     benefitText(
                       2,
-                      'Loss/damage to own vehicle by fire or theft. ',
+                      'Loss as a result of fire or theft',
                     ),
                     benefitText(
                       3,
-                      'Covers damage to another’s property up to N1 million naira. ',
+                      "Accidental damage to third party's properties up to a limit of ₦1,000,000.00",
                     ),
                     benefitText(
                       4,
-                      'Accidental total and permanent disability to the insured to a limit of ₦1,000,000.00 ',
+                      'Total and partial disability coverage in the event of an accident, up to a limit of ₦1,000,000.00',
                     ),
                     benefitText(
                       5,
-                      'We cover your medical expense including that of other vehicle’s passenger(s) to a limit of ₦100,000.00 in the event of a hospitalization due to accident.',
+                      'Medical expenses in the event of an accident up to a limit of ₦1,000,000.00',
                     )
+
+                // Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                // children: [
+                //   benefitText(
+                //     1,
+                //     'Accidental damage to own vehicle. ',
+                //   ),
+                //   benefitText(
+                //     2,
+                //     'Loss/damage to own vehicle by fire or theft. ',
+                //   ),
+                //   benefitText(
+                //     3,
+                //     'Covers damage to another’s property up to N1 million naira. ',
+                //   ),
+                //   benefitText(
+                //     4,
+                //     'Accidental total and permanent disability to the insured to a limit of ₦1,000,000.00 ',
+                //   ),
+                //   benefitText(
+                //     5,
+                //     'We cover your medical expense including that of other vehicle’s passenger(s) to a limit of ₦100,000.00 in the event of a hospitalization due to accident.',
+                //   )
                   ],
                 ),
               ),

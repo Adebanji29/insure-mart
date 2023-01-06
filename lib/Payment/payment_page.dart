@@ -156,8 +156,8 @@ class MakePayment{
                   "Transaction failed"
               ),
             ));
-        // InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
-        // insuranceProvider.saveNewInsuranceInfo(insurancemodel,context);
+        InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
+        insuranceProvider.saveNewInsuranceInfo(insurancemodel,context);
         ref.gotoStep(0);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Main()));
         // Navigator.pop(context);

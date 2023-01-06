@@ -20,7 +20,8 @@ import '../../widget/text_fields.dart';
 
 class StepSix extends StatefulWidget {
   final InsuranceModel model;
-  const StepSix({super.key, required this.model,});
+  String summary;
+ StepSix({super.key, required this.model,required this.summary});
 
   @override
   State<StepSix> createState() => _StepSixState();
@@ -132,7 +133,7 @@ class _StepSixState extends State<StepSix> {
                   .copyWith(color: InsuremartTheme.green1),
             ),
             Text(
-              '₦${widget.model.premiumPaid.toString()}',
+              '₦${widget.summary.toString()}',
               style: InsuremartTheme.lightTextTheme.headline3!
                   .copyWith(fontSize: 18, color: InsuremartTheme.green1),
             ),
@@ -145,16 +146,16 @@ class _StepSixState extends State<StepSix> {
               if (selectedIndex == null) {
                 Fluttertoast.showToast(msg: "Kindly select a payment card");
               } else {
-                // insuranceProvider.saveNewInsuranceInfo(widget.model);
-
-                //
-
+                // insuranceProvider.saveNewInsuranceInfo(widget.model);//
+                setState(() {
+                  widget.model.premiumPaid=widget.summary;
+                });
                 MakePayment(
                         cardModel: mycardModel,
                         insurancemodel: widget.model,
                         context: context,
                         email: "emogbolu@theinsuremart.com",
-                        price: double.parse(widget.model.premiumPaid.toString()).toInt())
+                        price: double.parse(widget.summary.toString()).toInt())
                     .chargeCardAndMakePayment();}
             }),
         const SizedBox(height: 10),

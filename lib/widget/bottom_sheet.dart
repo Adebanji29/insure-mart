@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/screen/insurance/insurance.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/app_state_manager.dart';
@@ -42,7 +43,7 @@ Future<dynamic> carBottomSheet(BuildContext context) {
           LongButton(
               title: 'RENEW EXISTING INSURANCE',
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> MyInsurance()));
                 context.read<AppStateManager>().goToTab(1);
               }),
           // const CustomSizedBox(height: 10),
