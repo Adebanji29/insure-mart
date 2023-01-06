@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:insuremart_app/screen/home/step_one.dart';
+import 'package:intl/intl.dart';
 // import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 import 'package:provider/provider.dart';
@@ -75,7 +76,7 @@ class _NewInsuranceState extends State<NewInsurance> {
 
   @override
   Widget build(BuildContext context) {
-
+    var formatter= NumberFormat.decimalPattern('en_us');
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),

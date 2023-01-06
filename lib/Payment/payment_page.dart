@@ -21,7 +21,7 @@ class MakePayment{
   CardModel cardModel;
   BuildContext context;
   String email;
-  int price;
+  double price;
   PaystackPlugin _paystack= PaystackPlugin();
   MakePayment({required this.context, required this.email, required this.price, required this.cardModel, required this.insurancemodel});
 
@@ -54,7 +54,7 @@ class MakePayment{
 
     initializeplugin().then((_) async {
       Charge charge= Charge()
-        ..amount= price*100
+        ..amount= (price*100).toInt()
         ..email= email
         ..reference= getReference()
         ..card= getCardUI();

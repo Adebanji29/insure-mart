@@ -43,7 +43,6 @@ Future<dynamic> carBottomSheet(BuildContext context) {
           LongButton(
               title: 'RENEW EXISTING INSURANCE',
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> MyInsurance()));
                 context.read<AppStateManager>().goToTab(1);
               }),
           // const CustomSizedBox(height: 10),
