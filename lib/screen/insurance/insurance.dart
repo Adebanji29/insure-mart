@@ -147,16 +147,18 @@ class InsuranceItem extends StatelessWidget {
             children: [
               textSubtext(
                 'Registration N0.',
-                '*****${insuranceModel.registrationNumber.toString().substring(insuranceModel.registrationNumber.toString().length - 4)}',
-              ),
+                insuranceModel.registrationNumber.toString()),
+                // '*****${insuranceModel.registrationNumber.toString().substring(insuranceModel.registrationNumber.toString().length - 4)}',),
+
               textSubtext(
                 'Chassis N0.',
-                '*****${insuranceModel.chasisNumber.toString().substring(insuranceModel.chasisNumber.toString().length - 4)}',
-              ),
+                  insuranceModel.chasisNumber.toString()),
+                // '*****${insuranceModel.chasisNumber.toString().substring(insuranceModel.chasisNumber.toString().length - 4)}',),
+
               textSubtext(
                 'Engine N0.',
-                '*****${insuranceModel.engineNumber.toString().substring(insuranceModel.engineNumber.toString().length - 4)}',
-              ),
+                  insuranceModel.engineNumber.toString()),
+                // '*****${insuranceModel.engineNumber.toString().substring(insuranceModel.engineNumber.toString().length - 4)}',),
             ],
           ),
           const CustomSizedBox(height: 20),
