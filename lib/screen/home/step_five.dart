@@ -60,7 +60,7 @@ class _StepFiveState extends State<StepFive> {
 
   @override
   Widget build(BuildContext context) {
-var formatter= NumberFormat('#,##,000');
+    var formatter= NumberFormat.decimalPattern('en_us');
   var vlc= computation.getVlc;
    var rrw= computation.getRRW;
    var hp=computation.getHP;
@@ -96,11 +96,11 @@ var formatter= NumberFormat('#,##,000');
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              widget.model.coverType.toString().contains('party')?Container():buildRow('Sum Insured', '₦${widget.model.sumInsured.toString()}'),
+              widget.model.coverType.toString().contains('party')?Container():buildRow('Sum Insured', '₦${formatter.format(double.parse(widget.model.sumInsured.toString().replaceAll(RegExp('[^0-9.]'), '')))}'),
               const SizedBox(height: 20),
               buildRow('Period of Insurance', widget.model.insurancePeriod.toString()),
               const SizedBox(height: 20),
-               buildRow('Basic Premuim',  widget.model.coverType.toString().contains('party')? '₦${rdPartyCost}':'₦${basicPremium.toString()}'),
+               buildRow('Basic Premuim',  widget.model.coverType.toString().contains('party')? '₦${formatter.format(double.parse(rdPartyCost.toString().replaceAll(RegExp('[^0-9.]'), '')))}':'₦${formatter.format(double.parse(basicPremium.toString().replaceAll(RegExp('[^0-9.]'), '')))}'),
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
@@ -111,23 +111,23 @@ var formatter= NumberFormat('#,##,000');
                 textAlign: TextAlign.left,
               ),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("ebb")?   addOnsRow('Excess buy back', '₦${ebb.toString()}') : Container(),
+              widget.model.step3Extensions.toString().contains("ebb")?   addOnsRow('Excess buy back', '₦${formatter.format(double.parse(ebb.toString().replaceAll(RegExp('[^0-9.]'), '')))}') : Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("flood")?  addOnsRow('Flood Extension',  '₦${flood.toString()}' ):Container(),
+              widget.model.step3Extensions.toString().contains("flood")?  addOnsRow('Flood Extension', '₦${formatter.format(double.parse(flood.toString().replaceAll(RegExp('[^0-9.]'), '')))}' ):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("srcc")? addOnsRow('SRCC',  '₦${srcc.toString()}'):Container(),
+              widget.model.step3Extensions.toString().contains("srcc")? addOnsRow('SRCC', '₦${formatter.format(double.parse(srcc.toString().replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
               const SizedBox(height: 10),
-              widget.model.atp != null? addOnsRow('Third Party Property Damage',  '₦${tpd.toString()}'):Container(),
+              widget.model.atp != null? addOnsRow('Third Party Property Damage',  '₦${formatter.format(double.parse(tpd.toString().replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
               const SizedBox(height: 10),
               vlc != 0? addOnsRow('Vehicle Licence',  '₦${vlc}'):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("rrw")? addOnsRow('Road Worthiness',  '₦${rrw}'):Container(),
+              widget.model.step3Extensions.toString().contains("rrw")? addOnsRow('Road Worthiness',  '₦${formatter.format(double.parse(rrw.toString().replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("rhp")? addOnsRow('Hackney Permit',  '₦${hp}'):Container(),
+              widget.model.step3Extensions.toString().contains("rhp")? addOnsRow('Hackney Permit', '₦${formatter.format(double.parse(hp.toString().replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("vtd")? addOnsRow('Vehicle Tracking Device',  '₦0'):Container(),
+              widget.model.step3Extensions.toString().contains("vtd")? addOnsRow('Vehicle Tracking Device',  '₦${formatter.format(double.parse('0'.replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
               const SizedBox(height: 10),
-              widget.model.step3Extensions.toString().contains("rtd")? addOnsRow('Install/Renew Tracking Device',  '₦0'):Container(),
+              widget.model.step3Extensions.toString().contains("rtd")? addOnsRow('Install/Renew Tracking Device',  '₦${formatter.format(double.parse('0'.replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
@@ -147,7 +147,7 @@ var formatter= NumberFormat('#,##,000');
                         .copyWith(color: InsuremartTheme.black4),
                   ),
                   Text(
-                    '₦${summary}',
+                    '₦${formatter.format(double.parse(summary.replaceAll(RegExp('[^0-9.]'), '')))}',
                     style: InsuremartTheme.lightTextTheme.headline2!
                         .copyWith(color: InsuremartTheme.blue1),
                   ),

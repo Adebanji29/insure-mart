@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/screen/claims/new_claim.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../Backend models/insurance_model.dart';
@@ -27,6 +29,7 @@ class _MyInsuranceState extends State<MyInsurance> {
     InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context);
     insuranceProvider.getNewInsuranceData();
     List<InsuranceModel>insuranceList= insuranceProvider.getNewInsuranceList;
+
 
     var items = ['Car Insurance', 'Insurance'];
     String? value = items[0];
@@ -107,6 +110,7 @@ class InsuranceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var formatter= NumberFormat.decimalPattern('en_us');
     insuranceModel.carmake== "Toyota"? insuranceModel.carMakeImage='assets/images/toyota_logo.png':insuranceModel.carMakeImage='assets/images/jeep.png';
     final size = MediaQuery.of(context).size;
     return Container(
@@ -136,7 +140,7 @@ class InsuranceItem extends StatelessWidget {
           const CustomSizedBox(height: 25),
           Row(
             children: [
-              insuranceModel.coverType.toString().contains("party")?Container(): textSubtext('Sum Insured', '₦${insuranceModel.sumInsured.toString()}', money: true),
+              insuranceModel.coverType.toString().contains("party")?Container(): textSubtext('Sum Insured', '₦${formatter.format(double.parse(insuranceModel.sumInsured.toString().replaceAll(RegExp('[^0-9.]'), '')))}', money: true),
               const CustomSizedBox(width: 30),
               textSubtext('Expiry Date', insuranceModel.expDate.toString()),
             ],
@@ -183,7 +187,9 @@ class InsuranceItem extends StatelessWidget {
                   //       arguments: int.parse(insuranceModel.purchaseId.toString()),
                   //     ),
                   size: size),
-              button(text: 'REPORT CLAIM', onPressed: () {}, size: size),
+              button(text: 'REPORT CLAIM', onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> NewClaim()));
+              }, size: size),
             ],
           )
         ],

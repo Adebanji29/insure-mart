@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 // import 'package:provider/provider.dart';
 
 // import '../../provider/insurance_provider.dart';
@@ -6,6 +7,7 @@ import '../../Backend models/insurance_model.dart';
 import '../../widget/buttons.dart';
 import '../../widget/boxes.dart';
 import '../../utils/app_theme.dart';
+import '../claims/new_claim.dart';
 
 class InsuranceDetail extends StatelessWidget {
 
@@ -15,6 +17,7 @@ class InsuranceDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var formatter= NumberFormat.decimalPattern('en_us');
     // final insuranceId = ModalRoute.of(context)!.settings.arguments as int;
     // final insurance = context.read<InsuranceProvider>().findById(insuranceId);
 
@@ -90,9 +93,9 @@ class InsuranceDetail extends StatelessWidget {
               const CustomSizedBox(height: 30),
               const Divider(),
               const CustomSizedBox(height: 30),
-              premiumPaid(model.premiumPaid.toString()),
+              premiumPaid('₦${formatter.format(double.parse(model.premiumPaid.toString().replaceAll(RegExp('[^0-9.]'), '')))}'),
               const CustomSizedBox(height: 20),
-             model.coverType.toString().contains("party")?Container():sumInsured('₦${model.sumInsured.toString()}'),
+             model.coverType.toString().contains("party")?Container():sumInsured('₦${formatter.format(double.parse(model.sumInsured.toString().replaceAll(RegExp('[^0-9.]'), '')))}'),
               const CustomSizedBox(height: 30),
               const Divider(),
               const CustomSizedBox(height: 30),
@@ -131,7 +134,9 @@ class InsuranceDetail extends StatelessWidget {
               const CustomSizedBox(height: 30),
               LongButton(
                 title: 'REPORT CLAIM',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> NewClaim()));
+                },
                 color: const Color(0xffd6d6d6),
                 textColor: InsuremartTheme.blue4,
               ),
@@ -209,11 +214,11 @@ class InsuranceDetail extends StatelessWidget {
             style: InsuremartTheme.lightTextTheme.headline2!
                 .copyWith(fontSize: 14),
           ),
-          Text(
-            '/year',
-            style: InsuremartTheme.lightTextTheme.bodyText2!
-                .copyWith(color: InsuremartTheme.black1.withOpacity(.5)),
-          )
+          // Text(
+          //   '/year',
+          //   style: InsuremartTheme.lightTextTheme.bodyText2!
+          //       .copyWith(color: InsuremartTheme.black1.withOpacity(.5)),
+          // )
         ],
       )
     ],

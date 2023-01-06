@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
 
@@ -42,8 +43,7 @@ class _StepSixState extends State<StepSix> {
 
   @override
   Widget build(BuildContext context) {
-    InsuranceProvider insuranceProvider =
-        Provider.of<InsuranceProvider>(context);
+    var formatter= NumberFormat.decimalPattern('en_us');
     CardProvider cardprovider = Provider.of<CardProvider>(context);
 
     cardprovider.getCardData();
@@ -133,7 +133,8 @@ class _StepSixState extends State<StepSix> {
                   .copyWith(color: InsuremartTheme.green1),
             ),
             Text(
-              '₦${widget.summary.toString()}',
+
+            widget.summary.toString().contains("null")? '₦0': '₦${formatter.format(double.parse(widget.summary.replaceAll(RegExp('[^0-9.]'), '')))}',
               style: InsuremartTheme.lightTextTheme.headline3!
                   .copyWith(fontSize: 18, color: InsuremartTheme.green1),
             ),
@@ -155,7 +156,7 @@ class _StepSixState extends State<StepSix> {
                         insurancemodel: widget.model,
                         context: context,
                         email: "emogbolu@theinsuremart.com",
-                        price: double.parse(widget.summary.toString()).toInt())
+                        price: double.parse(widget.summary.toString()))
                     .chargeCardAndMakePayment();}
             }),
         const SizedBox(height: 10),
