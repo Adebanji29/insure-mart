@@ -20,7 +20,6 @@ class MyInsurance extends StatefulWidget {
 
 class _MyInsuranceState extends State<MyInsurance> {
   final List<String> menuItem = [
-    'Renew Expired Policies',
     'Renew My Policy',
   ];
 
@@ -91,10 +90,8 @@ class _MyInsuranceState extends State<MyInsurance> {
 
   void onMenuSelected(BuildContext context, String value) {
     switch (value) {
-      case 'Renew Expired Policies':
-        Navigator.of(context).pushNamed(RenewPolicy.route);
-        break;
       case 'Renew My Policy':
+        Navigator.of(context).pushNamed(RenewPolicy.route);
         break;
       default:
     }
