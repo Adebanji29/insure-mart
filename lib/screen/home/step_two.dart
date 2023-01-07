@@ -1,6 +1,7 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/provider/insurance_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../Backend models/insurance_model.dart';
@@ -21,7 +22,7 @@ class _StepTwoState extends State<StepTwo> {
   @override
   Widget build(BuildContext context) {
     final ref = context.read<NewInsuranceManager>();
-    final watchProvider = context.watch<NewInsuranceManager>();
+    final watchProvider = context.watch<InsuranceProvider>();
     return ListView(
       padding: const EdgeInsets.only(
         left: 20,

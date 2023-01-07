@@ -10,7 +10,6 @@ import '../Backend models/cardModel.dart';
 import '../Constant/key.dart';
 import '../provider/insurance_provider.dart';
 import '../provider/new_insurance_provider.dart';
-import '../screen/home/home.dart';
 import '../screen/home/request_hardcopy.dart';
 import '../screen/main_screen.dart';
 import '../utils/app_theme.dart';
@@ -71,7 +70,9 @@ class MakePayment{
       if(response.status == true){
         print("Transaction successful");
         InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
-        insuranceProvider.saveNewInsuranceInfo(insurancemodel,context);
+      insurancemodel.coverType.toString().contains("party")?
+      insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel,context)
+      :insuranceProvider.saveNewInsuranceInfoForComprehensive(insurancemodel, context);
 
 
         final ref = context.read<NewInsuranceManager>();
@@ -156,8 +157,6 @@ class MakePayment{
                   "Transaction failed"
               ),
             ));
-        // InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
-        // insuranceProvider.saveNewInsuranceInfo(insurancemodel,context);
         ref.gotoStep(0);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Main()));
         // Navigator.pop(context);

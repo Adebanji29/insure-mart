@@ -1,11 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:image_picker/image_picker.dart';
-// import 'package:flutter/material.dart';
+
 
 class NewInsuranceTab {
   static const stepOne = 0;
@@ -17,10 +13,7 @@ class NewInsuranceTab {
 }
 
 class NewInsuranceManager extends ChangeNotifier {
-  final User? user = FirebaseAuth.instance.currentUser;
   int _currentStep = NewInsuranceTab.stepOne;
-  final ImagePicker _imagePicker = ImagePicker();
-  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final List<String> _coverList = const <String>[
     'Comprehensive',
     'Third party only',
@@ -37,13 +30,7 @@ class NewInsuranceManager extends ChangeNotifier {
   bool _rhp = false;
   bool _dpe = false;
   final List<String> _selectedExtension = [];
-  File? _carFront;
-  File? _carLeft;
-  File? _carRight;
-  File? _carBack;
-  File? _carInterior1;
-  File? _carInterior2;
-  File? _carInterior3;
+
 
   List<String> get coverList => _coverList;
   String? get typeOfCover => _typeOfCover;
@@ -57,13 +44,7 @@ class NewInsuranceManager extends ChangeNotifier {
   bool get rrw => _rrw;
   bool get rhp => _rhp;
   bool get dpe => _dpe;
-  File? get carFront => _carFront;
-  File? get carLeft => _carLeft;
-  File? get carRight => _carRight;
-  File? get carBack => _carBack;
-  File? get carInterior1 => _carInterior1;
-  File? get carInterior2 => _carInterior2;
-  File? get carInterior3 => _carInterior3;
+
 
   List<String> get selectedExtension {
     return _selectedExtension;
@@ -74,31 +55,6 @@ class NewInsuranceManager extends ChangeNotifier {
   void setTypeOfCover(String val) {
     _typeOfCover = val;
     notifyListeners();
-  }
-
-  pickImage({required ImageSource source, required String which}) async {
-    XFile? pickedImage = await _imagePicker.pickImage(source: source);
-    if (pickedImage != null) {
-      File file = File(pickedImage.path);
-      imageFile(which, file);
-      notifyListeners();
-      log(file.toString());
-      // log('...$_interimPoliceReport');
-    }
-  }
-
-   Future<String?> uploadFile(File? file) async {
-    if (file != null) {
-      final ref = _firebaseStorage
-          .ref()
-          .child('New Insurance')
-          .child(user!.uid)
-          .child(DateTime.now().toString());
-      await ref.putFile(file);
-
-      return await ref.getDownloadURL();
-    }
-    return null;
   }
 
   void step3Switch(String sel) {
@@ -238,38 +194,6 @@ class NewInsuranceManager extends ChangeNotifier {
     }
   }
 
-  imageFile(String which, File imageFile) {
-    switch (which) {
-      case 'front':
-        _carFront = imageFile;
-        notifyListeners();
-        break;
-      case 'left':
-        _carLeft = imageFile;
-        notifyListeners();
-        break;
-      case 'right':
-        _carRight = imageFile;
-        notifyListeners();
-        break;
-      case 'back':
-        _carBack = imageFile;
-        notifyListeners();
-        break;
-      case 'interior1':
-        _carInterior1 = imageFile;
-        notifyListeners();
-        break;
-      case 'interior2':
-        _carInterior2 = imageFile;
-        notifyListeners();
-        break;
-      case 'interior3':
-        _carInterior3 = imageFile;
-        notifyListeners();
-        break;
-    }
-  }
 }
 
 class RetrieveInsuranceManager extends ChangeNotifier {
