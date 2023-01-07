@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -68,8 +67,6 @@ class _NewClaimState extends State<NewClaim> {
     _descriptionOfAccident.dispose();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -347,14 +344,14 @@ class ImageContainer extends StatefulWidget {
   const ImageContainer({
     Key? key,
     required this.imageFile,
-    // required this.imageUrl,
     required this.which,
     this.imageOnly = true,
+    this.isClaim = true,
   }) : super(key: key);
   final File? imageFile;
-  // String? imageUrl;
   final String which;
   final bool imageOnly;
+  final bool isClaim;
 
   @override
   State<ImageContainer> createState() => _ImageContainerState();
@@ -438,7 +435,10 @@ class _ImageContainerState extends State<ImageContainer> {
       onTap: () {
         showDialog(
           context: context,
-          builder: (_) => ImageSourceDialogBox(which: widget.which),
+          builder: (_) => ImageSourceDialogBox(
+            which: widget.which,
+            isClaim: widget.isClaim,
+          ),
         );
         // imageSourceDialogBox(widget.which);
       },
