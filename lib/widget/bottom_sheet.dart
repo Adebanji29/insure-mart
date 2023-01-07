@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../provider/app_state_manager.dart';
 import '../screen/home/new_insurance.dart';
+import '../screen/insurance/renew_policy.dart';
 import '../utils/app_theme.dart';
 import 'boxes.dart';
 import 'buttons.dart';
@@ -43,6 +44,7 @@ Future<dynamic> carBottomSheet(BuildContext context) {
           LongButton(
               title: 'RENEW EXISTING INSURANCE',
               onPressed: () {
+                Navigator.of(context).pushNamed(RenewPolicy.route);
                 context.read<AppStateManager>().goToTab(1);
               }),
           // const CustomSizedBox(height: 10),
