@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/new_claim_provider.dart';
+import '../provider/new_insurance_provider.dart';
 
 class MyAlertDialog extends StatelessWidget {
   final String title;
@@ -33,12 +34,18 @@ class MyAlertDialog extends StatelessWidget {
 }
 
 class ImageSourceDialogBox extends StatelessWidget {
-  const ImageSourceDialogBox({super.key, required this.which,});
+  const ImageSourceDialogBox({
+    super.key,
+    required this.which,
+    this.isClaim = true,
+  });
   final String which;
+  final bool isClaim;
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<NewClaimProvider>();
+    final claimProvider = context.read<NewClaimProvider>();
+    final insuranceProvider = context.read<NewInsuranceManager>();
     return AlertDialog(
       content: SingleChildScrollView(
         child: ListBody(
@@ -48,7 +55,11 @@ class ImageSourceDialogBox extends StatelessWidget {
               title: const Text("Pick from Camera"),
               onTap: () async {
                 Navigator.pop(context);
-                provider.pickImage(source: ImageSource.camera, which: which);
+                isClaim
+                    ? claimProvider.pickImage(
+                        source: ImageSource.camera, which: which)
+                    : insuranceProvider.pickImage(
+                        source: ImageSource.camera, which: which);
                 // getImage(source: ImageSource.camera);
               },
             ),
@@ -57,7 +68,11 @@ class ImageSourceDialogBox extends StatelessWidget {
               title: const Text("Pick from Gallery"),
               onTap: () async {
                 Navigator.pop(context);
-                provider.pickImage(source: ImageSource.gallery, which: which);
+                isClaim
+                    ? claimProvider.pickImage(
+                        source: ImageSource.gallery, which: which)
+                    : insuranceProvider.pickImage(
+                        source: ImageSource.gallery, which: which);
                 // getImage(source: ImageSource.gallery);
               },
             ),
@@ -67,5 +82,3 @@ class ImageSourceDialogBox extends StatelessWidget {
     );
   }
 }
-
-
