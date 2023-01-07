@@ -31,6 +31,7 @@ class InsuranceModel{
   List<String>step3Extensions;
 
 
+
   InsuranceModel({
     this.userUID,
     this.purchaseId,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:insuremart_app/provider/insurance_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/new_claim_provider.dart';
-import '../provider/new_insurance_provider.dart';
 
 class MyAlertDialog extends StatelessWidget {
   final String title;
@@ -45,7 +45,7 @@ class ImageSourceDialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final claimProvider = context.read<NewClaimProvider>();
-    final insuranceProvider = context.read<NewInsuranceManager>();
+    final insuranceProvider = context.read<InsuranceProvider>();
     return AlertDialog(
       content: SingleChildScrollView(
         child: ListBody(

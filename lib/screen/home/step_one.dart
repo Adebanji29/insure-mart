@@ -1,4 +1,3 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -8,8 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:insuremart_app/uppercaseFormatter/uppercase_formatter.dart';
 import 'package:intl/intl.dart';
-
-// import 'package:insuremart/screen/home/step_two.dart';
 import 'package:provider/provider.dart';
 import '../../Backend models/insurance_model.dart';
 import '../../computation/computation.dart';
@@ -263,6 +260,7 @@ class _StepOneState extends State<StepOne> {
             ),
             const CustomSizedBox(height: 25),
             label('Chassis Number'),
+
             CustomTextField(
               validator: (value) {
                 if (value.toString().isNotEmpty && value.length > 2) {
@@ -279,7 +277,6 @@ class _StepOneState extends State<StepOne> {
               ],
               controller: _chassisNumber,
               label: 'Chassis Number',
-              textCapitalization: TextCapitalization.characters,
             ),
             const CustomSizedBox(height: 25),
             label('Engine Number'),

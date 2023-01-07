@@ -31,7 +31,6 @@ class _MyClaimsState extends State<MyClaims> {
   @override
   Widget build(BuildContext context) {
     final claims = Provider.of<ClaimProvider>(context);
-    // claims.getClaimsData();
     List<Claim> claimlist = claims.claimList;
     return Scaffold(
       appBar: AppBar(

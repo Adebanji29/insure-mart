@@ -30,19 +30,7 @@ class NewClaimProvider extends ChangeNotifier {
   File? _rdPartyadditionalImage1;
   File? _rdPartyadditionalImage2;
   File? _rdPartyadditionalImage3;
-  // String? _swornAvidivitUrl;
-  // String? _interimPoliceReportUrl;
-  // String? _finalPoliceReportUrl;
-  // String? _imageWithRegNum1Url;
-  // String? _imageWithRegNum2Url;
-  // String? _rdPartyImageWithRegNum1Url;
-  // String? _rdPartyImageWithRegNum2Url;
-  // String? _additionalImage1Url;
-  // String? _additionalImage2Url;
-  // String? _additionalImage3Url;
-  // String? _rdPartyadditionalImage1Url;
-  // String? _rdPartyadditionalImage2Url;
-  // String? _rdPartyadditionalImage3Url;
+
 
   List<String> get regNumList => _regNumList;
   bool get submiting => _submiting;
