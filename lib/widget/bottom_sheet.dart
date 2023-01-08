@@ -3,6 +3,7 @@ import 'package:insuremart_app/screen/insurance/insurance.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/app_state_manager.dart';
+import '../provider/new_insurance_provider.dart';
 import '../screen/home/new_insurance.dart';
 import '../screen/insurance/renew_policy.dart';
 import '../utils/app_theme.dart';
@@ -10,6 +11,7 @@ import 'boxes.dart';
 import 'buttons.dart';
 
 Future<dynamic> carBottomSheet(BuildContext context) {
+  final insure = context.read<NewInsuranceManager>();
   return showModalBottomSheet(
     context: context,
     builder: (context) => Padding(
@@ -36,6 +38,7 @@ Future<dynamic> carBottomSheet(BuildContext context) {
           LongButton(
             title: 'NEW CAR INSURANCE',
             onPressed: () {
+              insure.clearStep3Extensions();
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(NewInsurance.route);
             },

@@ -157,6 +157,7 @@ class MakePayment{
                   "Transaction failed"
               ),
             ));
+
         ref.gotoStep(0);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Main()));
         // Navigator.pop(context);

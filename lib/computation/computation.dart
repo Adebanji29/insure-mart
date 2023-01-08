@@ -196,7 +196,7 @@ class Computation {
 
   void getVehicleLicence(){
     // if(model.vehicletrackinglicence.toString().isNotEmpty){
-      if(model.step3Extensions.contains("Renew Vehicle License")){
+      if(model.step3Extensions.contains("rvl")){
       if (model.carmake=='Acura' && model.carmodel== 'Mdx'){
         vlicence= 4000;
       }

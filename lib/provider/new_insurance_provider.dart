@@ -25,11 +25,11 @@ class NewInsuranceManager extends ChangeNotifier {
   bool _atp = false;
   bool _vtd = false;
   bool _rtd = false;
-  final bool _rvl = false;
+   bool _rvl = false;
   bool _rrw = false;
   bool _rhp = false;
   bool _dpe = false;
-  final List<String> _selectedExtension = [];
+   List<String> _selectedExtension = [];
 
 
   List<String> get coverList => _coverList;
@@ -110,16 +110,29 @@ class NewInsuranceManager extends ChangeNotifier {
         }
         notifyListeners();
         break;
+
       case 'rtd':
         _rtd = !_rtd;
-        if (_vtd & !_selectedExtension.contains('rtd')) {
+        if (_rtd & !_selectedExtension.contains('rtd')) {
           _selectedExtension.add('rtd');
         }
-        if (!_vtd & _selectedExtension.contains('rtd')) {
+        if (!_rtd& _selectedExtension.contains('rtd')) {
           _selectedExtension.remove('rtd');
         }
         notifyListeners();
         break;
+
+      case 'rvl':
+        _rvl = !_rvl;
+        if (_rvl & !_selectedExtension.contains('rvl')) {
+          _selectedExtension.add('rvl');
+        }
+        if (!_rvl & _selectedExtension.contains('rvl')) {
+          _selectedExtension.remove('rvl');
+        }
+        notifyListeners();
+        break;
+
       case 'rrw':
         _rrw = !_rrw;
         if (_rrw & !_selectedExtension.contains('rrw')) {
@@ -130,6 +143,7 @@ class NewInsuranceManager extends ChangeNotifier {
         }
         notifyListeners();
         break;
+
       case 'rhp':
         _rhp = !_rhp;
         if (_rhp & !_selectedExtension.contains('rhp')) {
@@ -152,6 +166,20 @@ class NewInsuranceManager extends ChangeNotifier {
         break;
       default:
     }
+  }
+
+   clearStep3Extensions(){
+    _ebb = false;
+   _flood = false;
+   _srcc = false;
+    _atp = false;
+    _vtd = false;
+     _rtd = false;
+     _rvl = false;
+     _rrw = false;
+     _rhp = false;
+     _dpe = false;
+    _selectedExtension=[];
   }
 
   void nextStep() {

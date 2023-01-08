@@ -712,8 +712,8 @@ class Utils{
 
  static List extension_descript= [
     { "name":"Excess Buy Back",
-      "descript":"Excess Buy Back (EBB) is the waiver of the excess amount incurred in the event of a claim. under your Comprehensive Motor insurance policy."
-          " This means that your insurance provider would be paying 100% of your claim without any deductions for excel"
+      "descript":"Excess Buy Back (EBB) is the waiver of the excess amount incurred in the event of a claim under your Comprehensive Motor insurance policy."
+          " This means that your insurance provider would be paying 100% of your claim without any deductions "
     },
 
     {"name":"SRCC",

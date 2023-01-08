@@ -52,7 +52,6 @@ class _StepFiveState extends State<StepFive> {
     computation.getHackneyPermit();
     computation.getRoadWorthiness();
     computation.getClassOfInsurane();
-    // computation.getThirdPartyInsuranceCost();
     super.initState();
   }
 
@@ -75,10 +74,9 @@ class _StepFiveState extends State<StepFive> {
     widget.model.step3Extensions.toString().contains("ebb")?   ebb= (0.005* sumInsured):ebb= 0;
     widget.model.step3Extensions.toString().contains("flood")? flood= (0.005* sumInsured):flood= 0;
     widget.model.step3Extensions.toString().contains("srcc")?   srcc= (0.005* sumInsured):srcc= 0;
-    widget.model.atp==null? tpd=0: tpd= double.parse(widget.model.atp.toString().replaceAll(RegExp('[^0-9.]'), ''));
+    widget.model.step3Extensions.toString().contains("atp")?tpd= double.parse(widget.model.atp.toString().replaceAll(RegExp('[^0-9.]'), '')):tpd=0;
 
-
-     widget.model.coverType.toString().contains('party')? summary= (rdPartyCost+vlc+ rrw+ hp).toString():summary= (basicPremium+ebb+flood+srcc+tpd+vlc+ rrw+ hp).toString();
+    widget.model.coverType.toString().contains('party')? summary= (rdPartyCost+vlc+ rrw+ hp).toString():summary= (basicPremium+ebb+flood+srcc+tpd+vlc+ rrw+ hp).toString();
 
 
     return ListView(
@@ -117,7 +115,7 @@ class _StepFiveState extends State<StepFive> {
               const SizedBox(height: 10),
               widget.model.step3Extensions.toString().contains("srcc")? addOnsRow('SRCC', '₦${formatter.format(double.parse(srcc.toString()))}'):Container(),
               const SizedBox(height: 10),
-              widget.model.atp != null? addOnsRow('Third Party Property Damage',  '₦${formatter.format(double.parse(tpd.toString().replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
+              widget.model.step3Extensions.toString().contains("atp")? addOnsRow('Third Party Property Damage',  '₦${formatter.format(double.parse(tpd.toString().replaceAll(RegExp('[^0-9.]'), '')))}'):Container(),
               const SizedBox(height: 10),
               vlc != 0? addOnsRow('Vehicle Licence',  '₦${vlc}'):Container(),
               const SizedBox(height: 10),

@@ -12,8 +12,16 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Payment/payment_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Payment/payment_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/computation/computation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/computation/computation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/provider/new_insurance_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/new_insurance_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_five.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_five.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_six.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_six.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_three.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_three.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/utils.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widget/bottom_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget/bottom_sheet.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widget/info_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget/info_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673128814449</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="an update on the insurance page">
+      <created>1673129662469</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1673129662469</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -230,7 +245,8 @@
     <MESSAGE value="some edits on the insurance card" />
     <MESSAGE value="thousand format added to computed values" />
     <MESSAGE value="save car-insurance Function modified" />
-    <option name="LAST_COMMIT_MESSAGE" value="save car-insurance Function modified" />
+    <MESSAGE value="an update on the insurance page" />
+    <option name="LAST_COMMIT_MESSAGE" value="an update on the insurance page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
