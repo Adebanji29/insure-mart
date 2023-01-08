@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insuremart_app/screen/claims/new_claim.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
 import '../../Backend models/insurance_model.dart';
@@ -108,6 +109,7 @@ class InsuranceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var formatter= NumberFormat.decimalPattern('en_us');
+
     insuranceModel.carmake== "Toyota"? insuranceModel.carMakeImage='assets/images/toyota_logo.png':insuranceModel.carMakeImage='assets/images/jeep.png';
     final size = MediaQuery.of(context).size;
     return Container(
@@ -135,11 +137,19 @@ class InsuranceItem extends StatelessWidget {
           const CustomSizedBox(height: 25),
           buildProvider(insuranceModel.providerImage.toString(), insuranceModel.providerName.toString()),
           const CustomSizedBox(height: 25),
+          insuranceModel.coverType.toString().contains("party")?
           Row(
             children: [
-              insuranceModel.coverType.toString().contains("party")?Container(): textSubtext('Sum Insured', '₦${formatter.format(double.parse(insuranceModel.sumInsured.toString().replaceAll(RegExp('[^0-9.]'), '')))}', money: true),
-              const CustomSizedBox(width: 30),
-              textSubtext('Expiry Date', insuranceModel.expDate.toString()),
+              textSubtext('Policy Start Date', insuranceModel.policyStartDate.toString()),
+            ],
+          ):
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              textSubtext('Sum Insured', '₦${formatter.format(double.parse(insuranceModel.sumInsured.toString().replaceAll(RegExp('[^0-9.]'), '')))}', money: true),
+             const CustomSizedBox(width: 30),
+              textSubtext('Policy Start Date', insuranceModel.policyStartDate.toString()),
+
             ],
           ),
           const CustomSizedBox(height: 25),
@@ -150,7 +160,7 @@ class InsuranceItem extends StatelessWidget {
                 'Registration N0.',
                 insuranceModel.registrationNumber.toString()),
                 // '*****${insuranceModel.registrationNumber.toString().substring(insuranceModel.registrationNumber.toString().length - 4)}',),
-              ]
+              textSubtext('Expiry Date', insuranceModel.expDate.toString()),]
                 ),
 
           const CustomSizedBox(height: 25),

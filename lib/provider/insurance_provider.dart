@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jiffy/jiffy.dart';
 import '../Backend models/insurance_model.dart';
 import '../models/insurance.dart';
 
@@ -111,16 +112,34 @@ class InsuranceProvider extends ChangeNotifier {
     }
   }
 
+  void clearImageFiles(){
+    _carFront= null;
+    _carBack= null;
+    _carRight = null;
+    _carLeft= null;
+    _carInterior1= null;
+    _carInterior2= null;
+    _carInterior3= null;
+  }
+
+
+  void getExpiryDate(InsuranceModel model){
+
+    var yy= double.parse(model.policyStartDate.toString().substring(0,4)).toInt();
+    var mm= double.parse(model.policyStartDate.toString().substring(6,7)).toInt();
+    var dd=double.parse(model.policyStartDate.toString().substring(9,10)).toInt();
+
+    final startdate= new DateTime(yy,mm,dd);
+    final period=  double.parse(model.insurancePeriod.toString().replaceAll(RegExp('[^0-9]'),'')).toInt();
+
+    model.expDate= (Jiffy(startdate).add(months: (period)).dateTime).toString().substring(0,10);
+  }
 
   void saveNewInsuranceInfoForComprehensive(InsuranceModel model, BuildContext context) async
   {
-    model.purchaseId = DateTime
-        .now()
-        .millisecondsSinceEpoch
-        .toString();
+    getExpiryDate(model);
+    model.purchaseId = DateTime.now().millisecondsSinceEpoch.toString();
     model.purchaceDate = DateTime.now().toLocal().toString();
-
-
     User? currentUser = FirebaseAuth.instance.currentUser;
     model.userUID= currentUser!.uid;
 
@@ -150,7 +169,7 @@ class InsuranceProvider extends ChangeNotifier {
           "purchase Date": model.purchaceDate,
           "renewalDate": "",
           "premiumPaid": "₦${model.premiumPaid.toString()}",
-          "expDate": "",
+          "expDate": model.expDate,
           "selected extension":model.step3Extensions,
           "additional third party":model.atp,
           "renew vehicle license data": model.vehicletrackinglicence,
@@ -187,7 +206,7 @@ class InsuranceProvider extends ChangeNotifier {
             "purchase Date": model.purchaceDate,
             "renewalDate": "",
             "premiumPaid": "₦${model.premiumPaid.toString()}",
-            "expDate": "",
+            "expDate": model.expDate,
             "selected extension":model.step3Extensions,
             "additional third party":model.atp,
             "renew vehicle license data": model.vehicletrackinglicence,
@@ -208,12 +227,11 @@ class InsuranceProvider extends ChangeNotifier {
 
   void saveNewInsuranceInfoForThirdParty(InsuranceModel model, BuildContext context) async
   {
-    model.purchaseId = DateTime
-        .now()
-        .millisecondsSinceEpoch
-        .toString();
+    getExpiryDate(model);
+    model.purchaseId = DateTime.now().millisecondsSinceEpoch.toString();
     model.purchaceDate = DateTime.now().toLocal().toString();
 
+    model.sumInsured=0;
 
     User? currentUser = FirebaseAuth.instance.currentUser;
     model.userUID= currentUser!.uid;
@@ -244,7 +262,7 @@ class InsuranceProvider extends ChangeNotifier {
           "purchase Date": model.purchaceDate,
           "renewalDate": "",
           "premiumPaid": "₦${model.premiumPaid.toString()}",
-          "expDate": "",
+          "expDate": model.expDate,
           "selected extension":model.step3Extensions,
           "additional third party":model.atp,
           "renew vehicle license data": model.vehicletrackinglicence,
@@ -275,7 +293,7 @@ class InsuranceProvider extends ChangeNotifier {
             "purchase Date": model.purchaceDate,
             "renewalDate": "",
             "premiumPaid": "₦${model.premiumPaid.toString()}",
-            "expDate": "",
+            "expDate": model.expDate,
             "selected extension":model.step3Extensions,
             "additional third party":model.atp,
             "renew vehicle license data": model.vehicletrackinglicence,
@@ -340,18 +358,6 @@ class InsuranceProvider extends ChangeNotifier {
   int get getNewInsuranceListLength{
     return newInsuranceList.length;
   }
-
-  List<InsuranceModel> selectedRenewList= [];
-
-  List<InsuranceModel> get getSelectedRenewList{
-    return selectedRenewList;
-
-  }
-
-  int get getSelectedRenewListLength{
-    return selectedRenewList.length;
-  }
-
 
 }
 

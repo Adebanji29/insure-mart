@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/Backend%20models/insurance_model.dart';
+import 'package:insuremart_app/provider/insurance_provider.dart';
 import 'package:insuremart_app/screen/insurance/insurance.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +14,8 @@ import 'buttons.dart';
 
 Future<dynamic> carBottomSheet(BuildContext context) {
   final insure = context.read<NewInsuranceManager>();
+  final inst = context.read<InsuranceProvider>();
+  InsuranceModel model=InsuranceModel(sumInsured: 0, step3Extensions: []);
   return showModalBottomSheet(
     context: context,
     builder: (context) => Padding(
@@ -39,6 +43,7 @@ Future<dynamic> carBottomSheet(BuildContext context) {
             title: 'NEW CAR INSURANCE',
             onPressed: () {
               insure.clearStep3Extensions();
+              inst.clearImageFiles();
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(NewInsurance.route);
             },
