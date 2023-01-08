@@ -62,7 +62,7 @@ dependencies:
   flutter_paystack:
   firebase_messaging:
   double_back_to_close_app:
-
+  jiffy:
 
 
 

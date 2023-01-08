@@ -18,8 +18,6 @@ class InsuranceDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var formatter= NumberFormat.decimalPattern('en_us');
-    // final insuranceId = ModalRoute.of(context)!.settings.arguments as int;
-    // final insurance = context.read<InsuranceProvider>().findById(insuranceId);
 
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -85,8 +83,8 @@ class InsuranceDetail extends StatelessWidget {
                   textSubtext('Purchase date', model.purchaceDate.toString().substring(0,11)),
                   const CustomSizedBox(width: 34),
                   textSubtext('Policy start date', model.policyStartDate.toString()),
-                  const CustomSizedBox(width: 34),
-                  textSubtext('Renewal date', model.renewalDate.toString()),
+                  // const CustomSizedBox(width: 34),
+                  // textSubtext('Renewal date', model.renewalDate.toString()),
 
                 ],
               ),

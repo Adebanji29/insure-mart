@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e323a948-7b36-4ea8-adc6-ae648cac56b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
@@ -15,13 +16,15 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Payment/payment_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Payment/payment_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/computation/computation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/computation/computation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/provider/new_insurance_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/new_insurance_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/provider/insurance_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/insurance_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/claims/new_claim.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/claims/new_claim.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screen/home/step_five.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_five.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screen/home/step_six.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_six.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/home/step_three.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/home/step_three.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/insurance/insurance.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/insurance/insurance_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/insurance/insurance_detail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widget/bottom_sheet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget/bottom_sheet.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widget/info_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget/info_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673129662469</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="step3 page modified and clear step3 extensions function added">
+      <created>1673163322247</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1673163322247</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -246,7 +256,8 @@
     <MESSAGE value="thousand format added to computed values" />
     <MESSAGE value="save car-insurance Function modified" />
     <MESSAGE value="an update on the insurance page" />
-    <option name="LAST_COMMIT_MESSAGE" value="an update on the insurance page" />
+    <MESSAGE value="step3 page modified and clear step3 extensions function added" />
+    <option name="LAST_COMMIT_MESSAGE" value="step3 page modified and clear step3 extensions function added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

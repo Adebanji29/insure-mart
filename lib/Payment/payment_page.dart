@@ -69,9 +69,9 @@ class MakePayment{
       print('Response $response');
       if(response.status == true){
         print("Transaction successful");
-        InsuranceProvider insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
+        final insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
       insurancemodel.coverType.toString().contains("party")?
-      insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel,context)
+       insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel,context)
       :insuranceProvider.saveNewInsuranceInfoForComprehensive(insurancemodel, context);
 
 
@@ -157,6 +157,10 @@ class MakePayment{
                   "Transaction failed"
               ),
             ));
+        final insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
+        insurancemodel.coverType.toString().contains("party")?
+        insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel,context)
+            :insuranceProvider.saveNewInsuranceInfoForComprehensive(insurancemodel, context);
 
         ref.gotoStep(0);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Main()));

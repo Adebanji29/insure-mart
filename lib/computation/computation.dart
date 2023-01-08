@@ -181,18 +181,18 @@ class Computation {
   }
 
 
-  // void getThirdPartyInsuranceCost(){
-  //   if(insuranceClass== "Commercial"){
-  //     thirdparty= 25000;
-  //   }
-  //   else{
-  //     thirdparty= 15000;
-  //   }
-  // }
-  //
-  // double get get3rdParty{
-  //   return thirdparty;
-  // }
+  void getThirdPartyInsuranceCost(){
+    if(insuranceClass== "Commercial"){
+      thirdparty= 100000;
+    }
+    else{
+      thirdparty= 15000;
+    }
+  }
+
+  double get get3rdParty{
+    return thirdparty;
+  }
 
   void getVehicleLicence(){
     // if(model.vehicletrackinglicence.toString().isNotEmpty){
@@ -1588,17 +1588,4 @@ class Computation {
   double get getHP{
     return hpermit;
   }
-// getAdditionalThirdParty(){
-//     if (model.atp.toString().isNotEmpty){
-//      atp = double.parse(model.atp.toString().replaceAll(RegExp('[^0-9.]'), ''));
-//     }
-//     else{
-//       atp=0;
-//     }
-//     print(atp);
-// }
-//
-//   double get getAtp{
-//     return atp;
-//   }
 }

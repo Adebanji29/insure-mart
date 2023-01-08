@@ -52,6 +52,7 @@ class _StepFiveState extends State<StepFive> {
     computation.getHackneyPermit();
     computation.getRoadWorthiness();
     computation.getClassOfInsurane();
+    computation.getThirdPartyInsuranceCost();
     super.initState();
   }
 
@@ -64,8 +65,7 @@ class _StepFiveState extends State<StepFive> {
    var rrw= computation.getRRW;
    var hp=computation.getHP;
 
-
-  double rdPartyCost= 3000000.00;
+var rdPartyCost= computation.get3rdParty;
 
    widget.model.sumInsured== 0? sumInsured=0: sumInsured= widget.model.sumInsured;
      basicPremium= (0.02 * sumInsured);
