@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:insuremart_app/global/global.dart';
 import 'package:insuremart_app/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,21 @@ class _StepThreeState extends State<StepThree> {
   void dispose() {
     _licenseController.dispose();
     super.dispose();
+  }
+
+
+  validation()async{
+    final ref = context.read<NewInsuranceManager>();
+   if(widget.model.step3Extensions.contains('rvl') && widget.model.vehicletrackinglicence==""){
+     Fluttertoast.showToast(msg: "enter the expired vehicle license number");
+   }
+   else if(widget.model.step3Extensions.contains('atp') && widget.model.atp == null){
+     Fluttertoast.showToast(msg: "kindly select the additional third property of your choice");
+   }
+   else{
+     Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, )));
+     ref.nextStep();
+   }
   }
 
 
@@ -134,6 +150,9 @@ class _StepThreeState extends State<StepThree> {
 
         const SizedBox(height: 25),
         CustomExpansion(
+          onClick:(){
+            insure.step3Switch('rvl');
+            } ,
           title: 'Renew vehicle license',
           selected: insurance.rvl,
           childern: [
@@ -166,17 +185,12 @@ class _StepThreeState extends State<StepThree> {
 
 
        insure.typeOfCover.toString().contains('party') ? const CustomSizedBox(height: 250):const CustomSizedBox(height: 25),
-        LongButton(title: 'CONTINUE', onPressed: ()async{
+        LongButton(title: 'CONTINUE', onPressed: () async{
           setState(() {
             widget.model.step3Extensions= selectedSnapshot;
             widget.model.vehicletrackinglicence=_licenseController.text.trim();
-            _licenseController.text.trim().isNotEmpty? widget.model.step3Extensions.add("Renew Vehicle License"):widget.model.step3Extensions.remove("Renew Vehicle License");
-
-
           });
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> NewInsurance(myModel: widget.model, )));
-          insure.nextStep();
-
+          validation();
         }),
       ],
     );
@@ -215,18 +229,39 @@ class CustomExpansion extends StatelessWidget {
         child: ExpansionTile(
           childrenPadding:
           const EdgeInsets.only(left: 20, right: 20, bottom: 24),
-          title: Text(
-            title,
-            style: InsuremartTheme.lightTextTheme.bodyText1!
-                .copyWith(fontWeight: FontWeight.w400),
-          ),
-          trailing: GestureDetector(
-            onTap: () {},
-            child: const Icon(
-              Icons.info_outlined,
-              color: InsuremartTheme.black3,
+          title: GestureDetector(
+            behavior: HitTestBehavior.deferToChild,
+            onTap: onClick,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: InsuremartTheme.lightTextTheme.bodyText1!
+                        .copyWith(fontWeight: FontWeight.w400),
+                  ),
+                ),
+                selected
+                    ? const Icon(Icons.check, color: InsuremartTheme.blue1)
+                    : Container(
+                  height: 34,
+                  width: 34,
+                  decoration: BoxDecoration(
+                    color: InsuremartTheme.black4.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ],
             ),
           ),
+          // trailing: GestureDetector(
+          //   onTap: () {},
+          //   child: const Icon(
+          //     Icons.info_outlined,
+          //     color: InsuremartTheme.black3,
+          //   ),
+          // ),
           children: [
             Divider(color: InsuremartTheme.black4.withOpacity(.2)),
             ...childern,

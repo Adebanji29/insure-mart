@@ -116,7 +116,7 @@ class _StepSixState extends State<StepSix> {
         const SizedBox(height: 76),
         const Divider(),
         const SizedBox(height: 25),
-        textRow('Amount Insured', widget.model.sumInsured.toString()),
+        textRow('Amount Insured','₦${formatter.format(double.parse(widget.model.sumInsured.toString().replaceAll(RegExp('[^0-9.]'), '')))}'),
         const SizedBox(height: 10),
         textRow('Extensions + Addons',
             widget.model.step3Extensions.toString() != null? widget.model.step3Extensions.length.toString():"0",),
