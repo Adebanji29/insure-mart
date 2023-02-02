@@ -31,7 +31,6 @@ class NewClaimProvider extends ChangeNotifier {
   File? _rdPartyadditionalImage2;
   File? _rdPartyadditionalImage3;
 
-
   List<String> get regNumList => _regNumList;
   bool get submiting => _submiting;
   String? get regNum => _regnum;
@@ -56,9 +55,9 @@ class NewClaimProvider extends ChangeNotifier {
 
   Future<List<String>> getUserRegNum() async {
     final response = await _firebaseFirestore
-        // .collection("Users")
-        // .doc(user!.uid)
-        .collection("New Car Insurance")
+        .collection("Users")
+        .doc(user!.uid)
+        .collection("Insurance")
         .orderBy("purchase Date", descending: true)
         .get();
     // .orderBy("purchase Date", descending: true)
@@ -119,8 +118,8 @@ class NewClaimProvider extends ChangeNotifier {
         .set({
       'id': id,
       'Claim Status': 'more info needed',
-      'Claim Amount' : '0',
-      'Offer Detail' :'',
+      'Claim Amount': '0',
+      'Offer Detail': '',
       'Type of Loss': typeOfLoss,
       'Reg Num': regNum,
       'Date of Accident': dateOfAccident,

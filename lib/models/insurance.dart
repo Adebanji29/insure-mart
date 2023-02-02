@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 
 class Insurance with ChangeNotifier {
-  final int id;
+  final String id;
   final String class_;
   final String type;
   final String policy;
@@ -16,7 +16,6 @@ class Insurance with ChangeNotifier {
   final String carMake;
   final String carMakeImage;
   final String carModel;
-  final int carYear;
   final String regNum;
   final String chassisNum;
   final String engineNum;
@@ -40,7 +39,6 @@ class Insurance with ChangeNotifier {
     required this.expDate,
     required this.carMake,
     required this.carModel,
-    required this.carYear,
     required this.carMakeImage,
     this.selected = false,
   });

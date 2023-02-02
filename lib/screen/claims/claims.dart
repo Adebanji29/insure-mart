@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insuremart_app/service/claim_service.dart';
 
 import 'package:provider/provider.dart';
 
@@ -8,9 +9,9 @@ import '../../utils/app_theme.dart';
 import '../../widget/boxes.dart';
 import '../../widget/buttons.dart';
 import '../../widget/custom_progress_indicator.dart';
-import 'claim_discharge.dart';
-import 'new_claim.dart';
-import 'reject_claim.dart';
+import './claim_discharge.dart';
+import './new_claim.dart';
+import './reject_claim.dart';
 
 class MyClaims extends StatefulWidget {
   const MyClaims({Key? key}) : super(key: key);
@@ -20,18 +21,18 @@ class MyClaims extends StatefulWidget {
 }
 
 class _MyClaimsState extends State<MyClaims> {
-  late Future<void> futureData;
+  late Stream<List<Claim>> streamData;
 
   @override
   void initState() {
-    futureData = context.read<ClaimProvider>().getClaimsData();
+    streamData = ClaimService().claims;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final claims = Provider.of<ClaimProvider>(context);
-    List<Claim> claimlist = claims.claimList;
+    final claims = Provider.of<List<Claim>>(context);
+    // List<Claim> claimlist = claims;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Claims'),
@@ -44,8 +45,8 @@ class _MyClaimsState extends State<MyClaims> {
           ),
         ],
       ),
-      body: FutureBuilder<void>(
-          future: futureData,
+      body: StreamBuilder<void>(
+          stream: streamData,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const Center(
@@ -54,9 +55,9 @@ class _MyClaimsState extends State<MyClaims> {
             }
             return ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              itemCount: claims.claimList.length,
+              itemCount: claims.length,
               itemBuilder: (_, index) {
-                final claim = claimlist[index];
+                final claim = claims[index];
                 return Provider.value(
                   value: claim,
                   child: ClaimItemCard(
@@ -78,8 +79,8 @@ class _MyClaimsState extends State<MyClaims> {
 // }
 
 class ClaimItemCard extends StatelessWidget {
-  int myIndex;
-  ClaimItemCard({super.key, required this.myIndex});
+  final int myIndex;
+  const ClaimItemCard({super.key, required this.myIndex});
 
   @override
   Widget build(BuildContext context) {

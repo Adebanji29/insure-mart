@@ -14,57 +14,7 @@ class ClaimProvider extends ChangeNotifier {
   User? user = FirebaseAuth.instance.currentUser;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  final List<Claim> _claims = [
-    // Claim(
-    //   id: 2452665,
-    //   status: 'under review and adjustment',
-    //   assets: 'Ford Focus',
-    //   dateOfIncident: '28-02-2021',
-    //   description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. At sed venenatis et vel magna.',
-    // ),
-    // Claim(
-    //   id: 2452637,
-    //   status: 'More Info Needed',
-    //   assets: 'Ford Focus',
-    //   dateOfIncident: '28-02-2021',
-    //   description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. At sed venenatis et vel magna.',),
-    //
-    // Claim(
-    //   id: 2459539,
-    //   status: 'rejected',
-    //   assets: 'Toyota Rav4',
-    //   dateOfIncident: '28-02-2021',
-    //   repairAmount: '₦23,181,700.00',
-    //   description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. At sed venenatis et vel magna.',
-    // ),
-    // Claim(
-    //   id: 2454539,
-    //   status: 'Offer Recieved',
-    //   assets: 'Toyota Rav4',
-    //   dateOfIncident: '28-02-2021',
-    //   repairAmount: '₦23,181,700.00',
-    //   claimedAmount: '₦23,181,700.00',
-    //   description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. At sed venenatis et vel magna.',
-    //   offerDetail:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel pellentesque ullamcorper elit, vitae justo, iaculis. Sed fermentum feugiat dictum risus lorem neque egestas. Faucibus malesuada tortor pulvinar eget. Aliquam cursus neque in lectus eget interdum scelerisque. Molestie ultricies vel libero, proin sem tempus risus, ultricies. Dolor tincidunt dictumst metus pharetra cras in. Morbi ut sed risus nunc a. Amet, amet,',
-    // ),
-    // Claim(
-    //   id: 2454939,
-    //   status: 'Claim settled',
-    //   assets: 'Toyota Rav4',
-    //   dateOfIncident: '28-02-2021',
-    //   repairAmount: '₦23,181,700.00',
-    //   claimedAmount: '₦23,181,700.00',
-    //   description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. At sed venenatis et vel magna.',
-    //   offerDetail:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel pellentesque ullamcorper elit, vitae justo, iaculis. Sed fermentum feugiat dictum risus lorem neque egestas. Faucibus malesuada tortor pulvinar eget. Aliquam cursus neque in lectus eget interdum scelerisque. Molestie ultricies vel libero, proin sem tempus risus, ultricies. Dolor tincidunt dictumst metus pharetra cras in. Morbi ut sed risus nunc a. Amet, amet,',
-    // ),
-  ];
+  final List<Claim> _claims = [];
 
   List<Claim> get claimList => [..._claims];
 

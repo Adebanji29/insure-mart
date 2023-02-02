@@ -71,8 +71,8 @@ class MakePayment{
         print("Transaction successful");
         final insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
       insurancemodel.coverType.toString().contains("party")?
-       insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel,context)
-      :insuranceProvider.saveNewInsuranceInfoForComprehensive(insurancemodel, context);
+       insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel)
+      :insuranceProvider.saveNewInsuranceInfoForComprehensive(insurancemodel);
 
 
         final ref = context.read<NewInsuranceManager>();
@@ -159,8 +159,8 @@ class MakePayment{
             ));
         final insuranceProvider= Provider.of<InsuranceProvider>(context, listen: false);
         insurancemodel.coverType.toString().contains("party")?
-        insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel,context)
-            :insuranceProvider.saveNewInsuranceInfoForComprehensive(insurancemodel, context);
+        insuranceProvider.saveNewInsuranceInfoForThirdParty(insurancemodel)
+            :insuranceProvider.saveNewInsuranceInfoForComprehensive(insurancemodel);
 
         ref.gotoStep(0);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Main()));

@@ -48,16 +48,18 @@ import '../screen/home/request_hardcopy.dart';
 import 'Backend models/insurance_model.dart';
 import 'firebase_options.dart';
 import 'global/global.dart';
+import 'models/claim_model.dart';
+import 'models/insurance.dart';
 import 'provider/new_claim_provider.dart';
 import 'screen/home/home.dart';
 import 'screen/onboarding/onboard.dart';
 import 'screen/splashScreen/my_splash_screen.dart';
 import 'service/auth_service.dart';
+import 'service/claim_service.dart';
+import 'service/insurance_service.dart';
 import 'service/user_service.dart';
 
 Future<void> main() async {
-
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     name: 'insuremart',
@@ -71,7 +73,7 @@ Future<void> main() async {
   ]);
   //Firebase.initializeApp();
   ConnectionStatusSingleton connectionStatus =
-  ConnectionStatusSingleton.getInstance();
+      ConnectionStatusSingleton.getInstance();
   connectionStatus.initialize();
   runApp(const MyApp());
 }
@@ -94,11 +96,19 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CardProvider()),
         ChangeNotifierProvider(create: (_) => InsuranceProvider()),
         ChangeNotifierProvider(create: (_) => NewInsuranceManager()),
-        ChangeNotifierProvider(create: (_)=> NewClaimProvider()),
+        ChangeNotifierProvider(create: (_) => NewClaimProvider()),
         Provider<AuthService>(create: (_) => AuthService()),
         Provider<UserService>(create: (_) => UserService()),
         FutureProvider(
-            create: (_) => UserService().getUserDetails(), initialData: null)
+            create: (_) => UserService().getUserDetails(), initialData: null),
+        StreamProvider<List<Insurance>>.value(
+          value: InsuranceService().insuranceList,
+          initialData: const [],
+        ),
+        StreamProvider<List<Claim>>.value(
+          value: ClaimService().claims,
+          initialData: const [],
+        ),
         // StreamProvider<User?>.value(
         //   value: AuthService().authStateChanges,
         //   initialData: null,
@@ -116,13 +126,12 @@ class MaterialApplication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    InsuranceModel model= InsuranceModel(sumInsured: 0, step3Extensions: []);
+    InsuranceModel model = InsuranceModel(sumInsured: 0, step3Extensions: []);
     return MaterialApp(
       title: 'Insuremart',
       debugShowCheckedModeBanner: false,
       theme: InsuremartTheme.light(),
-      home:
-      MySplashScreen(),
+      home: const MySplashScreen(),
       // VerifyScreen()
       // InfoPage(title: "",message: "",),
       routes: {
@@ -132,7 +141,7 @@ class MaterialApplication extends StatelessWidget {
         SignUp.route: (_) => const SignUp(),
         Main.route: (_) => const Main(),
         Notifications.route: (_) => const Notifications(),
-        NewInsurance.route: (_) =>  NewInsurance(myModel: model),
+        NewInsurance.route: (_) => NewInsurance(myModel: model),
         RequestHardcopy.route: (_) => const RequestHardcopy(),
         ClaimDischarge.route: (_) => const ClaimDischarge(),
         NewClaim.route: (_) => const NewClaim(),
@@ -152,7 +161,7 @@ class MaterialApplication extends StatelessWidget {
         TwoStepVerification.route: (_) => const TwoStepVerification(),
         NextofKin.route: (_) => const NextofKin(),
         ChangePassword.route: (_) => const ChangePassword(),
-        InsuranceDetail.route: (_) => InsuranceDetail(model: model,),
+        InsuranceDetail.route: (_) => const InsuranceDetail(),
         RenewPolicy.route: (_) => const RenewPolicy(),
       },
     );
@@ -170,7 +179,7 @@ class AuthGate extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // return const Main();
-          return Login();
+          return const Login();
         } else {
           return const Login();
         }

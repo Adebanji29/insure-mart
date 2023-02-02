@@ -13,7 +13,7 @@ class RenewPolicy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final insurance = context.read<InsuranceProvider>();
+    final insurance = context.read<List<Insurance>>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Renew Policies'),
@@ -21,7 +21,7 @@ class RenewPolicy extends StatelessWidget {
         centerTitle: false,
         leadingWidth: 64,
       ),
-      body: insurance.item.isNotEmpty
+      body: insurance.isNotEmpty
           ? ListView(
         primary: true,
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 49),
@@ -30,9 +30,9 @@ class RenewPolicy extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             primary: false,
-            itemCount: insurance.item.length,
+            itemCount: insurance.length,
             itemBuilder: (context, index) {
-              var insure = insurance.item[index];
+              var insure = insurance[index];
               return ChangeNotifierProvider.value(
                 value: insure,
                 child: const RenewPolicyItem(),
