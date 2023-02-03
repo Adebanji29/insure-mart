@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
 
 // import '../../provider/insurance_provider.dart';
-import '../../Backend models/insurance_model.dart';
+import '../../models/insurance.dart';
 import '../../widget/buttons.dart';
 import '../../widget/boxes.dart';
 import '../../utils/app_theme.dart';
-import '../claims/new_claim.dart';
+// import '../claims/new_claim.dart';
 
 class InsuranceDetail extends StatelessWidget {
-
   static const route = '/insuranceDetail';
-  final InsuranceModel model;
-  const InsuranceDetail({super.key, required this.model});
+  const InsuranceDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var formatter= NumberFormat.decimalPattern('en_us');
+    // var formatter = NumberFormat.decimalPattern('en_us');
+    final insuranceId = ModalRoute.of(context)!.settings.arguments as String;
+    final insurance = context
+        .read<List<Insurance>>()
+        .firstWhere((insurance) => insurance.id == insuranceId);
 
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -41,9 +43,18 @@ class InsuranceDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomSizedBox(
-                height: 50,
-                width: 60.65,
-                child: Image.asset(model.carMakeImage.toString()),
+                height: 35,
+                width: 55.65,
+                child: Image.asset(insurance.carMakeImage),
+              ),
+              const CustomSizedBox(height: 5),
+              Text(
+                insurance.carMake,
+                style: InsuremartTheme.lightTextTheme.headline1!.copyWith(
+                  color: const Color(0xffAB002F),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               const CustomSizedBox(height: 30),
               SingleChildScrollView(
@@ -51,9 +62,9 @@ class InsuranceDetail extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    carDetail('Car Make', model.carmake.toString()),
+                    carDetail('Car Make', insurance.carMake),
                     const CustomSizedBox(width: 70),
-                    carDetail('Car Model', model.carmodel.toString()),
+                    carDetail('Car Model', insurance.carModel),
                     // const CustomSizedBox(width: 70),
                     // carDetail('Car Year', '${model.carYear}', year: true),
                   ],
@@ -64,36 +75,37 @@ class InsuranceDetail extends StatelessWidget {
               const CustomSizedBox(height: 30),
               Row(
                 children: [
-                  textSubtext('Class', model.insuranceClass.toString()),
+                  textSubtext('Class', insurance.class_),
                   const CustomSizedBox(width: 25),
-                  textSubtext('Type', model.coverType.toString()),
+                  textSubtext('Type', insurance.type),
                 ],
               ),
               const CustomSizedBox(height: 30),
               const Divider(),
               const CustomSizedBox(height: 30),
-              buildProvider(model.providerImage.toString(), model.providerName.toString()),
+              buildProvider(insurance.providerImage, insurance.provider),
               const CustomSizedBox(height: 30),
               const Divider(),
               const CustomSizedBox(height: 30),
-              textSubtext('Policy period', '${model.insurancePeriod} '),
+              textSubtext('Policy period', '${insurance.policyPeriod} '),
               const CustomSizedBox(height: 20),
               Row(
                 children: [
-                  textSubtext('Purchase date', model.purchaceDate.toString().substring(0,11)),
-                  const CustomSizedBox(width: 34),
-                  textSubtext('Policy start date', model.policyStartDate.toString()),
+                  textSubtext('Purchase date', insurance.purchaceDate),
                   // const CustomSizedBox(width: 34),
-                  // textSubtext('Renewal date', model.renewalDate.toString()),
-
+                  // textSubtext('Policy start date', insurance.),
+                  // const CustomSizedBox(width: 34),
+                  // textSubtext('Renewal date', insurance.renewalDate),
                 ],
               ),
               const CustomSizedBox(height: 30),
               const Divider(),
               const CustomSizedBox(height: 30),
-              premiumPaid('₦${formatter.format(double.parse(model.premiumPaid.toString().replaceAll(RegExp('[^0-9.]'), '')))}'),
+              premiumPaid(insurance.premiumPaid),
               const CustomSizedBox(height: 20),
-             model.coverType.toString().contains("party")?Container():sumInsured('₦${formatter.format(double.parse(model.sumInsured.toString().replaceAll(RegExp('[^0-9.]'), '')))}'),
+              insurance.type.contains("party")
+                  ? const SizedBox.shrink()
+                  : sumInsured(insurance.sumInsured),
               const CustomSizedBox(height: 30),
               const Divider(),
               const CustomSizedBox(height: 30),
@@ -133,7 +145,12 @@ class InsuranceDetail extends StatelessWidget {
               LongButton(
                 title: 'REPORT CLAIM',
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> NewClaim()));
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const NewClaim(),
+                  //   ),
+                  // );
                 },
                 color: const Color(0xffd6d6d6),
                 textColor: InsuremartTheme.blue4,
@@ -180,91 +197,91 @@ class InsuranceDetail extends StatelessWidget {
   }
 
   Column sumInsured(String sum) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Sum Insured',
-        style: InsuremartTheme.lightTextTheme.headline5!
-            .copyWith(fontSize: 12),
-      ),
-      const CustomSizedBox(height: 5),
-      Text(
-        sum,
-        style: InsuremartTheme.lightTextTheme.headline2!
-            .copyWith(fontSize: 14),
-      ),
-    ],
-  );
-
-  Column premiumPaid(String amount) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Premium Paid',
-        style: InsuremartTheme.lightTextTheme.headline5!
-            .copyWith(fontSize: 12),
-      ),
-      const CustomSizedBox(height: 5),
-      Wrap(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            amount,
+            'Sum Insured',
+            style: InsuremartTheme.lightTextTheme.headline5!
+                .copyWith(fontSize: 12),
+          ),
+          const CustomSizedBox(height: 5),
+          Text(
+            sum,
             style: InsuremartTheme.lightTextTheme.headline2!
                 .copyWith(fontSize: 14),
           ),
-          // Text(
-          //   '/year',
-          //   style: InsuremartTheme.lightTextTheme.bodyText2!
-          //       .copyWith(color: InsuremartTheme.black1.withOpacity(.5)),
-          // )
         ],
-      )
-    ],
-  );
+      );
+
+  Column premiumPaid(String amount) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Premium Paid',
+            style: InsuremartTheme.lightTextTheme.headline5!
+                .copyWith(fontSize: 12),
+          ),
+          const CustomSizedBox(height: 5),
+          Wrap(
+            children: [
+              Text(
+                amount,
+                style: InsuremartTheme.lightTextTheme.headline2!
+                    .copyWith(fontSize: 14),
+              ),
+              // Text(
+              //   '/year',
+              //   style: InsuremartTheme.lightTextTheme.bodyText2!
+              //       .copyWith(color: InsuremartTheme.black1.withOpacity(.5)),
+              // )
+            ],
+          )
+        ],
+      );
 
   Column buildProvider(String logo, String provider) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Provider',
-        style: InsuremartTheme.lightTextTheme.headline5!
-            .copyWith(fontSize: 12),
-      ),
-      const CustomSizedBox(height: 5),
-      CustomSizedBox(
-        height: 50,
-        width: 50,
-        child: Image.asset(logo),
-      ),
-      const CustomSizedBox(height: 5),
-      Text(
-        provider,
-        style: InsuremartTheme.lightTextTheme.bodyText2,
-      )
-    ],
-  );
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Provider',
+            style: InsuremartTheme.lightTextTheme.headline5!
+                .copyWith(fontSize: 12),
+          ),
+          const CustomSizedBox(height: 5),
+          CustomSizedBox(
+            height: 50,
+            width: 50,
+            child: Image.asset(logo),
+          ),
+          const CustomSizedBox(height: 5),
+          Text(
+            provider,
+            style: InsuremartTheme.lightTextTheme.bodyText2,
+          )
+        ],
+      );
 
   Column textSubtext(String title, String subtitle) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        title,
-        style: InsuremartTheme.lightTextTheme.headline5!
-            .copyWith(fontSize: 12),
-      ),
-      const CustomSizedBox(height: 5),
-      Text(
-        subtitle,
-        style: InsuremartTheme.lightTextTheme.bodyText2,
-      ),
-    ],
-  );
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: InsuremartTheme.lightTextTheme.headline5!
+                .copyWith(fontSize: 12),
+          ),
+          const CustomSizedBox(height: 5),
+          Text(
+            subtitle,
+            style: InsuremartTheme.lightTextTheme.bodyText2,
+          ),
+        ],
+      );
 
   Column carDetail(
-      String title,
-      String subtitle, {
-        bool year = false,
-      }) =>
+    String title,
+    String subtitle, {
+    bool year = false,
+  }) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -278,9 +295,9 @@ class InsuranceDetail extends StatelessWidget {
             subtitle,
             style: !year
                 ? InsuremartTheme.lightTextTheme.headline3!.copyWith(
-              fontSize: 12,
-              color: InsuremartTheme.green1,
-            )
+                    fontSize: 12,
+                    color: InsuremartTheme.green1,
+                  )
                 : InsuremartTheme.lightTextTheme.subtitle1,
           )
         ],

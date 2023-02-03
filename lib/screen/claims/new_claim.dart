@@ -41,7 +41,7 @@ class _NewClaimState extends State<NewClaim> {
   late TextEditingController _descriptionOfAccident;
 
   User? currentUser = FirebaseAuth.instance.currentUser;
-  String ClaimID = DateTime.now().millisecondsSinceEpoch.toString();
+  // String ClaimID = DateTime.now().millisecondsSinceEpoch.toString();
 
   @override
   void initState() {

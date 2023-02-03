@@ -1,24 +1,22 @@
-import 'dart:collection';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jiffy/jiffy.dart';
 import '../Backend models/insurance_model.dart';
 import '../models/insurance.dart';
 
-
-
 class InsuranceProvider extends ChangeNotifier {
   final User? user = FirebaseAuth.instance.currentUser;
   final ImagePicker _imagePicker = ImagePicker();
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
-  final List<Insurance> _myInsurance = list;
+  final List<Insurance> _myInsurance = [];
 
   bool _isSelected = false;
   File? _carFront;
@@ -38,9 +36,7 @@ class InsuranceProvider extends ChangeNotifier {
   File? get carInterior2 => _carInterior2;
   File? get carInterior3 => _carInterior3;
 
-  UnmodifiableListView<Insurance> get item =>
-      UnmodifiableListView([..._myInsurance]);
-
+  List<Insurance> get item => _myInsurance;
 
   // Insurance findById(int id) =>
   //     _myInsurance.firstWhere((insurance) => insurance.id == id);
@@ -78,7 +74,6 @@ class InsuranceProvider extends ChangeNotifier {
     return null;
   }
 
-
   imageFile(String which, File imageFile) {
     switch (which) {
       case 'front':
@@ -112,320 +107,212 @@ class InsuranceProvider extends ChangeNotifier {
     }
   }
 
-  void clearImageFiles(){
-    _carFront= null;
-    _carBack= null;
+  void clearImageFiles() {
+    _carFront = null;
+    _carBack = null;
     _carRight = null;
-    _carLeft= null;
-    _carInterior1= null;
-    _carInterior2= null;
-    _carInterior3= null;
+    _carLeft = null;
+    _carInterior1 = null;
+    _carInterior2 = null;
+    _carInterior3 = null;
   }
 
+  void getExpiryDate(InsuranceModel model) {
+    var yy =
+        double.parse(model.policyStartDate.toString().substring(0, 4)).toInt();
+    var mm =
+        double.parse(model.policyStartDate.toString().substring(6, 7)).toInt();
+    var dd =
+        double.parse(model.policyStartDate.toString().substring(9, 10)).toInt();
 
-  void getExpiryDate(InsuranceModel model){
+    final startdate = DateTime(yy, mm, dd);
+    final period = double.parse(
+            model.insurancePeriod.toString().replaceAll(RegExp('[^0-9]'), ''))
+        .toInt();
 
-    var yy= double.parse(model.policyStartDate.toString().substring(0,4)).toInt();
-    var mm= double.parse(model.policyStartDate.toString().substring(6,7)).toInt();
-    var dd=double.parse(model.policyStartDate.toString().substring(9,10)).toInt();
-
-    final startdate= new DateTime(yy,mm,dd);
-    final period=  double.parse(model.insurancePeriod.toString().replaceAll(RegExp('[^0-9]'),'')).toInt();
-
-    model.expDate= (Jiffy(startdate).add(months: (period)).dateTime).toString().substring(0,10);
+    model.expDate = (Jiffy(startdate).add(months: (period)).dateTime)
+        .toString()
+        .substring(0, 10);
   }
 
-  void saveNewInsuranceInfoForComprehensive(InsuranceModel model, BuildContext context) async
-  {
+  void saveNewInsuranceInfoForComprehensive(InsuranceModel model) async {
     getExpiryDate(model);
     model.purchaseId = DateTime.now().millisecondsSinceEpoch.toString();
     model.purchaceDate = DateTime.now().toLocal().toString();
     User? currentUser = FirebaseAuth.instance.currentUser;
-    model.userUID= currentUser!.uid;
+    model.userUID = currentUser!.uid;
+
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(model.userUID)
+        .collection("Insurance")
+        .doc(model.purchaseId)
+        .set({
+      "userId": model.userUID,
+      "purchaseID": model.purchaseId,
+      "policyStartDate": model.policyStartDate,
+      "class": model.insuranceClass,
+      "type": model.coverType,
+      "username": model.username,
+      "carMake": model.carmake,
+      "carModel": model.carmodel,
+      "providerImage": model.providerImage,
+      "providerName": model.providerName,
+      "vehicleColor": model.vehicleColor,
+      "sumInsured": model.sumInsured,
+      "regNo": model.registrationNumber,
+      "chasisNumber": model.chasisNumber,
+      "engineNumber": model.engineNumber,
+      "policyPeriod": model.insurancePeriod,
+      "purchaseDate": model.purchaceDate,
+      "renewalDate": "",
+      "premiumPaid": "₦${model.premiumPaid.toString()}",
+      "expDate": model.expDate,
+      "selectedExtension": model.step3Extensions,
+      "additionalThirdParty": model.atp,
+      "renewVehicleLicenseData": model.vehicletrackinglicence,
+      "carFront": await uploadFile(carFront),
+      "carLeft": await uploadFile(carLeft),
+      "carRight": await uploadFile(carRight),
+      "carBack": await uploadFile(carBack),
+      "carInterior1": await uploadFile(carInterior1),
+      "carInterior2": await uploadFile(carInterior2),
+      "carInterior3": await uploadFile(carInterior3),
+    });
+  }
+
+  void saveNewInsuranceInfoForThirdParty(InsuranceModel model) async {
+    getExpiryDate(model);
+    model.purchaseId = DateTime.now().millisecondsSinceEpoch.toString();
+    model.purchaceDate = DateTime.now().toLocal().toString();
+
+    model.sumInsured = 0;
+
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    model.userUID = currentUser!.uid;
 
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(model.userUID)
         .collection("New Car Insurance")
         .doc(model.purchaseId)
-        .set(
-        {
-          "userId": model.userUID,
-          "purchaseID": model.purchaseId,
-          "policyStartDate": model.policyStartDate,
-          "class": model.insuranceClass,
-          "type": model.coverType,
-          "username": model.username,
-          "car make": model.carmake,
-          "car model": model.carmodel,
-          "provider image": model.providerImage,
-          "provider name": model.providerName,
-          "vehicle color": model.vehicleColor,
-          "sum insured": model.sumInsured,
-          "reg no": model.registrationNumber,
-          "chasis number": model.chasisNumber,
-          "engine number": model.engineNumber,
-          "policy period": model.insurancePeriod,
-          "purchase Date": model.purchaceDate,
-          "renewalDate": "",
-          "premiumPaid": "₦${model.premiumPaid.toString()}",
-          "expDate": model.expDate,
-          "selected extension":model.step3Extensions,
-          "additional third party":model.atp,
-          "renew vehicle license data": model.vehicletrackinglicence,
-          "carFront":  await uploadFile(carFront),
-          "carLeft": await uploadFile(carLeft),
-          "carRight":await uploadFile(carRight),
-          "carBack":await uploadFile(carBack),
-          "carInterior1":await uploadFile(carInterior1),
-          "carInterior2":await uploadFile(carInterior2),
-          "carInterior3":await uploadFile(carInterior3),
-
-        }).whenComplete(() async {
+        .set({
+      "userId": model.userUID,
+      "purchaseID": model.purchaseId,
+      "policyStartDate": model.policyStartDate,
+      "class": model.insuranceClass,
+      "type": model.coverType,
+      "username": model.username,
+      "car make": model.carmake,
+      "car model": model.carmodel,
+      "provider image": model.providerImage,
+      "provider name": model.providerName,
+      "vehicle color": model.vehicleColor,
+      "sum insured": model.sumInsured,
+      "reg no": model.registrationNumber,
+      "chasis number": model.chasisNumber,
+      "engine number": model.engineNumber,
+      "policy period": model.insurancePeriod,
+      "purchase Date": model.purchaceDate,
+      "renewalDate": "",
+      "premiumPaid": "₦${model.premiumPaid.toString()}",
+      "expDate": model.expDate,
+      "selected extension": model.step3Extensions,
+      "additional third party": model.atp,
+      "renew vehicle license data": model.vehicletrackinglicence,
+    }).whenComplete(() async {
       await FirebaseFirestore.instance
           .collection("New Car Insurance")
           .doc(model.purchaseId)
-          .set(
-          {
-            "userId": model.userUID,
-            "purchaseID": model.purchaseId,
-            "policyStartDate": model.policyStartDate,
-            "class": model.insuranceClass,
-            "type": model.coverType,
-            "username": model.username,
-            "car make": model.carmake,
-            "car model": model.carmodel,
-            "provider image": model.providerImage,
-            "provider name": model.providerName,
-            "vehicle color": model.vehicleColor,
-            "sum insured": model.sumInsured,
-            "reg no": model.registrationNumber,
-            "chasis number": model.chasisNumber,
-            "engine number": model.engineNumber,
-            "policy period": model.insurancePeriod,
-            "purchase Date": model.purchaceDate,
-            "renewalDate": "",
-            "premiumPaid": "₦${model.premiumPaid.toString()}",
-            "expDate": model.expDate,
-            "selected extension":model.step3Extensions,
-            "additional third party":model.atp,
-            "renew vehicle license data": model.vehicletrackinglicence,
-            "carFront":  await uploadFile(carFront),
-            "carLeft": await uploadFile(carLeft),
-            "carRight":await uploadFile(carRight),
-            "carBack":await uploadFile(carBack),
-            "carInterior1":await uploadFile(carInterior1),
-            "carInterior2":await uploadFile(carInterior2),
-            "carInterior3":await uploadFile(carInterior3),
-
-          });
+          .set({
+        "userId": model.userUID,
+        "purchaseID": model.purchaseId,
+        "policyStartDate": model.policyStartDate,
+        "class": model.insuranceClass,
+        "type": model.coverType,
+        "username": model.username,
+        "car make": model.carmake,
+        "car model": model.carmodel,
+        "provider image": model.providerImage,
+        "provider name": model.providerName,
+        "vehicle color": model.vehicleColor,
+        "sum insured": model.sumInsured,
+        "reg no": model.registrationNumber,
+        "chasis number": model.chasisNumber,
+        "engine number": model.engineNumber,
+        "policy period": model.insurancePeriod,
+        "purchase Date": model.purchaceDate,
+        "renewalDate": "",
+        "premiumPaid": "₦${model.premiumPaid.toString()}",
+        "expDate": model.expDate,
+        "selected extension": model.step3Extensions,
+        "additional third party": model.atp,
+        "renew vehicle license data": model.vehicletrackinglicence,
+      });
     });
 
     notifyListeners();
   }
 
+  List<InsuranceModel> newInsuranceList = [];
 
-  void saveNewInsuranceInfoForThirdParty(InsuranceModel model, BuildContext context) async
-  {
-    getExpiryDate(model);
-    model.purchaseId = DateTime.now().millisecondsSinceEpoch.toString();
-    model.purchaceDate = DateTime.now().toLocal().toString();
-
-    model.sumInsured=0;
-
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    model.userUID= currentUser!.uid;
-
-    await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(model.userUID)
-        .collection("New Car Insurance")
-        .doc(model.purchaseId)
-        .set(
-        {
-          "userId": model.userUID,
-          "purchaseID": model.purchaseId,
-          "policyStartDate": model.policyStartDate,
-          "class": model.insuranceClass,
-          "type": model.coverType,
-          "username": model.username,
-          "car make": model.carmake,
-          "car model": model.carmodel,
-          "provider image": model.providerImage,
-          "provider name": model.providerName,
-          "vehicle color": model.vehicleColor,
-          "sum insured": model.sumInsured,
-          "reg no": model.registrationNumber,
-          "chasis number": model.chasisNumber,
-          "engine number": model.engineNumber,
-          "policy period": model.insurancePeriod,
-          "purchase Date": model.purchaceDate,
-          "renewalDate": "",
-          "premiumPaid": "₦${model.premiumPaid.toString()}",
-          "expDate": model.expDate,
-          "selected extension":model.step3Extensions,
-          "additional third party":model.atp,
-          "renew vehicle license data": model.vehicletrackinglicence,
-
-
-        }).whenComplete(() async {
-      await FirebaseFirestore.instance
-          .collection("New Car Insurance")
-          .doc(model.purchaseId)
-          .set(
-          {
-            "userId": model.userUID,
-            "purchaseID": model.purchaseId,
-            "policyStartDate": model.policyStartDate,
-            "class": model.insuranceClass,
-            "type": model.coverType,
-            "username": model.username,
-            "car make": model.carmake,
-            "car model": model.carmodel,
-            "provider image": model.providerImage,
-            "provider name": model.providerName,
-            "vehicle color": model.vehicleColor,
-            "sum insured": model.sumInsured,
-            "reg no": model.registrationNumber,
-            "chasis number": model.chasisNumber,
-            "engine number": model.engineNumber,
-            "policy period": model.insurancePeriod,
-            "purchase Date": model.purchaceDate,
-            "renewalDate": "",
-            "premiumPaid": "₦${model.premiumPaid.toString()}",
-            "expDate": model.expDate,
-            "selected extension":model.step3Extensions,
-            "additional third party":model.atp,
-            "renew vehicle license data": model.vehicletrackinglicence,
-
-          });
-
-    });
-
-    notifyListeners();
-  }
-
-  List<InsuranceModel>newInsuranceList=[];
-
-  Future<void> getNewInsuranceData() async{
-    List<InsuranceModel>newList=[];
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    QuerySnapshot newInsuranceSnapshot= await FirebaseFirestore.instance.collection("Users")
-        .doc(currentUser!.uid)
-        .collection("New Car Insurance").orderBy("purchase Date",
-        descending: true
-    )
+  Future<List<Insurance>> getInsuranceData() async {
+    // User? user = FirebaseAuth.instance.currentUser;
+    final insuranceSnapshot = await firebaseFirestore
+        .collection('Users')
+        .doc(user!.uid)
+        .collection('Insurance')
         .get();
-    newInsuranceSnapshot.docs.forEach(
-            (element) {
-          InsuranceModel insuranceData = InsuranceModel(
+    var insure =  insuranceSnapshot.docs.map(
+      (DocumentSnapshot data) => Insurance(
+        regNum: data.get('regNum') ?? '',
+        chassisNum: data.get('chasisNumber') ?? '',
+        engineNum: data.get('engineNumber') ?? '',
+        id: data.get('purchaseID') ?? '',
+        class_: data.get('class') ?? '',
+        type: data.get('type') ?? '',
+        policy: data.get('providerName'),
+        policyPeriod: data.get('policyPeriod') ?? '',
+        provider: data.get('providerName') ?? '',
+        providerImage: data.get('providerImage') ?? '',
+        sumInsured: data.get('sumInsured') ?? '',
+        purchaceDate: data.get('purchaceDate') ?? '',
+        renewalDate: data.get('renewalDate') ?? '',
+        premiumPaid: data.get('premiumPaid') ?? '',
+        expDate: data.get('expDate') ?? '',
+        carMake: data.get('carMake') ?? '',
+        carModel: data.get('carModel') ?? '',
+        carMakeImage: data.get('carMakeImage') ?? '',
+      ),
+    ).toList();
+    // for (var data in insuranceSnapshot.docs) {
+    //   Insurance insuranceData = Insurance(
+    //     regNum: data.get('regNum') ?? '',
+    //     chassisNum: data.get('chasisNumber') ?? '',
+    //     engineNum: data.get('engineNumber') ?? '',
+    //     id: data.get('purchaseID') ?? '',
+    //     class_: data.get('class') ?? '',
+    //     type: data.get('type') ?? '',
+    //     policy: data.get('providerName'),
+    //     policyPeriod: data.get('policyPeriod') ?? '',
+    //     provider: data.get('providerName') ?? '',
+    //     providerImage: data.get('providerImage') ?? '',
+    //     sumInsured: data.get('sumInsured') ?? '',
+    //     purchaceDate: data.get('purchaceDate') ?? '',
+    //     renewalDate: data.get('renewalDate') ?? '',
+    //     premiumPaid: data.get('premiumPaid') ?? '',
+    //     expDate: data.get('expDate') ?? '',
+    //     carMake: data.get('carMake') ?? '',
+    //     carModel: data.get('carModel') ?? '',
+    //     carMakeImage: data.get('carMakeImage') ?? '',
+    //   );
+      // if (!_myInsurance.contains(insuranceData)) {
+      //   _myInsurance.add(insuranceData);
+      //   log(_myInsurance.length.toString());
+    //     notifyListeners();
+    //   }
+    // }
 
-            userUID: element["userId"],
-            purchaseId: element["purchaseID"],
-            insuranceClass: element["class"],
-            coverType: element["type"],
-            username: element["username"],
-            carmake: element["car make"],
-            carmodel: element["car model"],
-            providerName: element["provider name"],
-            providerImage: element["provider image"],
-            vehicleColor: element["vehicle color"],
-            sumInsured: element["sum insured"],
-            registrationNumber: element["reg no"],
-            chasisNumber: element["chasis number"],
-            engineNumber: element["engine number"],
-            policy:"${element["username"]}'s Car Insurance",
-            insurancePeriod: element["policy period"],
-            purchaceDate: element["purchase Date"],
-            policyStartDate: element["policyStartDate"],
-            renewalDate: element["renewalDate"],
-            premiumPaid: element["premiumPaid"],
-            expDate: element["expDate"],
-           step3Extensions: []
-
-
-          );
-          newList.add(insuranceData);
-        });
-    newInsuranceList=newList;
-    notifyListeners();
+    return insure;
   }
-  List<InsuranceModel> get getNewInsuranceList{
-    return newInsuranceList;
-
-  }
-
-  int get getNewInsuranceListLength{
-    return newInsuranceList.length;
-  }
-
 }
-
-
-
-final list = [
-  Insurance(
-    id: 1,
-    class_: 'Car Insurance',
-    type: 'Comprehensive',
-    policy: 'Joshua Hawkins’s Car Insurance',
-    policyPeriod: '1',
-    provider: 'Leadway Assurance Plc',
-    sumInsured: '₦23,181,700.00',
-    purchaceDate: '28-02-2022',
-    renewalDate: '28-02-2022',
-    premiumPaid: '₦181,700',
-    expDate: '28-02-2022',
-    carMake: 'Toyota',
-    carModel: 'Rav4',
-    carYear: 2012,
-    regNum: '98765456553',
-    chassisNum: '98765456553',
-    engineNum: '98765456553',
-    carMakeImage: 'assets/images/toyota_logo.png',
-    providerImage: 'assets/images/camel.png',
-  ),
-  Insurance(
-    id: 2,
-    class_: 'Car Insurance',
-    type: 'Comprehensive',
-    policy: 'Joshua Hawkins’s Car Insurance',
-    policyPeriod: '1',
-    provider: 'Leadway Assurance Plc',
-    sumInsured: '₦23,181,700.00',
-    purchaceDate: '28-02-2022',
-    renewalDate: '28-02-2022',
-    premiumPaid: '₦181,700',
-    expDate: '28-02-2022',
-    carMake: 'Toyota',
-    carModel: 'Camry',
-    carYear: 2012,
-    regNum: '98765456553',
-    chassisNum: '98765456553',
-    engineNum: '98765456553',
-    carMakeImage: 'assets/images/toyota_logo.png',
-    providerImage: 'assets/images/camel.png',
-  ),
-  Insurance(
-    id: 3,
-    class_: 'Car Insurance',
-    type: 'Comprehensive',
-    policy: 'Joshua Hawkins’s Car Insurance',
-    policyPeriod: '1',
-    provider: 'Leadway Assurance Plc',
-    sumInsured: '₦23,181,700.00',
-    purchaceDate: '28-02-2022',
-    renewalDate: '28-02-2022',
-    premiumPaid: '₦181,700',
-    expDate: '28-02-2022',
-    carMake: 'Toyota',
-    carModel: 'Corola',
-    carYear: 2020,
-    regNum: '987654565ok',
-    chassisNum: '98765456553',
-    engineNum: '98765456553',
-    carMakeImage: 'assets/images/toyota_logo.png',
-    providerImage: 'assets/images/camel.png',
-  ),
-];
-
